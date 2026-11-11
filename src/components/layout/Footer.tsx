@@ -16,13 +16,16 @@ const company = [
   { label: "Contact", href: "/contact" },
 ];
 
+// The words in the band along the bottom of the footer.
+const band = ["Serviceberry", "Pigging", "Commissioning", "Integrity", "Chemicals", "Monitoring", "Equipment"];
+
 function Heading({ children }: { children: React.ReactNode }) {
   return <p className="text-[13px] font-semibold text-ink">{children}</p>;
 }
 
 /**
  * Light footer: a short call to action, then four link columns, socials and the Academy link,
- * the legal line, and a large faint wordmark. One hairline between each band; two text tones.
+ * the legal line, and a slow band of large faint words cut off at the bottom. One hairline between each band; two text tones.
  */
 export function Footer() {
   return (
@@ -106,9 +109,21 @@ export function Footer() {
           <p>Respect. Integrity. Passion.</p>
         </div>
       </div>
-      <p aria-hidden className="headline -mb-[0.22em] text-center text-[clamp(4rem,17vw,17rem)] leading-none text-ink/[0.045] select-none">
-        Serviceberry
-      </p>
+      {/* a slow band of words along the bottom, cut through the middle so it adds no scroll of its own */}
+      <div aria-hidden className="relative h-[clamp(2.6rem,8.4vw,8.6rem)] overflow-hidden select-none">
+        <div className="flex w-max animate-marquee pt-[0.6vw] [--marquee-duration:70s]">
+          {[0, 1].map((k) => (
+            <p key={k} className="headline flex shrink-0 items-center whitespace-nowrap text-[clamp(4rem,14vw,14.5rem)] leading-[0.8] text-ink/[0.06]">
+              {band.map((w) => (
+                <span key={w} className="flex items-center">
+                  <span className={w === "Serviceberry" ? "text-brand/[0.13]" : undefined}>{w}</span>
+                  <span className="mx-[0.28em] inline-block size-[0.14em] rounded-full bg-berry/35" />
+                </span>
+              ))}
+            </p>
+          ))}
+        </div>
+      </div>
     </footer>
   );
 }

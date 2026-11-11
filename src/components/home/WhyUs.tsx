@@ -6,6 +6,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "motion/react"
 import { ArrowUpRight, BadgeCheck, FileSearch, Handshake, HardHat, Settings2, ShieldCheck } from "lucide-react";
 import { useRef } from "react";
 import { img } from "@/content/images";
+import { spot } from "@/lib/spot";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -55,13 +56,27 @@ export function WhyUs() {
               whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               viewport={{ once: true, margin: "0px 0px -60px 0px" }}
               transition={{ duration: 0.9, delay: (i % 3) * 0.08 + Math.floor(i / 3) * 0.12, ease }}
-              className="group rounded-[24px] bg-white/[0.07] p-7 ring-1 ring-white/15 backdrop-blur-xl transition-colors duration-500 hover:bg-white/[0.12]"
+              onPointerMove={spot}
+              className="spot group relative overflow-hidden rounded-[24px] bg-white/[0.07] p-7 ring-1 ring-white/15 backdrop-blur-xl transition-[background-color,translate,box-shadow] duration-500 ease-out-expo hover:-translate-y-1.5 hover:bg-white/[0.11] hover:shadow-[0_30px_60px_-30px_rgba(0,0,0,0.7)]"
             >
-              <span className="grid size-12 place-items-center rounded-2xl bg-white/10 text-brand-light ring-1 ring-white/20 transition-transform duration-500 group-hover:-rotate-6">
-                <r.icon className="size-6" strokeWidth={1.6} />
+              {/* an occasional sheen, staggered across the grid */}
+              <span aria-hidden className="pointer-events-none absolute inset-y-0 left-0 w-1/3 overflow-visible">
+                <span
+                  className="anim-sheen absolute inset-y-0 left-0 w-full bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.07),transparent)]"
+                  style={{ animationDelay: `${i * 1.3}s` }}
+                />
               </span>
-              <h3 className="headline mt-8 text-[24px]">{r.title}</h3>
-              <p className="mt-2 text-[15px] leading-relaxed text-white/70">{r.body}</p>
+              <div className="relative flex items-start justify-between">
+                <span className="grid size-12 place-items-center rounded-2xl bg-white/10 text-brand-light ring-1 ring-white/20 transition-[rotate,scale,background-color,color] duration-500 ease-out-expo group-hover:-rotate-6 group-hover:scale-110 group-hover:bg-brand-light group-hover:text-brand-deep">
+                  <r.icon className="size-6" strokeWidth={1.6} />
+                </span>
+                <span className="font-display text-[13px] font-semibold text-white/30 tabular-nums transition-colors duration-500 group-hover:text-brand-light">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+              </div>
+              <h3 className="headline relative mt-8 text-[24px] transition-[translate] duration-500 ease-out-expo group-hover:translate-x-1">{r.title}</h3>
+              <p className="relative mt-2 text-[15px] leading-relaxed text-white/70 transition-colors duration-500 group-hover:text-white/85">{r.body}</p>
+              <span aria-hidden className="absolute bottom-0 left-7 h-[2px] w-0 bg-brand-light transition-[width] duration-700 ease-out-expo group-hover:w-[calc(100%-3.5rem)]" />
             </motion.li>
           ))}
         </ul>

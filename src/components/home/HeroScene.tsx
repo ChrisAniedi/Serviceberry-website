@@ -7,7 +7,7 @@ import { site } from "@/content/site";
  * photo, so the overlays can be placed in the photo's own coordinates (percent of the image):
  * a gas flare on a boom off the left of the deck, a blinking warning light on the derrick and
  * the crane, smoke drifting downwind, haze moving across the sky and light glinting on the sea.
- * All motion is CSS keyframes (globals.css), which the reduced-motion rule stops.
+ * The whole scene pushes in slowly. All motion is CSS keyframes (globals.css), which the reduced-motion rule stops.
  */
 export function HeroScene() {
   return (
@@ -15,6 +15,7 @@ export function HeroScene() {
       className="absolute top-[58%] left-1/2 aspect-[2000/1333] -translate-x-1/2 -translate-y-[58%]"
       style={{ width: "max(100%, calc(max(100svh, 760px) * 1.5004))", height: "max(100%, calc(100vw / 1.5004))" }}
     >
+      <div className="anim-push absolute inset-0 origin-[35%_55%]">
       {site.heroVideo ? (
         <video className="h-full w-full object-cover" src={site.heroVideo} poster={img.chapterInspect} autoPlay muted loop playsInline aria-hidden />
       ) : (
@@ -43,25 +44,41 @@ export function HeroScene() {
             </g>
           </svg>
 
-          {/* the flare: small at this distance, glowing into the haze */}
+          {/* warm light the flare throws over the scene, breathing with it */}
+          <div className="anim-glow absolute top-[53.4%] left-[28.3%] size-[1400px] -translate-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(255,170,80,0.22),rgba(255,140,60,0.06)_55%,transparent)] mix-blend-screen" />
+
+          {/* the flare: big enough to read from across the deck, glowing into the haze */}
           <div className="absolute top-[53.4%] left-[28.3%] h-0 w-0">
-            <span className="anim-glow absolute -top-[150px] -left-[150px] size-[300px] rounded-full bg-[radial-gradient(closest-side,rgba(255,190,110,0.42),rgba(255,150,70,0.12)_50%,transparent)] mix-blend-screen" />
-            <span className="absolute bottom-0 left-0 block h-[34px] w-[17px] -translate-x-1/2 origin-bottom -rotate-[18deg] opacity-90 mix-blend-screen">
-              <span className="anim-flame-a absolute inset-x-0 bottom-0 h-full origin-bottom rounded-[50%_50%_45%_45%/65%_65%_35%_35%] bg-[linear-gradient(to_top,#ff7a2a,#ffa04a_45%,rgba(255,180,90,0))] blur-[3px]" />
-              <span className="anim-flame-b absolute inset-x-[16%] bottom-0 h-[70%] origin-bottom rounded-[50%_50%_45%_45%/65%_65%_35%_35%] bg-[linear-gradient(to_top,#ffc070,#ffe0a0_55%,rgba(255,236,190,0))] blur-[2px]" />
-              <span className="anim-flame-c absolute inset-x-[32%] bottom-0 h-[40%] origin-bottom rounded-[50%_50%_45%_45%/65%_65%_35%_35%] bg-[#fff1d6] blur-[1.5px]" />
+            <span className="anim-glow absolute -top-[260px] -left-[260px] size-[520px] rounded-full bg-[radial-gradient(closest-side,rgba(255,196,120,0.6),rgba(255,150,70,0.2)_45%,transparent)] mix-blend-screen" />
+            <span className="anim-glow-fast absolute -top-[90px] -left-[90px] size-[180px] rounded-full bg-[radial-gradient(closest-side,rgba(255,236,190,0.75),rgba(255,180,90,0.25)_50%,transparent)] mix-blend-screen" />
+            <span className="anim-shimmer absolute bottom-0 left-0 block h-[96px] w-[44px] -translate-x-1/2 origin-bottom -rotate-[18deg] mix-blend-screen">
+              <span className="anim-flame-a absolute inset-x-[-18%] bottom-0 h-full origin-bottom rounded-[50%_50%_45%_45%/70%_70%_30%_30%] bg-[linear-gradient(to_top,#ff5a1a,#ff8a3a_40%,rgba(255,150,70,0))] opacity-80 blur-[6px]" />
+              <span className="anim-flame-b absolute inset-x-0 bottom-0 h-[86%] origin-bottom rounded-[50%_50%_45%_45%/65%_65%_35%_35%] bg-[linear-gradient(to_top,#ff7a2a,#ffa04a_45%,rgba(255,180,90,0))] blur-[3px]" />
+              <span className="anim-flame-d absolute inset-x-[14%] bottom-0 h-[64%] origin-bottom rounded-[50%_50%_45%_45%/65%_65%_35%_35%] bg-[linear-gradient(to_top,#ffc070,#ffe0a0_55%,rgba(255,236,190,0))] blur-[2px]" />
+              <span className="anim-flame-c absolute inset-x-[30%] bottom-0 h-[38%] origin-bottom rounded-[50%_50%_45%_45%/65%_65%_35%_35%] bg-[#fff4de] blur-[1.5px]" />
             </span>
-            {/* a veil of the same haze over the flame, so it sits in the air like the rig does */}
-            <span className="absolute -top-[40px] -left-[30px] size-[60px] rounded-full bg-[rgba(236,170,88,0.22)] blur-[10px]" />
-            {/* smoke carried downwind */}
-            {[0, 1.6, 3.2, 4.8].map((d) => (
+            {/* embers lifting off the tip */}
+            {[0, 0.7, 1.4, 2.1, 2.8, 3.5].map((d, k) => (
               <span
                 key={d}
-                className="anim-smoke absolute -top-[46px] -left-[8px] size-[26px] rounded-full bg-[rgba(130,96,58,0.16)] blur-[14px]"
+                className="anim-ember absolute -top-[40px] size-[3px] rounded-full bg-[#ffd9a0] shadow-[0_0_6px_2px_rgba(255,170,80,0.8)]"
+                style={{ left: `${-18 + k * 5}px`, animationDelay: `${d}s` }}
+              />
+            ))}
+            {/* a veil of the same haze over the flame, so it sits in the air like the rig does */}
+            <span className="absolute -top-[90px] -left-[50px] size-[110px] rounded-full bg-[rgba(236,170,88,0.18)] blur-[16px]" />
+            {/* smoke carried downwind */}
+            {[0, 1.3, 2.6, 3.9, 5.2].map((d) => (
+              <span
+                key={d}
+                className="anim-smoke absolute -top-[110px] -left-[16px] size-[46px] rounded-full bg-[rgba(130,96,58,0.2)] blur-[18px]"
                 style={{ animationDelay: `${d}s` }}
               />
             ))}
           </div>
+
+          {/* the flare's reflection on the sea, flickering */}
+          <div className="anim-glow-fast absolute top-[72%] left-[28.3%] h-[22%] w-[90px] -translate-x-1/2 bg-[linear-gradient(to_bottom,rgba(255,170,80,0.55),rgba(255,150,70,0.15)_60%,transparent)] blur-[6px] mix-blend-screen [mask-image:repeating-linear-gradient(180deg,#000_0_4px,transparent_4px_8px)]" />
 
           {/* warning lights */}
           <span className="anim-blink absolute top-[30.4%] left-[50.6%] size-[6px] -translate-1/2 rounded-full bg-[#ff3b3b] shadow-[0_0_12px_4px_rgba(255,60,60,0.75)]" />
@@ -74,6 +91,7 @@ export function HeroScene() {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 }

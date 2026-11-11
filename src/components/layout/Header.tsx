@@ -23,8 +23,8 @@ const primary = [
 
 /**
  * Top bar: four primary links on the left, the logo centred (Services opens a panel), "Get a quote" and a Menu
- * button that opens the full-screen menu. Clear over the home hero, dark glass once the
- * page moves, white past the hero. Tucks away while reading down, returns on the way up.
+ * button that opens the full-screen menu. Clear over the home hero, dark frosted glass once
+ * the page moves, light frosted glass past the hero. Tucks away while reading down, returns on the way up.
  */
 export function Header() {
   const pathname = usePathname();
@@ -66,9 +66,11 @@ export function Header() {
             ? "bg-transparent"
             : dark
               ? moved
-                ? "bg-ink/75 shadow-[0_1px_0_rgba(255,255,255,0.1)] backdrop-blur-md"
+                ? "bg-[linear-gradient(180deg,rgba(10,22,48,0.55),rgba(10,22,48,0.3))] shadow-[inset_0_-1px_0_rgba(255,255,255,0.12),0_10px_30px_-18px_rgba(0,0,0,0.5)] backdrop-blur-2xl backdrop-saturate-150"
                 : "bg-transparent shadow-[0_1px_0_rgba(255,255,255,0.14)]"
-              : `bg-white/95 backdrop-blur ${moved ? "shadow-[0_1px_0_#dde3ea,0_10px_30px_-18px_rgba(12,26,43,0.35)]" : "shadow-[0_1px_0_#dde3ea]"}`
+              : moved
+                ? "bg-white/70 shadow-[inset_0_-1px_0_rgba(221,227,236,0.9),0_12px_32px_-20px_rgba(12,26,43,0.4)] backdrop-blur-2xl backdrop-saturate-[1.8]"
+                : "bg-white/85 shadow-[0_1px_0_#dde3ea] backdrop-blur-xl"
         }`}
         animate={{ y: hidden && !open ? -80 : 0 }}
         transition={{ duration: 0.45, ease }}

@@ -133,6 +133,36 @@ html.lenis, html.lenis body { height: auto; }
   from { background-position: 0 0; }
   to { background-position: 240px 0; }
 }
+@keyframes flame-d {
+  0%, 100% { transform: scale(1, 1) skewX(0deg); }
+  25% { transform: scale(0.94, 1.2) skewX(-6deg); }
+  55% { transform: scale(1.06, 0.88) skewX(4deg); }
+  80% { transform: scale(0.98, 1.1) skewX(-3deg); }
+}
+@keyframes glow-fast {
+  0%, 100% { opacity: 0.8; }
+  20% { opacity: 1; }
+  40% { opacity: 0.65; }
+  70% { opacity: 0.95; }
+}
+@keyframes shimmer {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(6deg); }
+}
+@keyframes ember {
+  0% { transform: translate(0, 0) scale(1); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translate(70px, -150px) scale(0.3); opacity: 0; }
+}
+@keyframes push {
+  from { transform: scale(1); }
+  to { transform: scale(1.07); }
+}
+.anim-flame-d { animation: flame-d 1.1s ease-in-out infinite; }
+.anim-glow-fast { animation: glow-fast 0.9s ease-in-out infinite; }
+.anim-shimmer { animation: shimmer 3.4s ease-in-out infinite; }
+.anim-ember { animation: ember 2.8s ease-out infinite; opacity: 0; }
+.anim-push { animation: push 26s ease-in-out infinite alternate; }
 .anim-flame-a { animation: flame-a 0.9s ease-in-out infinite; }
 .anim-flame-b { animation: flame-b 0.7s ease-in-out infinite; }
 .anim-flame-c { animation: flame-c 0.5s ease-in-out infinite; }
@@ -156,6 +186,13 @@ html.lenis, html.lenis body { height: auto; }
 }
 .anim-pig-run { animation: pig-run 9s cubic-bezier(0.65, 0, 0.35, 1) infinite; }
 
+/* product flowing through the cleaned pipe */
+@keyframes flow {
+  from { background-position: 0 0; }
+  to { background-position: 70px 0; }
+}
+.anim-flow { animation: flow 1.1s linear infinite; }
+
 @keyframes caret {
   0%, 45% { opacity: 1; }
   50%, 95% { opacity: 0; }
@@ -168,6 +205,12 @@ html.lenis, html.lenis body { height: auto; }
   50% { transform: translateY(-10px); }
 }
 .anim-float { animation: float 7s ease-in-out infinite; }
+@keyframes bob {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(4px, -16px) rotate(1.5deg); }
+  66% { transform: translate(-4px, -6px) rotate(-1.5deg); }
+}
+.anim-bob { animation: bob 6s ease-in-out infinite; }
 
 /* ---- Fading glass: frosted where the text sits, melting into the photo, no hard edges ----
    The blur and the light both fade out from the bottom-left corner; a hairline rim catches
@@ -196,6 +239,34 @@ html.lenis, html.lenis body { height: auto; }
   mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
 }
 .text-lift { text-shadow: 0 1px 2px rgba(5, 10, 25, 0.45), 0 2px 18px rgba(5, 10, 25, 0.35); }
+
+/* ---- Spotlight: a soft light and a lit edge that follow the pointer (set --mx/--my) ----
+   Like glass-fade, the element supplies its own position class. */
+.spot::before, .spot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+.spot::before {
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), var(--spot, rgba(143, 180, 255, 0.2)), transparent 45%);
+}
+.spot::after {
+  padding: 1px;
+  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), var(--spot-edge, rgba(143, 180, 255, 0.85)), transparent 45%);
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+.spot:hover::before, .spot:hover::after, .spot:focus-visible::before, .spot:focus-visible::after { opacity: 1; }
+
+/* a slow sheen that crosses a card now and then, so a still grid feels alive */
+@keyframes sheen {
+  0%, 78% { transform: translateX(-120%) skewX(-18deg); }
+  100% { transform: translateX(320%) skewX(-18deg); }
+}
+.anim-sheen { animation: sheen 9s ease-in-out infinite; }
 
 /* ---- Hero grid: light running through the lines ---- */
 .grid-comet-y {

@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
-import { useRef } from "react";
+import { Maximize2 } from "lucide-react";
+import { useRef, useState } from "react";
+import { Lightbox } from "@/components/ui/Lightbox";
 import { brochure } from "@/content/images";
 
 const rowA = [
@@ -22,7 +24,7 @@ const rowB = [
   { src: brochure.elecsysNetwork, label: "Remote CP network" },
 ];
 
-function Row({ items, from, to }: { items: typeof rowA; from: string; to: string }) {
+function Row({ items, from, to, onOpen }: { items: typeof rowA; from: string; to: string; onOpen: (i: number) => void }) {
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
@@ -34,11 +36,22 @@ function Row({ items, from, to }: { items: typeof rowA; from: string; to: string
           <li
             key={i}
             aria-hidden={i >= items.length}
-            className={`group relative h-[220px] shrink-0 overflow-hidden rounded-[24px] bg-mist sm:h-[270px] ${i % 3 === 1 ? "w-[260px] sm:w-[300px]" : i % 3 === 2 ? "w-[340px] sm:w-[440px]" : "w-[300px] sm:w-[360px]"}`}
+            className={`relative h-[220px] shrink-0 sm:h-[270px] ${i % 3 === 1 ? "w-[260px] sm:w-[300px]" : i % 3 === 2 ? "w-[340px] sm:w-[440px]" : "w-[300px] sm:w-[360px]"}`}
           >
-            <Image src={it.src} alt={i < items.length ? it.label : ""} fill sizes="440px" className="object-cover transition-transform duration-[1.2s] ease-out-expo group-hover:scale-[1.06]" />
-            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-ink/55 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-100" />
-            <span className="glass-fade text-lift absolute bottom-3 left-3 rounded-full px-3.5 py-1.5 text-[13px] font-medium text-white">{it.label}</span>
+            <button
+              type="button"
+              tabIndex={i >= items.length ? -1 : undefined}
+              onClick={() => onOpen(i % items.length)}
+              aria-label={`View photo: ${it.label}`}
+              className="group relative block h-full w-full cursor-zoom-in overflow-hidden rounded-[24px] bg-mist text-left"
+            >
+              <Image src={it.src} alt={i < items.length ? it.label : ""} fill sizes="440px" className="object-cover transition-transform duration-[1.2s] ease-out-expo group-hover:scale-[1.06]" />
+              <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-ink/55 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-100" />
+              <span className="glass-fade text-lift absolute bottom-3 left-3 rounded-full px-3.5 py-1.5 text-[13px] font-medium text-white">{it.label}</span>
+              <span className="absolute top-3 right-3 grid size-10 scale-75 place-items-center rounded-full bg-white/85 text-ink opacity-0 shadow-lg backdrop-blur transition-[opacity,scale] duration-500 ease-out-expo group-hover:scale-100 group-hover:opacity-100 group-focus-visible:scale-100 group-focus-visible:opacity-100">
+                <Maximize2 className="size-4" />
+              </span>
+            </button>
           </li>
         ))}
       </motion.ul>
@@ -46,8 +59,10 @@ function Row({ items, from, to }: { items: typeof rowA; from: string; to: string
   );
 }
 
-/** Two rows of Serviceberry's own field photos that slide in opposite directions as you scroll. */
+/** Two rows of Serviceberry's own field photos that slide in opposite directions as you scroll; tap one to see it full size. */
 export function FieldStrip() {
+  const all = [...rowA, ...rowB];
+  const [open, setOpen] = useState<number | null>(null);
   return (
     <section aria-label="In the field" className="overflow-hidden bg-white py-24 sm:py-28">
       <div className="container-x mb-12 flex flex-wrap items-end justify-between gap-6">
@@ -62,9 +77,10 @@ export function FieldStrip() {
         </p>
       </div>
       <div className="space-y-4">
-        <Row items={rowA} from="0%" to="-30%" />
-        <Row items={rowB} from="-30%" to="0%" />
+        <Row items={rowA} from="0%" to="-30%" onOpen={(i) => setOpen(i)} />
+        <Row items={rowB} from="-30%" to="0%" onOpen={(i) => setOpen(rowA.length + i)} />
       </div>
+      <Lightbox items={all} index={open} onClose={() => setOpen(null)} onIndex={setOpen} />
     </section>
   );
 }
