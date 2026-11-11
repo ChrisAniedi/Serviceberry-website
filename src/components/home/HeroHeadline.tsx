@@ -1,7 +1,7 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
+import { useEffect, useState } from "react";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -14,98 +14,89 @@ export const runs = [
   { from: "spool", to: "start-up", a: "Spool", b: "Start-up" },
 ] as const;
 
-const EVERY = 3400;
+const phrase = (i: number) => `${runs[i].from} to ${runs[i].to}.`;
 
-/** Rotates through `runs`; the arc labels follow the same index. Static with reduced motion. */
-export function useRun() {
+const TYPE = 60; // ms per letter typed
+const ERASE = 30; // ms per letter erased
+const HOLD = 2200; // ms the full phrase stays
+const START = 2000; // ms before the first erase (lets the intro finish)
+
+/**
+ * Types the run out letter by letter, holds it, erases it, and types the next one.
+ * Returns the run index (the arc labels follow it) and the text typed so far.
+ * With reduced motion the first phrase simply stays.
+ */
+export function useTypedRun() {
   const reduce = useReducedMotion();
-  const [i, setI] = useState(0);
+  const [index, setIndex] = useState(0);
+  const [typed, setTyped] = useState(phrase(0));
+  const [mode, setMode] = useState<"hold" | "erase" | "type">("hold");
+
   useEffect(() => {
     if (reduce) return;
-    const t = setTimeout(() => setI((v) => (v + 1) % runs.length), i === 0 ? EVERY + 1800 : EVERY);
+    const full = phrase(index);
+    let t: ReturnType<typeof setTimeout>;
+    if (mode === "hold") t = setTimeout(() => setMode("erase"), typed === phrase(0) && index === 0 ? START + HOLD : HOLD);
+    else if (mode === "erase") {
+      if (typed.length) t = setTimeout(() => setTyped(typed.slice(0, -1)), ERASE);
+      else
+        t = setTimeout(() => {
+          setIndex((index + 1) % runs.length);
+          setMode("type");
+        }, 280);
+    } else {
+      if (typed.length < full.length) t = setTimeout(() => setTyped(full.slice(0, typed.length + 1)), TYPE);
+      else setMode("hold");
+    }
     return () => clearTimeout(t);
-  }, [i, reduce]);
-  return i;
+  }, [mode, typed, index, reduce]);
+
+  return { index, typed };
+}
+
+/** Colours the typed text: the two ends in gold, "to" and the full stop in white. */
+function Typed({ text, index }: { text: string; index: number }) {
+  const from = runs[index].from;
+  const a = text.slice(0, from.length);
+  const mid = text.slice(from.length, from.length + 4); // " to "
+  const b = text.slice(from.length + 4).replace(/\.$/, "");
+  const dot = text.endsWith(".") ? "." : "";
+  return (
+    <>
+      <span className="text-[#ffd79a]">{a}</span>
+      {mid}
+      <span className="text-[#ffd79a]">{b}</span>
+      {dot}
+    </>
+  );
 }
 
 /**
- * A slot for one changing word. It measures the incoming word and eases its own width to
- * fit, while the old word rises out and the new one rises in. Both are clipped by the slot,
- * so a longer outgoing word can never run over its neighbours.
+ * "Pipeline integrity, from launch to receiver." The first line stays; the run after
+ * "from" is typed out, held, erased and replaced by the next ("survey to sign-off",
+ * "wellhead to export line"…). The second line sits in a box as wide as the longest run,
+ * with the text set from its left edge, so typing never shifts the line about.
+ * Decorative: the page's real h1 sits under it.
  */
-function Swap({ text }: { text: string }) {
-  const measure = useRef<HTMLSpanElement>(null);
-  const [width, setWidth] = useState<number>();
-
-  useLayoutEffect(() => {
-    const m = measure.current;
-    if (!m) return;
-    const set = () => setWidth(m.offsetWidth);
-    set();
-    const ro = new ResizeObserver(set);
-    ro.observe(m);
-    return () => ro.disconnect();
-  }, [text]);
-
+export function HeroHeadline({ index, typed }: { index: number; typed: string }) {
+  const longest = runs.map((_, i) => phrase(i)).reduce((a, b) => (b.length > a.length ? b : a));
   return (
-    <span
-      className="relative inline-block overflow-hidden pb-[0.08em] align-bottom text-[#ffd79a]"
-      style={{ width, transition: "width 0.7s cubic-bezier(0.16, 1, 0.3, 1)" }}
+    <motion.p
+      aria-hidden
+      initial={{ opacity: 0, y: 24, filter: "blur(8px)" }}
+      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      transition={{ duration: 1.1, delay: 0.45, ease }}
+      className="headline mt-6 text-[clamp(2.6rem,4.8vw,5.2rem)] leading-[1.02] font-[350] tracking-[-0.045em]"
     >
-      {/* sizes the slot (height always; width before the first measurement) */}
-      <span className="invisible whitespace-nowrap">{text}</span>
-      {/* measures the incoming word's natural width */}
-      <span ref={measure} aria-hidden className="invisible absolute top-0 left-0 whitespace-nowrap">
-        {text}
+      <span className="block">Pipeline integrity,</span>
+      <span className="relative inline-grid max-w-full text-left">
+        {/* reserves the width of the longest run */}
+        <span className="invisible col-start-1 row-start-1">from {longest}</span>
+        <span className="col-start-1 row-start-1">
+          from <Typed text={typed} index={index} />
+          <span className="anim-caret ml-[0.04em] inline-block h-[0.82em] w-[0.06em] translate-y-[0.08em] rounded-full bg-[#ffd79a] align-baseline" />
+        </span>
       </span>
-      <AnimatePresence initial={false}>
-        <motion.span
-          key={text}
-          className="absolute top-0 left-0 whitespace-nowrap"
-          initial={{ y: "105%", opacity: 0, filter: "blur(8px)" }}
-          animate={{ y: "0%", opacity: 1, filter: "blur(0px)" }}
-          exit={{ y: "-105%", opacity: 0, filter: "blur(8px)" }}
-          transition={{ duration: 0.75, ease }}
-        >
-          {text}
-        </motion.span>
-      </AnimatePresence>
-    </span>
-  );
-}
-
-function Rise({ children, delay }: { children: React.ReactNode; delay: number }) {
-  return (
-    <span className="inline-block overflow-hidden pb-[0.08em] align-bottom">
-      <motion.span className="inline-block" initial={{ y: "110%", filter: "blur(8px)" }} animate={{ y: "0%", filter: "blur(0px)" }} transition={{ duration: 1.1, delay, ease }}>
-        {children}
-      </motion.span>
-    </span>
-  );
-}
-
-/**
- * "Pipeline integrity, from launch to receiver." The first line stays; the two ends of the
- * run change together ("survey to sign-off", "wellhead to export line"…). Decorative: the
- * page's real h1 sits under it.
- */
-export function HeroHeadline({ index }: { index: number }) {
-  const r = runs[index];
-  return (
-    <p aria-hidden className="headline mt-6 text-[clamp(2.6rem,4.8vw,5.2rem)] leading-[0.98] font-[350] tracking-[-0.045em]">
-      <span className="block">
-        <Rise delay={0.45}>Pipeline</Rise> <Rise delay={0.52}>integrity,</Rise>
-      </span>
-      <span className="block lg:whitespace-nowrap">
-        <Rise delay={0.59}>from</Rise>{" "}
-        <Rise delay={0.66}>
-          <Swap text={r.from} />
-        </Rise>{" "}
-        <Rise delay={0.73}>to</Rise>{" "}
-        <Rise delay={0.8}>
-          <Swap text={`${r.to}.`} />
-        </Rise>
-      </span>
-    </p>
+    </motion.p>
   );
 }

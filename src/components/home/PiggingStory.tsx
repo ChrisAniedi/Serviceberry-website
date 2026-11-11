@@ -39,15 +39,15 @@ function StepBody({ i, compact = false }: { i: number; compact?: boolean }) {
   const s = steps[i];
   return (
     <div>
-      <p className="font-display text-[13px] font-semibold tracking-[0.14em] text-brand-light uppercase">
+      <p className="font-display text-[13px] font-semibold tracking-[0.14em] text-brand uppercase">
         Station {String(i + 1).padStart(2, "0")} / 04
       </p>
-      <h3 className={`headline mt-3 text-white ${compact ? "text-[30px]" : "text-[clamp(2rem,3.4vw,3rem)]"}`}>{s.title}</h3>
-      <p className="mt-4 max-w-md text-[16.5px] leading-relaxed text-white/75">{s.body}</p>
-      <ul className="mt-6 space-y-2.5">
+      <h3 className={`headline mt-3 text-ink ${compact ? "text-[30px]" : "text-[clamp(2rem,3.4vw,3rem)]"}`}>{s.title}</h3>
+      <p className="mt-3 max-w-md text-[16.5px] leading-relaxed text-steel">{s.body}</p>
+      <ul className="mt-5 space-y-2">
         {s.points.map((p) => (
-          <li key={p} className="flex items-center gap-3 text-[15px] text-white/90">
-            <span className="h-[2px] w-5 rounded-full bg-brand-light" /> {p}
+          <li key={p} className="flex items-center gap-3 text-[15px] text-ink">
+            <span className="h-[2px] w-5 rounded-full bg-brand" /> {p}
           </li>
         ))}
       </ul>
@@ -62,14 +62,14 @@ function Track({ progress, active }: { progress: MotionValue<number>; active: nu
   return (
     <div className="relative mx-[18px] h-[64px]">
       {/* pipe */}
-      <div className="absolute inset-x-0 top-1/2 h-[10px] -translate-y-1/2 rounded-full bg-white/[0.08] shadow-[inset_0_1px_0_rgba(255,255,255,0.12),inset_0_-1px_0_rgba(0,0,0,0.3)]" />
-      <motion.div className="absolute top-1/2 left-0 h-[10px] w-full origin-left -translate-y-1/2 rounded-full bg-[linear-gradient(90deg,rgba(143,180,255,0.35),rgba(143,180,255,0.75))]" style={{ scaleX: fill }} />
+      <div className="absolute inset-x-0 top-1/2 h-[10px] -translate-y-1/2 rounded-full bg-[#d9dde3] shadow-[inset_0_1px_2px_rgba(10,22,48,0.18),inset_0_-1px_0_rgba(255,255,255,0.8)]" />
+      <motion.div className="absolute top-1/2 left-0 h-[10px] w-full origin-left -translate-y-1/2 rounded-full bg-[linear-gradient(90deg,rgba(11,79,191,0.35),#0b4fbf)]" style={{ scaleX: fill }} />
       {/* stations */}
       {steps.map((s, i) => (
         <div key={s.title} className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2" style={{ left: `${(i / (steps.length - 1)) * 100}%` }}>
-          <span className={`block size-5 rounded-full border-2 transition-colors duration-500 ${i <= active ? "border-brand-light bg-brand-deep" : "border-white/25 bg-brand-deep"}`} />
+          <span className={`block size-5 rounded-full border-2 transition-colors duration-500 ${i <= active ? "border-brand bg-white" : "border-[#c4cad3] bg-stone"}`} />
           <span
-            className={`absolute top-8 text-[13px] whitespace-nowrap transition-colors duration-500 ${i === 0 ? "left-0" : i === steps.length - 1 ? "right-0" : "left-1/2 -translate-x-1/2"} ${i === active ? "text-white" : "text-white/55"}`}
+            className={`absolute top-8 text-[13px] whitespace-nowrap transition-colors duration-500 ${i === 0 ? "left-0" : i === steps.length - 1 ? "right-0" : "left-1/2 -translate-x-1/2"} ${i === active ? "font-medium text-ink" : "text-steel"}`}
           >
             {s.title}
           </span>
@@ -113,31 +113,31 @@ export function PiggingStory() {
     <section
       ref={ref}
       id="kp-2"
-      className="relative scroll-mt-20 overflow-x-clip bg-brand-deep text-white"
+      className="relative scroll-mt-20 overflow-x-clip bg-stone text-ink"
       style={{ height: pin ? "320svh" : undefined }}
     >
-      <div className={pin ? "sticky top-0 flex h-svh flex-col justify-center overflow-hidden" : "py-24 sm:py-28"}>
-        <div aria-hidden className="pointer-events-none absolute -top-40 right-[-10%] size-[620px] rounded-full bg-[radial-gradient(closest-side,rgba(11,79,191,0.45),transparent)]" />
+      <div className={pin ? "sticky top-0 flex h-svh flex-col justify-center overflow-hidden pt-24 pb-12" : "py-24 sm:py-28"}>
+        <div aria-hidden className="pointer-events-none absolute -top-40 right-[-10%] size-[620px] rounded-full bg-[radial-gradient(closest-side,rgba(255,255,255,0.9),transparent)]" />
         <div className="container-x relative">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
-              <p className="font-display text-[12px] font-semibold tracking-[0.16em] text-brand-light uppercase">Our core: pigging</p>
+              <p className="font-display text-[12px] font-semibold tracking-[0.16em] text-brand uppercase">Our core: pigging</p>
               <h2 className="headline mt-4 max-w-[18ch] text-[clamp(2.2rem,4.2vw,3.6rem)]">
-                How a pigging run <span className="text-brand-light">keeps your line flowing.</span>
+                How a pigging run <span className="text-brand">keeps your line flowing.</span>
               </h2>
             </div>
-            <p className="max-w-md text-[16px] leading-relaxed text-white/70">
+            <p className="max-w-md text-[16px] leading-relaxed text-steel">
               Operational and maintenance pigging, caliper and geometry runs, and intelligent pigging with specialist tool providers.
             </p>
           </div>
 
           {pin ? (
             <>
-              <div className="mt-12">
+              <div className="mt-9">
                 <Track progress={progress} active={active} />
               </div>
-              <div className="mt-16 grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">
-                <div className="relative min-h-[300px]">
+              <div className="mt-12 grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">
+                <div className="relative">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={active}
@@ -149,8 +149,11 @@ export function PiggingStory() {
                       <StepBody i={active} />
                     </motion.div>
                   </AnimatePresence>
+                  <div className="mt-8">
+                    <Button href="/services/pipeline-integrity-pigging">Plan a pigging programme</Button>
+                  </div>
                 </div>
-                <div className="relative aspect-[16/10] max-h-[44svh] w-full overflow-hidden rounded-[28px] bg-ink ring-1 ring-white/10">
+                <div className="relative aspect-[16/10] max-h-[42svh] w-full overflow-hidden rounded-[28px] bg-ink shadow-[0_30px_60px_-30px_rgba(10,22,48,0.45)]">
                   <AnimatePresence initial={false}>
                     <motion.div
                       key={active}
@@ -164,7 +167,7 @@ export function PiggingStory() {
                     </motion.div>
                   </AnimatePresence>
                   <div className="absolute inset-0 bg-gradient-to-t from-ink/50 via-transparent to-transparent" />
-                  <span className="glass-fade text-lift absolute bottom-4 left-4 rounded-full px-4 py-2 text-[13px] font-medium">
+                  <span className="absolute bottom-4 left-4 rounded-full bg-white/90 px-4 py-2 text-[13px] font-medium text-ink shadow-sm backdrop-blur-md">
                     {String(active + 1).padStart(2, "0")} · {steps[active].title}
                   </span>
                 </div>
@@ -173,7 +176,7 @@ export function PiggingStory() {
           ) : (
             <ol className="mt-12 space-y-12">
               {steps.map((s, i) => (
-                <li key={s.title} className="grid gap-6 border-t border-white/15 pt-10 sm:grid-cols-2 sm:items-center">
+                <li key={s.title} className="grid gap-6 border-t border-ink/10 pt-10 sm:grid-cols-2 sm:items-center">
                   <div className="relative aspect-[16/10] overflow-hidden rounded-[24px] bg-ink">
                     <Image src={s.image} alt="" fill sizes="(min-width:640px) 50vw, 100vw" className="object-cover" />
                   </div>
@@ -183,10 +186,11 @@ export function PiggingStory() {
             </ol>
           )}
 
-          <div className={`flex flex-wrap items-center justify-between gap-4 ${pin ? "mt-12" : "mt-14 border-t border-white/15 pt-10"}`}>
-            <Button href="/services/pipeline-integrity-pigging">Plan a pigging programme</Button>
-            {pin && <span className="text-[13px] text-white/50">Scroll to follow the pig</span>}
-          </div>
+          {!pin && (
+            <div className="mt-12 border-t border-ink/10 pt-10">
+              <Button href="/services/pipeline-integrity-pigging">Plan a pigging programme</Button>
+            </div>
+          )}
         </div>
       </div>
     </section>

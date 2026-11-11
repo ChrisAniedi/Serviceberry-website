@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { brochure } from "@/content/images";
 
 const ease = [0.16, 1, 0.3, 1] as const;
@@ -56,30 +56,14 @@ const tech = [
 
 /**
  * Specialist technologies as expanding panels: the open one shows its photo and story,
- * the rest stand as slim labelled columns. On large screens the section holds while the
- * panels open one by one with the scroll; hover, focus or click also opens one. Stacks on phones.
+ * the rest stand as slim labelled columns. Hover, focus or click opens one. Stacks on phones.
  */
 export function TechPanels() {
   const [open, setOpen] = useState(0);
-  const [pin, setPin] = useState(false);
-  const ref = useRef<HTMLElement>(null);
-
-  // large screens: the section holds while each panel opens in turn, then lets go
-  useEffect(() => {
-    const mq = window.matchMedia("(min-width: 1024px) and (min-height: 700px) and (prefers-reduced-motion: no-preference)");
-    const set = () => setPin(mq.matches);
-    set();
-    mq.addEventListener("change", set);
-    return () => mq.removeEventListener("change", set);
-  }, []);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
-  useMotionValueEvent(scrollYProgress, "change", (p) => {
-    if (pin) setOpen(Math.min(tech.length - 1, Math.floor(p * tech.length)));
-  });
 
   return (
-    <section ref={ref} className="relative bg-ink text-white" style={{ height: pin ? `${100 + (tech.length - 1) * 55}svh` : undefined }}>
-      <div className={pin ? "sticky top-0 flex h-svh flex-col justify-center" : "py-24 sm:py-32"}>
+    <section className="relative bg-ink text-white">
+      <div className="py-24 sm:py-32">
       <div className="container-x w-full">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
@@ -93,7 +77,7 @@ export function TechPanels() {
           </p>
         </div>
 
-        <div className="mt-10 flex flex-col gap-3 lg:h-[min(560px,calc(100svh-300px))] lg:flex-row">
+        <div className="mt-10 flex flex-col gap-3 lg:h-[560px] lg:flex-row">
           {tech.map((t, i) => {
             const on = open === i;
             return (
@@ -164,15 +148,7 @@ export function TechPanels() {
             );
           })}
         </div>
-              {pin && (
-          <div aria-hidden className="mt-6 flex items-center gap-2">
-            {tech.map((t, i) => (
-              <span key={t.key} className={`h-1 rounded-full transition-all duration-500 ${i === open ? "w-10 bg-white" : "w-4 bg-white/25"}`} />
-            ))}
-            <span className="ml-3 text-[13px] text-white/50">Keep scrolling</span>
-          </div>
-        )}
-      </div>
+            </div>
       </div>
     </section>
   );

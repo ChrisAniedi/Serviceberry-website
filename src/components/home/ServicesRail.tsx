@@ -137,9 +137,6 @@ export function ServicesRail() {
           <div aria-hidden className="mr-3 hidden h-[3px] w-32 overflow-hidden rounded-full bg-line sm:block">
             <motion.span className="block h-full origin-left bg-brand" style={{ scaleX: bar }} />
           </div>
-          <Link href="/services" className="mr-2 hidden min-h-11 items-center gap-1.5 text-[15px] font-medium text-brand hover:underline sm:inline-flex">
-            All services <ArrowRight className="size-4" />
-          </Link>
           <button type="button" onClick={() => step(-1)} aria-label="Previous services" className="grid size-12 place-items-center rounded-full ring-1 ring-ink/15 transition-colors hover:bg-ink hover:text-white">
             <ArrowLeft className="size-5" />
           </button>

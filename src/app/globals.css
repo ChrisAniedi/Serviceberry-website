@@ -17,6 +17,7 @@
   --color-steel-2: #8b98a8;
   --color-line: #dde3ec;
   --color-mist: #f1f4f9;
+  --color-stone: #f1efea;
   --color-paper: #f8f9fc;
   --color-go: #1f9d55;
 
@@ -142,6 +143,13 @@ html.lenis, html.lenis body { height: auto; }
 .anim-drift-rev { animation: drift 46s ease-in-out infinite alternate-reverse; }
 .anim-glint { animation: glint 5s linear infinite; }
 .anim-glint-rev { animation: glint-x 14s linear infinite reverse; }
+
+@keyframes caret {
+  0%, 45% { opacity: 1; }
+  50%, 95% { opacity: 0; }
+  100% { opacity: 1; }
+}
+.anim-caret { animation: caret 1s steps(1) infinite; }
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
