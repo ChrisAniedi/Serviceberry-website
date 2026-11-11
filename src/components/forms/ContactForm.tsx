@@ -2,14 +2,14 @@
 
 import { useState, type FormEvent } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { CheckCircle2, Loader2, Paperclip } from "lucide-react";
+import { CheckCircle2, ChevronDown, Loader2, Paperclip } from "lucide-react";
 import { enquiryTypes } from "@/content/site";
 import { ALLOWED_ATTACHMENT, validateContact, type ContactFields, type FieldErrors } from "@/lib/contact";
 
 type Props = { defaultType?: string; defaultSubject?: string; defaultMessage?: string };
 
 const input =
-  "w-full bg-white px-4 py-3.5 text-[16px] text-ink ring-1 ring-line placeholder:text-steel-2 transition outline-none focus:ring-2 focus:ring-brand";
+  "w-full rounded-2xl bg-paper px-4 py-3.5 text-[16px] text-ink ring-1 ring-line placeholder:text-steel-2 transition-[box-shadow,background-color] outline-none hover:ring-ink/25 focus:bg-white focus:ring-2 focus:ring-brand aria-[invalid=true]:ring-[#b3123f]";
 
 /** Contact form with the exact fields from the workbook (section 8). */
 export function ContactForm({ defaultType, defaultSubject, defaultMessage }: Props) {
@@ -57,8 +57,8 @@ export function ContactForm({ defaultType, defaultSubject, defaultMessage }: Pro
     errors[k] ? <p id={`${k}-err`} className="mt-1.5 text-[13px] text-red-600">{errors[k]}</p> : null;
   const aria = (k: keyof FieldErrors) => ({ "aria-invalid": !!errors[k], "aria-describedby": errors[k] ? `${k}-err` : undefined });
   const Label = ({ htmlFor, children, optional }: { htmlFor: string; children: string; optional?: boolean }) => (
-    <label htmlFor={htmlFor} className="mb-2 block font-display text-[12px] font-semibold tracking-[0.08em] text-ink uppercase">
-      {children} {optional && <span className="text-steel">(optional)</span>}
+    <label htmlFor={htmlFor} className="mb-2 block text-[14px] font-medium text-ink">
+      {children} {optional ? <span className="font-normal text-steel">(optional)</span> : <span className="text-berry">*</span>}
     </label>
   );
 
@@ -69,7 +69,7 @@ export function ContactForm({ defaultType, defaultSubject, defaultMessage }: Pro
           key="done"
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="bg-white p-10 text-center ring-1 ring-line"
+          className="rounded-[24px] bg-paper p-10 text-center ring-1 ring-line"
           role="status"
         >
           <CheckCircle2 className="mx-auto size-12 text-go" strokeWidth={1.5} />
@@ -109,10 +109,13 @@ export function ContactForm({ defaultType, defaultSubject, defaultMessage }: Pro
           </div>
           <div>
             <Label htmlFor="type">Enquiry type</Label>
-            <select id="type" name="type" defaultValue={initialType} className={`${input} appearance-none`} {...aria("type")}>
+            <div className="relative">
+              <select id="type" name="type" defaultValue={initialType} className={`${input} appearance-none pr-11`} {...aria("type")}>
               <option value="" disabled>Choose one…</option>
               {enquiryTypes.map((t) => <option key={t} value={t} >{t}</option>)}
             </select>
+              <ChevronDown className="pointer-events-none absolute top-1/2 right-4 size-5 -translate-y-1/2 text-steel" />
+            </div>
             <Err k="type" />
           </div>
           <div className="sm:col-span-2">
@@ -126,8 +129,8 @@ export function ContactForm({ defaultType, defaultSubject, defaultMessage }: Pro
             <Err k="message" />
           </div>
           <div className="sm:col-span-2">
-            <span className="mb-2 block font-display text-[12px] font-semibold tracking-[0.08em] text-ink uppercase">Attachment <span className="text-steel">(optional)</span></span>
-            <label htmlFor="attachment" className="flex min-h-12 cursor-pointer items-center gap-3 border border-dashed border-steel-2 bg-white px-4 py-3 text-[14px] text-steel transition-colors hover:border-ink">
+            <span className="mb-2 block text-[14px] font-medium text-ink">Attachment <span className="font-normal text-steel">(optional)</span></span>
+            <label htmlFor="attachment" className="flex min-h-14 cursor-pointer items-center gap-3 rounded-2xl border border-dashed border-steel-2/70 bg-paper px-4 py-3 text-[14.5px] text-steel transition-colors hover:border-brand hover:text-ink">
               <Paperclip className="size-4" />
               <span className="min-w-0 truncate">{fileName || "Add a file: PDF, Word, Excel, JPG or PNG, up to 5 MB"}</span>
             </label>
@@ -152,10 +155,10 @@ export function ContactForm({ defaultType, defaultSubject, defaultMessage }: Pro
             <button
               type="submit"
               disabled={state === "sending"}
-              className="chamfer inline-flex min-h-12 items-center gap-3 bg-brand pr-8 pl-6 font-display text-[16px] font-semibold text-white transition-colors hover:bg-brand-deep disabled:opacity-70"
+              className="inline-flex min-h-14 items-center gap-3 rounded-full bg-berry px-8 font-display text-[16px] font-semibold text-white shadow-[0_14px_30px_-14px_rgba(196,32,90,0.85)] transition-colors hover:bg-berry-deep disabled:opacity-70"
             >
               {state === "sending" && <Loader2 className="size-4 animate-spin" />}
-              {state === "sending" ? "Sending…" : "Send enquiry"}
+              {state === "sending" ? "Sending…" : "Send message"}
             </button>
           </div>
         </motion.form>

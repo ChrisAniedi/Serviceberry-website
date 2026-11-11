@@ -15,20 +15,20 @@ const vacancies: { title: string; location: string; type: string; summary: strin
 export default function CareersPage() {
   return (
     <>
-      <PageHero kp="6+500" label="Careers" title={<>Build a career<br /><span className="text-brand">in energy</span></>} intro="We look for safe, skilled and curious people: technicians, engineers and support staff who take pride in work done right." image={img.workersStairs} />
+      <PageHero kp="6+500" label="Careers" title={<>Build a career <span className="text-brand">in energy.</span></>} intro="We look for safe, skilled and curious people: technicians, engineers and support staff who take pride in work done right." image={img.workersStairs} />
       <section className="bg-white py-24">
         <div className="container-x grid gap-12 lg:grid-cols-[1.4fr_1fr]">
           <div>
             <Title size="md" title="Current openings" />
             {vacancies.length === 0 ? (
-              <Reveal className="mt-8 border-l-[4px] border-brand bg-mist p-8">
-                <p className="headline text-[27px]">No current vacancies</p>
+              <Reveal className="mt-8 rounded-[30px] bg-mist p-8 ring-1 ring-line sm:p-10">
+                <p className="headline text-[30px]">No current vacancies</p>
                 <p className="mt-3 max-w-lg text-[16px] text-steel">There are no open roles right now. Send your CV and we will keep it on file for future openings.</p>
               </Reveal>
             ) : (
-              <ul className="mt-8 border-t border-line">
+              <ul className="mt-8 space-y-3">
                 {vacancies.map((v) => (
-                  <li key={v.title} className="border-b border-line py-6">
+                  <li key={v.title} className="rounded-[24px] bg-mist p-6 ring-1 ring-line">
                     <p className="headline text-[24px]">{v.title}</p>
                     <p className="mt-1 text-[15px] text-steel">{v.location} · {v.type}</p>
                     <p className="mt-3 text-steel">{v.summary}</p>
@@ -37,12 +37,15 @@ export default function CareersPage() {
               </ul>
             )}
           </div>
-          <Reveal className="h-fit bg-brand p-8 text-white">
+          <Reveal className="h-fit rounded-[30px] bg-brand-deep p-8 text-white sm:p-10 lg:sticky lg:top-24">
             <p className="font-display text-[13px] font-semibold tracking-[0.12em] text-brand-light uppercase">How to apply</p>
-            <ol className="mt-5 space-y-4 text-[16px] text-white/85">
-              <li>1. Prepare your CV (PDF) and a short cover note.</li>
-              <li>2. Put the role, or &quot;General application&quot;, in the subject line.</li>
-              <li>3. Email {site.email}.</li>
+            <ol className="mt-6 space-y-4 text-[16px] text-white/85">
+              {["Prepare your CV (PDF) and a short cover note.", "Put the role, or “General application”, in the subject line.", `Email ${site.email}.`].map((t, i) => (
+                <li key={t} className="grid grid-cols-[34px_1fr] gap-2">
+                  <span className="font-display text-[20px] leading-none font-light text-brand-light tabular-nums">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="break-words">{t}</span>
+                </li>
+              ))}
             </ol>
             <Button href={`mailto:${site.email}?subject=Career%20application`} variant="hivis" className="mt-8">Email your CV</Button>
           </Reveal>

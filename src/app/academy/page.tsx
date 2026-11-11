@@ -34,13 +34,14 @@ export default function AcademyPage() {
       <PageHero
         kp="6+000"
         label="Serviceberry Academy"
-        title={<>Learn on the line.<br /><span className="text-brand">Grow in the field.</span></>}
+        title={<>Learn on the line. <span className="text-brand">Grow in the field.</span></>}
         intro="Building technical competence. Developing industry professionals. Professional, business and technical learning, online."
         image={img.engHardhat}
+        after="bg-ink"
       >
         <div className="mt-6 flex flex-wrap gap-3">
           <Button href={site.academyUrl} external variant="hivis">Visit Serviceberry Academy</Button>
-          <Button href="/request-a-quote?type=Academy" variant="line">Enrol a team</Button>
+          <Button href="/request-a-quote?type=Academy" variant="glass">Enrol a team</Button>
         </div>
       </PageHero>
 
@@ -55,8 +56,8 @@ export default function AcademyPage() {
           <Title kp="6+100" label="Tracks" title={<>Three ways<br /><span className="text-brand">to grow</span></>} intro="Courses are grouped so you can build the exact mix your role needs." />
           <div className="mt-12 grid gap-4 md:grid-cols-3">
             {tracks.map((t, i) => (
-              <Reveal key={t.title} delay={i * 0.08} className="group bg-mist">
-                <div className="chamfer-lg relative aspect-[4/3] overflow-hidden">
+              <Reveal key={t.title} delay={i * 0.08} className="group overflow-hidden rounded-[28px] bg-mist ring-1 ring-line">
+                <div className="relative m-2 aspect-[4/3] overflow-hidden rounded-[22px]">
                   <Image src={t.image} alt="" fill sizes="33vw" className="object-cover transition-transform duration-[1.2s] group-hover:scale-105" />
                 </div>
                 <div className="p-6">
@@ -72,9 +73,9 @@ export default function AcademyPage() {
       <section data-nav="dark" className="bg-brand-deep py-24 text-white">
         <div className="container-x">
           <Title light kp="6+200" label="How it works" title={<>Sign-up to<br /><span className="text-brand-light">certificate</span></>} />
-          <ol className="mt-12 grid gap-px bg-white/15 sm:grid-cols-2 lg:grid-cols-4">
+          <ol className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {steps.map((s, i) => (
-              <li key={s} className="bg-brand-deep p-7">
+              <li key={s} className="rounded-[26px] bg-white/[0.06] p-7 ring-1 ring-white/12 backdrop-blur-xl">
                 <Reveal delay={i * 0.08}>
                   <span className="headline text-[54px] text-brand-light">{String(i + 1).padStart(2, "0")}</span>
                   <p className="headline mt-4 text-[22px]">{s}</p>
@@ -91,8 +92,8 @@ export default function AcademyPage() {
           <Title size="md" title={<>Made for people who<br /><span className="text-brand">keep energy moving</span></>} />
           <div className="mt-12 grid gap-3 md:grid-cols-3">
             {audience.map((a, i) => (
-              <Reveal key={a.title} delay={i * 0.08} className="bg-white p-7">
-                <a.icon className="size-9 text-brand" strokeWidth={1.5} />
+              <Reveal key={a.title} delay={i * 0.08} className="group rounded-[26px] bg-white p-7 ring-1 ring-line transition-[translate,box-shadow] duration-500 ease-out-expo hover:-translate-y-1.5 hover:shadow-[0_30px_60px_-30px_rgba(10,22,48,0.4)]">
+                <span className="grid size-14 place-items-center rounded-2xl bg-brand-soft text-brand transition-transform duration-500 group-hover:-rotate-6"><a.icon className="size-7" strokeWidth={1.5} /></span>
                 <p className="headline mt-8 text-[24px]">{a.title}</p>
                 <p className="mt-2 text-[16px] text-steel">{a.body}</p>
               </Reveal>
@@ -101,13 +102,16 @@ export default function AcademyPage() {
         </div>
       </section>
 
-      <section className="bg-brand py-20 text-white">
-        <div className="container-x flex flex-wrap items-center justify-between gap-6">
+      <section className="bg-mist pb-24">
+        <div data-nav="dark" className="container-x">
+          <div className="relative isolate flex flex-wrap items-center justify-between gap-6 overflow-hidden rounded-[36px] bg-brand-deep p-8 text-white sm:p-12 lg:p-16">
+            <div aria-hidden className="absolute -right-24 -bottom-40 -z-10 size-[520px] rounded-full bg-[radial-gradient(closest-side,rgba(143,180,255,0.3),transparent)]" />
           <div>
             <p className="headline text-[clamp(1.85rem,3.86vw,3.36rem)]">Your next skill is one click away.</p>
             <p className="mt-2 text-[15px] text-white/80">Opens academy.serviceberryglobal.com</p>
           </div>
           <Button href={site.academyUrl} external variant="white">Go to the Academy</Button>
+          </div>
         </div>
       </section>
     </>

@@ -186,6 +186,13 @@ html.lenis, html.lenis body { height: auto; }
 }
 .anim-pig-run { animation: pig-run 9s cubic-bezier(0.65, 0, 0.35, 1) infinite; }
 
+/* a light travelling along a hairline (page openers) */
+@keyframes run {
+  from { left: -10rem; }
+  to { left: 100%; }
+}
+.anim-run { animation: run 7s cubic-bezier(0.45, 0, 0.55, 1) infinite; }
+
 /* product flowing through the cleaned pipe */
 @keyframes flow {
   from { background-position: 0 0; }

@@ -21,9 +21,10 @@ export const site = {
   },
   phones: ["+234 702 500 2228", "+234 815 613 5559"],
   email: "info@serviceberryglobal.com",
-  // TODO(verify): add the company LinkedIn URL and WhatsApp number when confirmed.
+  // TODO(verify): add the company LinkedIn URL when confirmed.
   linkedin: "" as string,
-  whatsapp: "" as string,
+  // TODO(verify): confirm this line is on WhatsApp (it is the first office number for now).
+  whatsapp: "+234 702 500 2228",
   /**
    * Hero video. Drop a Higgsfield render at public/media/hero.mp4 (see HIGGSFIELD.md)
    * and set this to "/media/hero.mp4". Until then the hero uses the poster photo with motion.
@@ -91,3 +92,11 @@ export const enquiryTypes = [
   "Academy",
   "Other",
 ] as const;
+
+/** A wa.me link to the company WhatsApp, optionally with a first message typed in. */
+export function waLink(text = "Hello Serviceberry, I would like to ask about ") {
+  return `https://wa.me/${site.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(text)}`;
+}
+
+/** A tel: link for a displayed number. */
+export const telLink = (n: string) => `tel:${n.replace(/\s/g, "")}`;

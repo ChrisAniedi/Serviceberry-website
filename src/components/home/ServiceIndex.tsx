@@ -40,7 +40,7 @@ export function ServiceIndex() {
             {hover !== null && (
               <motion.div
                 aria-hidden
-                className="chamfer-lg pointer-events-none absolute top-0 left-0 z-20 hidden h-[230px] w-[330px] overflow-hidden lg:block"
+                className="pointer-events-none absolute top-0 left-0 z-20 hidden h-[230px] w-[330px] overflow-hidden rounded-[22px] shadow-[0_30px_60px_-24px_rgba(10,22,48,0.55)] lg:block"
                 style={{ x, y, translateX: "-50%", translateY: "-50%" }}
                 initial={{ opacity: 0, scale: 0.85 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -65,13 +65,13 @@ export function ServiceIndex() {
                   onMouseEnter={() => setHover(i)}
                   className="group grid grid-cols-[auto_1fr_auto] items-center gap-x-5 gap-y-2 py-6 sm:gap-x-8 lg:grid-cols-[60px_1.3fr_1fr_auto] lg:py-7"
                 >
-                  <span className="relative row-span-2 size-16 overflow-hidden sm:size-20 lg:hidden">
+                  <span className="relative row-span-2 size-16 overflow-hidden rounded-2xl sm:size-20 lg:hidden">
                     <Image src={s.image} alt="" fill sizes="80px" className="object-cover" />
                   </span>
                   <span className="hidden font-display text-[18px] font-semibold text-steel-2 lg:block">{String(i + 1).padStart(2, "0")}</span>
                   <span className={`headline text-[clamp(1.34rem,2.86vw,2.44rem)] transition-colors duration-300 ${hover === i ? "text-brand" : ""}`}>{s.title}</span>
                   <span className="col-start-2 text-[15px] leading-snug text-steel lg:col-start-auto">{s.short}</span>
-                  <span className={`col-start-3 row-span-2 row-start-1 grid size-12 place-items-center transition-colors duration-300 lg:col-start-auto lg:row-span-1 ${hover === i ? "bg-brand text-white" : "bg-white text-ink ring-1 ring-ink/15"}`}>
+                  <span className={`col-start-3 row-span-2 row-start-1 grid size-12 place-items-center rounded-full transition-colors duration-300 lg:col-start-auto lg:row-span-1 ${hover === i ? "bg-brand text-white" : "bg-white text-ink ring-1 ring-ink/15"}`}>
                     <ArrowUpRight className="size-5" />
                   </span>
                 </Link>

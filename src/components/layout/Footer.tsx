@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { Button } from "@/components/ui/Button";
 import { Logo } from "@/components/ui/Logo";
 import { Socials } from "@/components/ui/Socials";
 import { site } from "@/content/site";
@@ -24,24 +23,16 @@ function Heading({ children }: { children: React.ReactNode }) {
 }
 
 /**
- * Light footer: a short call to action, then four link columns, socials and the Academy link,
+ * Light footer: the logo, then four link columns, socials and the Academy link,
  * the legal line, and a slow band of large faint words cut off at the bottom. One hairline between each band; two text tones.
  */
 export function Footer() {
   return (
     <footer className="overflow-hidden border-t border-line bg-paper text-ink">
       <div className="container-x">
-        <div className="flex flex-col gap-8 border-b border-line py-14 lg:flex-row lg:items-end lg:justify-between">
-          <div>
-            <Logo />
-            <p className="headline mt-8 max-w-[22ch] text-[clamp(1.8rem,3vw,2.6rem)] leading-[1.08]">
-              Have a line, a plant or a project in mind?
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            <Button href="/request-a-quote">Get a quote</Button>
-            <Button href={`mailto:${site.email}`} variant="line">Email us</Button>
-          </div>
+        <div className="flex flex-wrap items-center justify-between gap-6 border-b border-line py-10">
+          <Logo />
+          <p className="text-[15px] text-steel">{site.tagline}, from Port Harcourt.</p>
         </div>
 
         <div className="grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1.1fr]">

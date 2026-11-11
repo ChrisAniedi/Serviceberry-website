@@ -5,7 +5,7 @@ import { Illustrative } from "@/components/ui/Illustrative";
 
 export function PartnerTile({ partner }: { partner: Partner }) {
   return (
-    <Link href={`/partners#${partner.slug}`} className="relative grid aspect-[16/9] place-items-center bg-white p-8 ring-1 ring-line transition-colors hover:bg-mist">
+    <Link href={`/partners#${partner.slug}`} className="relative grid aspect-[16/9] place-items-center rounded-[26px] bg-white p-8 ring-1 ring-line transition-[translate,box-shadow] duration-500 ease-out-expo hover:-translate-y-1 hover:shadow-[0_24px_50px_-28px_rgba(12,26,43,0.4)]">
       {partner.logo ? (
         <Image src={partner.logo} alt={partner.name} width={180} height={60} />
       ) : (
