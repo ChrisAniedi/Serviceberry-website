@@ -5,7 +5,7 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import { useState } from "react";
-import { brochure } from "@/content/images";
+import { brochure, img } from "@/content/images";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -62,7 +62,12 @@ export function TechPanels() {
   const [open, setOpen] = useState(0);
 
   return (
-    <section className="relative bg-ink text-white">
+    <section className="relative isolate overflow-hidden bg-ink text-white">
+      {/* a faint photo behind, kept quiet so the panels stay the focus */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <Image src={img.rigOcean} alt="" fill sizes="100vw" className="object-cover opacity-[0.14] grayscale" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,#0a1630_0%,rgba(10,22,48,0.55)_35%,rgba(10,22,48,0.7)_70%,#0a1630_100%)]" />
+      </div>
       <div className="py-24 sm:py-32">
       <div className="container-x w-full">
         <div className="flex flex-wrap items-end justify-between gap-6">
