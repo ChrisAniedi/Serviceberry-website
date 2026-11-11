@@ -1,0 +1,26 @@
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import type { Project } from "@/content/projects";
+import { Illustrative } from "@/components/ui/Illustrative";
+
+/** Compact project card used on service pages and the projects grid. */
+export function ProjectCard({ project, index }: { project: Project; index: number }) {
+  return (
+    <Link href={`/projects/${project.slug}`} className="group block bg-white ring-1 ring-line">
+      <div className="relative aspect-[4/3] overflow-hidden">
+        <Image src={project.image} alt="" fill sizes="(min-width:1024px) 33vw, 100vw" className="object-cover transition-transform duration-[1.2s] ease-out-expo group-hover:scale-105" />
+        <span className="absolute top-0 left-0 bg-berry px-3 py-1.5 font-display text-[13px] font-bold">{String(index + 1).padStart(2, "0")}</span>
+        {!project.verified && <Illustrative className="absolute top-2 right-2" />}
+      </div>
+      <div className="p-5">
+        <p className="font-display text-[11px] font-semibold tracking-[0.12em] text-brand uppercase">{project.type}</p>
+        <h3 className="headline mt-2 text-[22px]">{project.title}</h3>
+        <p className="mt-2 text-[14.5px] text-steel">{project.location} · {project.role}</p>
+        <span className="mt-4 inline-flex items-center gap-1 font-display text-[15px] font-semibold group-hover:text-brand">
+          View case study <ArrowUpRight className="size-4" />
+        </span>
+      </div>
+    </Link>
+  );
+}

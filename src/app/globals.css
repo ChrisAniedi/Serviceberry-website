@@ -1,26 +1,152 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/*
+  Brand colours from the Serviceberry brochure (Sept 2025): royal blue and navy from the
+  logo's S, crimson from its drop. berry-light is the crimson lifted for small text on dark.
+*/
+@theme {
+  --color-ink: #0a1630;
+  --color-brand: #0b4fbf;
+  --color-brand-deep: #0a2a57;
+  --color-brand-soft: #e8effc;
+  --color-brand-light: #8fb4ff;
+  --color-berry: #c4205a;
+  --color-berry-deep: #a3184a;
+  --color-berry-light: #ff7aa5;
+  --color-steel: #56667c;
+  --color-steel-2: #8b98a8;
+  --color-line: #dde3ec;
+  --color-mist: #f1f4f9;
+  --color-paper: #f8f9fc;
+  --color-go: #1f9d55;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
   }
 }
 
+html { background: #fff; --gutter: clamp(1.25rem, 3.6vw, 4rem); }
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #fff;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--color-berry); color: #fff; }
+
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* Edge to edge: content runs the full width with a fluid gutter (capped on very wide screens). */
+@utility container-x {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1920px;
+  padding-inline: var(--gutter);
+}
+
+/* Pull a block out of container-x to the screen edge (both sides, or the right only). */
+@utility bleed-x {
+  margin-inline: calc(-1 * var(--gutter));
+}
+@utility bleed-r {
+  margin-right: calc(-1 * var(--gutter));
+}
+
+/* Display type: Archivo, slightly wide, sentence case, tight */
+@utility headline {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-stretch: 104%;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+/* Steel-plate corner: cut top-right */
+/* Corner styles (once cut "steel plate" corners; now soft to match the pill buttons). */
+@utility chamfer {
+  border-radius: 14px;
+}
+@utility chamfer-lg {
+  border-radius: 28px;
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+/* ---- Hero scene: flare, smoke, lights, haze, sea ---- */
+@keyframes flame-a {
+  0%, 100% { transform: scale(1, 1) skewX(0deg); opacity: 0.95; }
+  20% { transform: scale(0.92, 1.12) skewX(-4deg); }
+  45% { transform: scale(1.05, 0.9) skewX(3deg); opacity: 0.85; }
+  70% { transform: scale(0.96, 1.08) skewX(-2deg); }
+}
+@keyframes flame-b {
+  0%, 100% { transform: scale(1, 1) skewX(0deg); }
+  30% { transform: scale(1.08, 0.86) skewX(5deg); }
+  60% { transform: scale(0.9, 1.16) skewX(-4deg); }
+}
+@keyframes flame-c {
+  0%, 100% { transform: scaleY(1); opacity: 1; }
+  50% { transform: scaleY(1.25); opacity: 0.8; }
+}
+@keyframes glow {
+  0%, 100% { opacity: 0.75; transform: scale(1); }
+  35% { opacity: 1; transform: scale(1.08); }
+  60% { opacity: 0.85; transform: scale(0.96); }
+}
+@keyframes smoke {
+  0% { transform: translate(0, 0) scale(0.6); opacity: 0; }
+  15% { opacity: 0.9; }
+  100% { transform: translate(120px, -120px) scale(2.8); opacity: 0; }
+}
+@keyframes blink {
+  0%, 55%, 100% { opacity: 0.15; }
+  60%, 80% { opacity: 1; }
+}
+@keyframes drift {
+  from { transform: translateX(0); }
+  to { transform: translateX(18%); }
+}
+@keyframes glint {
+  from { background-position: 0 0; }
+  to { background-position: 0 46px; }
+}
+@keyframes glint-x {
+  from { background-position: 0 0; }
+  to { background-position: 240px 0; }
+}
+.anim-flame-a { animation: flame-a 0.9s ease-in-out infinite; }
+.anim-flame-b { animation: flame-b 0.7s ease-in-out infinite; }
+.anim-flame-c { animation: flame-c 0.5s ease-in-out infinite; }
+.anim-glow { animation: glow 1.6s ease-in-out infinite; }
+.anim-smoke { animation: smoke 6.4s ease-out infinite; }
+.anim-blink { animation: blink 1.8s linear infinite; }
+.anim-drift { animation: drift 38s ease-in-out infinite alternate; }
+.anim-drift-rev { animation: drift 46s ease-in-out infinite alternate-reverse; }
+.anim-glint { animation: glint 5s linear infinite; }
+.anim-glint-rev { animation: glint-x 14s linear infinite reverse; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
