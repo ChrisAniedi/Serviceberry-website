@@ -1,7 +1,7 @@
 "use client";
 
-import { AnimatePresence, LayoutGroup, motion, useReducedMotion } from "motion/react";
-import { useEffect, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -16,7 +16,7 @@ export const runs = [
 
 const EVERY = 3400;
 
-/** Rotates through `runs`; calls back so the arc labels can follow. Static with reduced motion. */
+/** Rotates through `runs`; the arc labels follow the same index. Static with reduced motion. */
 export function useRun() {
   const reduce = useReducedMotion();
   const [i, setI] = useState(0);
@@ -28,40 +28,59 @@ export function useRun() {
   return i;
 }
 
-function Swap({ text, k, className = "" }: { text: string; k: string; className?: string }) {
+/**
+ * A slot for one changing word. It measures the incoming word and eases its own width to
+ * fit, while the old word rises out and the new one rises in. Both are clipped by the slot,
+ * so a longer outgoing word can never run over its neighbours.
+ */
+function Swap({ text }: { text: string }) {
+  const measure = useRef<HTMLSpanElement>(null);
+  const [width, setWidth] = useState<number>();
+
+  useLayoutEffect(() => {
+    const m = measure.current;
+    if (!m) return;
+    const set = () => setWidth(m.offsetWidth);
+    set();
+    const ro = new ResizeObserver(set);
+    ro.observe(m);
+    return () => ro.disconnect();
+  }, [text]);
+
   return (
-    <motion.span layout transition={{ layout: { duration: 0.55, ease } }} className={`relative inline-flex overflow-hidden pb-[0.08em] ${className}`}>
-      {/* "wait": the old words leave first, the line then settles to the new width, then the
-          new words rise in, so two words never share the slot */}
-      <AnimatePresence mode="wait" initial={false}>
+    <span
+      className="relative inline-block overflow-hidden pb-[0.08em] align-bottom text-[#ffd79a]"
+      style={{ width, transition: "width 0.7s cubic-bezier(0.16, 1, 0.3, 1)" }}
+    >
+      {/* sizes the slot (height always; width before the first measurement) */}
+      <span className="invisible whitespace-nowrap">{text}</span>
+      {/* measures the incoming word's natural width */}
+      <span ref={measure} aria-hidden className="invisible absolute top-0 left-0 whitespace-nowrap">
+        {text}
+      </span>
+      <AnimatePresence initial={false}>
         <motion.span
-          key={k}
-          className="relative inline-block whitespace-nowrap"
-          initial={{ y: "100%", opacity: 0, filter: "blur(6px)" }}
-          animate={{ y: "0%", opacity: 1, filter: "blur(0px)", transition: { duration: 0.6, delay: 0.12, ease } }}
-          exit={{ y: "-90%", opacity: 0, filter: "blur(6px)", transition: { duration: 0.3, ease: [0.4, 0, 1, 1] } }}
+          key={text}
+          className="absolute top-0 left-0 whitespace-nowrap"
+          initial={{ y: "105%", opacity: 0, filter: "blur(8px)" }}
+          animate={{ y: "0%", opacity: 1, filter: "blur(0px)" }}
+          exit={{ y: "-105%", opacity: 0, filter: "blur(8px)" }}
+          transition={{ duration: 0.75, ease }}
         >
           {text}
-          <motion.span
-            aria-hidden
-            className="absolute inset-x-0 bottom-[0.02em] h-[0.05em] origin-left rounded-full bg-[#ffc65c]"
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.35, ease }}
-          />
         </motion.span>
       </AnimatePresence>
-    </motion.span>
+    </span>
   );
 }
 
-function Fixed({ children, delay }: { children: React.ReactNode; delay: number }) {
+function Rise({ children, delay }: { children: React.ReactNode; delay: number }) {
   return (
-    <motion.span layout transition={{ layout: { duration: 0.55, ease } }} className="inline-flex overflow-hidden pb-[0.08em]">
+    <span className="inline-block overflow-hidden pb-[0.08em] align-bottom">
       <motion.span className="inline-block" initial={{ y: "110%", filter: "blur(8px)" }} animate={{ y: "0%", filter: "blur(0px)" }} transition={{ duration: 1.1, delay, ease }}>
         {children}
       </motion.span>
-    </motion.span>
+    </span>
   );
 }
 
@@ -74,22 +93,19 @@ export function HeroHeadline({ index }: { index: number }) {
   const r = runs[index];
   return (
     <p aria-hidden className="headline mt-6 text-[clamp(2.6rem,4.8vw,5.2rem)] leading-[0.98] font-[350] tracking-[-0.045em]">
-      <span className="flex flex-wrap justify-center gap-x-[0.24em]">
-        <Fixed delay={0.45}>Pipeline</Fixed>
-        <Fixed delay={0.52}>integrity,</Fixed>
+      <span className="block">
+        <Rise delay={0.45}>Pipeline</Rise> <Rise delay={0.52}>integrity,</Rise>
       </span>
-      <LayoutGroup>
-        <span className="flex min-h-[2em] flex-wrap content-start justify-center gap-x-[0.24em] lg:min-h-0 lg:flex-nowrap">
-          <Fixed delay={0.59}>from</Fixed>
-          <motion.span layout className="inline-flex" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.1, delay: 0.66, ease, layout: { duration: 0.55, ease } }}>
-            <Swap text={r.from} k={`f-${index}`} className="text-white" />
-          </motion.span>
-          <Fixed delay={0.73}>to</Fixed>
-          <motion.span layout className="inline-flex" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.1, delay: 0.8, ease, layout: { duration: 0.55, ease } }}>
-            <Swap text={`${r.to}.`} k={`t-${index}`} className="text-white" />
-          </motion.span>
-        </span>
-      </LayoutGroup>
+      <span className="block lg:whitespace-nowrap">
+        <Rise delay={0.59}>from</Rise>{" "}
+        <Rise delay={0.66}>
+          <Swap text={r.from} />
+        </Rise>{" "}
+        <Rise delay={0.73}>to</Rise>{" "}
+        <Rise delay={0.8}>
+          <Swap text={`${r.to}.`} />
+        </Rise>
+      </span>
     </p>
   );
 }

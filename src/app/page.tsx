@@ -22,10 +22,10 @@ export default function Home() {
       <ServicesBand />
       <ServicesRail />
       <PiggingStory />
-      <TechPanels />
       <FieldStrip />
-      <WhyUs />
+      <TechPanels />
       <EquipmentShelf />
+      <WhyUs />
       <ProjectStack />
       <AcademyBlock />
       <Closing />

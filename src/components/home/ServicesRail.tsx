@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useMotionValue, useMotionValueEvent, useReducedMotion, useScroll, useSpring } from "motion/react";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { brochure } from "@/content/images";
 import { services } from "@/content/services";
 import { Button } from "@/components/ui/Button";
@@ -47,13 +47,24 @@ export function ServicesRail() {
     progress.set(max > 0 ? r.scrollLeft / max : 0);
   };
 
-  // the glide: tie the first couple of cards to the vertical scroll, until the visitor takes over
-  const { scrollYProgress } = useScroll({ target: section, offset: ["start end", "end start"] });
+  // large screens: the section holds for a short scroll while the row glides two cards along,
+  // then lets the page carry on; the rest of the row is the visitor's to drag or step through
+  const [pin, setPin] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px) and (min-height: 700px) and (prefers-reduced-motion: no-preference)");
+    const set = () => setPin(mq.matches);
+    set();
+    mq.addEventListener("change", set);
+    return () => mq.removeEventListener("change", set);
+  }, []);
+  const { scrollYProgress } = useScroll({ target: section, offset: pin ? ["start start", "end end"] : ["start end", "end start"] });
   useMotionValueEvent(scrollYProgress, "change", (p) => {
     const r = rail.current;
     if (!r || touched.current || reduce) return;
-    const t = Math.min(1, Math.max(0, (p - 0.3) / 0.4));
-    r.scrollLeft = t * cardStep() * HINT_CARDS;
+    const t = pin ? Math.min(1, Math.max(0, (p - 0.08) / 0.84)) : Math.min(1, Math.max(0, (p - 0.3) / 0.4));
+    // ease in and out so the glide starts and settles softly
+    const e = t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2;
+    r.scrollLeft = e * cardStep() * HINT_CARDS;
   });
 
   useEffect(() => {
@@ -113,7 +124,8 @@ export function ServicesRail() {
   };
 
   return (
-    <section ref={section} id="kp-1" className="scroll-mt-20 bg-paper py-24 sm:py-32">
+    <section ref={section} id="kp-1" className="relative scroll-mt-20 bg-paper" style={{ height: pin ? "175svh" : undefined }}>
+      <div className={pin ? "sticky top-0 flex h-svh flex-col justify-center" : "py-24 sm:py-32"}>
       <div className="container-x flex flex-wrap items-end justify-between gap-6">
         <div>
           <p className="font-display text-[12px] font-semibold tracking-[0.16em] text-brand uppercase">Our services</p>
@@ -125,6 +137,9 @@ export function ServicesRail() {
           <div aria-hidden className="mr-3 hidden h-[3px] w-32 overflow-hidden rounded-full bg-line sm:block">
             <motion.span className="block h-full origin-left bg-brand" style={{ scaleX: bar }} />
           </div>
+          <Link href="/services" className="mr-2 hidden min-h-11 items-center gap-1.5 text-[15px] font-medium text-brand hover:underline sm:inline-flex">
+            All services <ArrowRight className="size-4" />
+          </Link>
           <button type="button" onClick={() => step(-1)} aria-label="Previous services" className="grid size-12 place-items-center rounded-full ring-1 ring-ink/15 transition-colors hover:bg-ink hover:text-white">
             <ArrowLeft className="size-5" />
           </button>
@@ -140,7 +155,7 @@ export function ServicesRail() {
         tabIndex={0}
         role="region"
         aria-label="Services, scroll sideways for more"
-        className="no-scrollbar mt-12 flex cursor-grab gap-5 overflow-x-auto px-[var(--gutter)] pb-2 select-none active:cursor-grabbing max-lg:snap-x max-lg:snap-mandatory max-lg:scroll-px-[var(--gutter)]"
+        className="no-scrollbar mt-10 flex cursor-grab gap-5 overflow-x-auto px-[var(--gutter)] pb-2 select-none active:cursor-grabbing max-lg:snap-x max-lg:snap-mandatory max-lg:scroll-px-[var(--gutter)]"
       >
         {services.map((s, i) => {
           const scope = s.scope.flatMap((g) => g.items).slice(0, 3);
@@ -150,7 +165,7 @@ export function ServicesRail() {
               data-card
               href={`/services/${s.slug}`}
               draggable={false}
-              className="group relative h-[min(62svh,560px)] w-[min(84vw,400px)] shrink-0 snap-start overflow-hidden rounded-[28px] bg-ink text-white"
+              className="group relative h-[min(58svh,540px)] w-[min(84vw,400px)] shrink-0 snap-start overflow-hidden rounded-[28px] bg-ink text-white"
             >
               <Image
                 src={photo[s.slug] ?? s.image}
@@ -183,7 +198,7 @@ export function ServicesRail() {
             </Link>
           );
         })}
-        <div data-card className="flex h-[min(62svh,560px)] w-[min(84vw,360px)] shrink-0 snap-start flex-col justify-between rounded-[28px] bg-brand p-8 text-white">
+        <div data-card className="flex h-[min(58svh,540px)] w-[min(84vw,360px)] shrink-0 snap-start flex-col justify-between rounded-[28px] bg-brand p-8 text-white">
           <p className="headline text-[32px] leading-[1.05]">Not sure which service fits?</p>
           <div>
             <p className="text-[15px] text-white/85">Tell us about the line or the asset. We will scope it with you.</p>
@@ -192,11 +207,6 @@ export function ServicesRail() {
         </div>
       </div>
 
-      <div className="container-x mt-8 flex items-center justify-between gap-4">
-        <p className="text-[14px] text-steel">Drag or swipe to see all {services.length} services.</p>
-        <Link href="/services" className="inline-flex min-h-11 items-center gap-1.5 text-[15px] font-medium text-brand hover:underline">
-          All services <ArrowRight className="size-4" />
-        </Link>
       </div>
     </section>
   );

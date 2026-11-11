@@ -134,7 +134,7 @@ export function TechPanels() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, transition: { duration: 0.2 } }}
                       transition={{ duration: 0.7, delay: 0.2, ease }}
-                      className="absolute inset-x-3 bottom-3 rounded-[22px] bg-white/10 p-6 ring-1 ring-white/20 backdrop-blur-xl lg:max-w-[560px] lg:p-7"
+                      className="absolute inset-x-3 bottom-3 glass-fade text-lift rounded-[22px] p-6 lg:max-w-[560px] lg:p-7"
                     >
                       <p className="font-display text-[12px] font-semibold tracking-[0.14em] text-brand-light uppercase">{t.key}</p>
                       <h3 className="headline mt-2 text-[clamp(1.6rem,2.4vw,2.2rem)] leading-[1.05]">{t.name}</h3>
@@ -154,7 +154,7 @@ export function TechPanels() {
                 </AnimatePresence>
                 {/* phones: always open */}
                 {!on && (
-                  <div className="absolute inset-x-3 bottom-3 rounded-[22px] bg-white/10 p-6 ring-1 ring-white/20 backdrop-blur-xl lg:hidden">
+                  <div className="absolute inset-x-3 bottom-3 glass-fade text-lift rounded-[22px] p-6 lg:hidden">
                     <p className="font-display text-[12px] font-semibold tracking-[0.14em] text-brand-light uppercase">{t.key}</p>
                     <h3 className="headline mt-2 text-[1.6rem] leading-[1.05]">{t.name}</h3>
                     <p className="mt-3 text-[15px] leading-relaxed text-white/80">{t.body}</p>
