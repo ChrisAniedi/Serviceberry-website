@@ -14,7 +14,7 @@ export function StartJob({ id = "kp-7" }: { id?: string }) {
             <span className="inline-flex h-6 items-center gap-1.5 rounded-full bg-white/10 px-2.5 text-[12px] text-brand-light"><span className="size-1.5 rounded-full bg-berry" />KP 7+000</span>
             Receiver
           </p>
-          <h2 className="headline mt-6 text-[clamp(2.52rem,5.88vw,5.04rem)]">Start a job</h2>
+          <h2 className="headline mt-6 text-[clamp(2.52rem,5.88vw,5.04rem)]">Get a quote</h2>
           <p className="mt-5 max-w-md text-[17px] leading-relaxed text-white/80">
             Have a project or equipment requirement? Tell us what you need and where. We&apos;ll come back with a method, a scope and a price.
           </p>

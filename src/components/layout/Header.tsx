@@ -22,7 +22,7 @@ const primary = [
 ];
 
 /**
- * Top bar: four primary links on the left, the logo centred (Services opens a panel), "Start a job" and a Menu
+ * Top bar: four primary links on the left, the logo centred (Services opens a panel), "Get a quote" and a Menu
  * button that opens the full-screen menu. Clear over the home hero, dark glass once the
  * page moves, white past the hero. Tucks away while reading down, returns on the way up.
  */
@@ -56,7 +56,7 @@ export function Header() {
   const dark = open || (pathname === "/" && !pastHero && !drop);
   const active = (href: string) => pathname === href || pathname.startsWith(href + "/");
   const linkCls = (on: boolean) =>
-    `relative flex h-[74px] items-center gap-1 px-3.5 font-display text-[15px] font-medium transition-colors ${on ? (dark ? "text-brand-light" : "text-brand") : dark ? "text-white/85 hover:text-white" : "text-ink hover:text-brand"}`;
+    `relative flex h-[74px] items-center gap-0.5 px-2.5 font-display text-[14.5px] font-medium transition-colors ${on ? (dark ? "text-brand-light" : "text-brand") : dark ? "text-white/85 hover:text-white" : "text-ink hover:text-brand"}`;
 
   return (
     <>
@@ -77,7 +77,7 @@ export function Header() {
         <div className="container-x grid h-[74px] grid-cols-[1fr_auto] items-center gap-6 lg:grid-cols-[1fr_auto_1fr]">
           <motion.nav
             aria-label="Main"
-            className="-ml-3.5 hidden items-center lg:flex"
+            className="-ml-2.5 hidden items-center lg:flex"
             animate={{ opacity: open ? 0 : 1 }}
             style={{ pointerEvents: open ? "none" : "auto" }}
             transition={{ duration: 0.3 }}
@@ -97,7 +97,7 @@ export function Header() {
               ) : (
                 <Link key={l.href} href={l.href} onMouseEnter={() => setDrop(false)} className={linkCls(active(l.href))}>
                   {l.label}
-                  {active(l.href) && <span className="absolute inset-x-3.5 bottom-0 h-[3px] bg-current" />}
+                  {active(l.href) && <span className="absolute inset-x-2.5 bottom-0 h-[3px] bg-current" />}
                 </Link>
               ),
             )}
@@ -106,8 +106,8 @@ export function Header() {
           <Logo light={dark} className="lg:justify-self-center" />
 
           <div className="flex items-center justify-self-end gap-2 sm:gap-3">
-            <Button href="/contact" size="sm" className="hidden sm:inline-flex">
-              Start a job
+            <Button href="/request-a-quote" size="sm" className="hidden sm:inline-flex">
+              Get a quote
             </Button>
             <button
               type="button"

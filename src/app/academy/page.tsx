@@ -40,7 +40,7 @@ export default function AcademyPage() {
       >
         <div className="mt-6 flex flex-wrap gap-3">
           <Button href={site.academyUrl} external variant="hivis">Visit Serviceberry Academy</Button>
-          <Button href="/contact?type=Academy" variant="line">Enrol a team</Button>
+          <Button href="/request-a-quote?type=Academy" variant="line">Enrol a team</Button>
         </div>
       </PageHero>
 

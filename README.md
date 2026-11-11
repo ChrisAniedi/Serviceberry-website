@@ -51,7 +51,10 @@ band, in the footer and in the mobile menu goes out to https://academy.servicebe
   Engineering." after the brochure's back page.
 - **Photos**: `public/images/serviceberry/` are from the brochure (small; used in cards). `public/images/stock/` are
   free-licence Unsplash placeholders. Both go through `src/content/images.ts`.
-- **Header**: links left, logo centre, Start a job and a Menu button that opens a full-screen menu.
+- **Header**: links left, logo centre, Get a quote and a Menu button that opens a full-screen menu.
+- **Request a quote** (`/request-a-quote`, `components/forms/QuoteFlow.tsx`): four steps (what you need with
+  sub-choices, the job, your details, review) with a live summary; sends through `/api/contact`. Links can
+  preselect with `?type=Services&subject=…`.
 - Everything respects the visitor's *reduce motion* setting.
 - Unverified items show a "To verify" tag in `npm run dev` only; it never shows on the live site,
   so the checklist below must be done before launch.

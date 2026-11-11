@@ -75,7 +75,7 @@ export default async function CaseStudy({ params }: Props) {
       <section className="bg-brand py-20 text-white">
         <div className="container-x flex flex-wrap items-center justify-between gap-6">
           <p className="headline text-[clamp(1.68rem,3.36vw,2.86rem)]">Discuss a similar requirement with our team.</p>
-          <Button href={`/contact?type=Project%20Collaboration&subject=${encodeURIComponent(p.title)}`} variant="white">Start the conversation</Button>
+          <Button href={`/request-a-quote?type=Project%20Collaboration&subject=${encodeURIComponent(p.title)}`} variant="white">Start the conversation</Button>
         </div>
       </section>
     </>

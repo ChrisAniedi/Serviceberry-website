@@ -54,7 +54,7 @@ export function EquipmentShelf({ id = "kp-4", withTitle = true }: { id?: string;
               </div>
               <div className="mt-8 flex flex-wrap items-center justify-between gap-4 bg-white p-6 ring-1 ring-line">
                 <p className="max-w-xl text-[16px] text-steel">Not listed? Tell us the duty, specification and timeline. We source it, check the technical fit and coordinate delivery.</p>
-                <Button href="/contact?type=Equipment%20Sourcing">Submit a sourcing enquiry</Button>
+                <Button href="/request-a-quote?type=Equipment%20Sourcing">Submit a sourcing enquiry</Button>
               </div>
             </motion.div>
           )}

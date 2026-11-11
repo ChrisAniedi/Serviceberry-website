@@ -16,7 +16,7 @@ export default async function ContactPage({ searchParams }: Props) {
 
   return (
     <>
-      <PageHero kp="7+000" label="Receiver" title={<>Start a job<br /><span className="text-brand">with our team</span></>} intro="Tell us about your technical requirement, equipment need or potential collaboration." />
+      <PageHero kp="7+000" label="Receiver" title={<>Get a quote<br /><span className="text-brand">with our team</span></>} intro="Tell us about your technical requirement, equipment need or potential collaboration." />
       <section className="bg-white pb-24">
         <div className="container-x grid gap-10 lg:grid-cols-[1.35fr_1fr]">
           <Reveal className="min-w-0 bg-mist p-6 sm:p-10">

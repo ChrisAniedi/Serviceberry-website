@@ -59,8 +59,8 @@ export function Closing({ id = "kp-7" }: { id?: string }) {
             <span className="h-[3px] w-16 bg-berry" /> Let&apos;s create value together today!
           </span>
           <div className="flex flex-wrap gap-3">
-            <Button href="/contact">Start a job</Button>
-            <Button href="/contact?type=Equipment%20Sourcing" variant="line">Source equipment</Button>
+            <Button href="/request-a-quote">Get a quote</Button>
+            <Button href="/request-a-quote?type=Equipment%20Sourcing" variant="line">Source equipment</Button>
           </div>
         </motion.div>
       </div>

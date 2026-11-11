@@ -36,7 +36,7 @@ export function Footer() {
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <Button href="/contact">Start a job</Button>
+            <Button href="/request-a-quote">Get a quote</Button>
             <Button href={`mailto:${site.email}`} variant="glass">Email us</Button>
           </div>
         </div>

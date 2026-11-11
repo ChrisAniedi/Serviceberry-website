@@ -39,7 +39,7 @@ export default async function EquipmentDetail({ params }: Props) {
     <>
       <PageHero kp="4+100" label={e.category} crumbs={[{ label: "Equipment", href: "/equipment" }]} title={e.title} intro={e.summary}>
         <div className="mt-6 flex items-center gap-3">
-          <Button href={`/contact?type=Equipment%20for%20Sale&subject=${encodeURIComponent(e.title)}`}>Request technical details</Button>
+          <Button href={`/request-a-quote?type=Equipment%20for%20Sale&subject=${encodeURIComponent(e.title)}`}>Request technical details</Button>
           {!e.verified && <Illustrative />}
         </div>
       </PageHero>

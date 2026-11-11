@@ -10,15 +10,13 @@ import { img } from "@/content/images";
 import { partners } from "@/content/partners";
 import { site } from "@/content/site";
 import { HeroArc } from "./HeroArc";
+import { HeroGridFlow } from "./HeroGridFlow";
+import { HeroHeadline, runs, useRun } from "./HeroHeadline";
 import { HeroScene } from "./HeroScene";
 import { HeroCrew } from "./HeroCrew";
 import { HeroTrace } from "./HeroTrace";
 
 const ease = [0.16, 1, 0.3, 1] as const;
-// headline words, with a running index for the stagger
-const lines = [["Pipeline", "integrity,"], ["from", "launch", "to", "receiver."]].map((ln, li, all) =>
-  ln.map((word, wi) => ({ word, n: all.slice(0, li).reduce((a, l) => a + l.length, 0) + wi })),
-);
 const cols = "lg:grid-cols-[minmax(0,1fr)_minmax(0,2.6fr)_minmax(0,1fr)]";
 
 /**
@@ -30,6 +28,7 @@ const cols = "lg:grid-cols-[minmax(0,1fr)_minmax(0,2.6fr)_minmax(0,1fr)]";
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
+  const run = useRun();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const photoY = useTransform(scrollYProgress, [0, 1], ["0%", reduce ? "0%" : "22%"]);
   const sideY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -120]);
@@ -50,6 +49,8 @@ export function Hero() {
         <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,rgba(24,14,4,0.55)_0%,rgba(24,14,4,0.1)_24%,rgba(24,14,4,0.04)_42%,rgba(18,16,24,0.4)_62%,rgba(10,22,48,0.88)_82%,#0a1630_93%,#0a1630_100%)]" />
       </motion.div>
 
+      <HeroGridFlow />
+
       {/* row 1 */}
       <div className={`grid min-h-[max(calc(100svh-64px),700px)] pt-[74px] ${cols}`}>
         <div className="hidden items-center justify-center px-8 lg:flex">
@@ -67,24 +68,7 @@ export function Hero() {
           >
             KP 0+000 · Port Harcourt, Nigeria
           </motion.p>
-          <p aria-hidden className="headline mt-6 text-[clamp(2.6rem,4.8vw,5.2rem)] leading-[0.98] font-[350] tracking-[-0.045em]">
-            {lines.map((ln, li) => (
-              <span key={li} className="block">
-                {ln.map(({ word, n }) => (
-                  <span key={word} className="inline-block overflow-hidden pb-[0.08em] align-bottom">
-                    <motion.span
-                      className="inline-block"
-                      initial={{ y: "110%", filter: "blur(8px)" }}
-                      animate={{ y: "0%", filter: "blur(0px)" }}
-                      transition={{ duration: 1.1, delay: 0.45 + n * 0.07, ease }}
-                    >
-                      {word}&nbsp;
-                    </motion.span>
-                  </span>
-                ))}
-              </span>
-            ))}
-          </p>
+          <HeroHeadline index={run} />
           <motion.h1
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -97,14 +81,14 @@ export function Hero() {
 
           {/* arc + call to action, sitting on the row line */}
           <div className="relative mt-auto w-full pt-12">
-            <HeroArc />
+            <HeroArc labels={[runs[run].a, runs[run].b]} />
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.9, ease }}
               className="relative z-10 -mb-6 flex justify-center gap-3"
             >
-              <Button href="/contact?type=Services" variant="hivis">Start a job</Button>
+              <Button href="/request-a-quote?type=Services" variant="hivis">Get a quote</Button>
               <Button href="/services" variant="line-light" className="!bg-ink/60">Our services</Button>
             </motion.div>
           </div>

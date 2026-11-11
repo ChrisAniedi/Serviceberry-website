@@ -43,7 +43,7 @@ export default async function ServicePage({ params }: Props) {
         intro={s.intro}
         image={s.image}
       >
-        <div className="mt-6"><Button href={`/contact?type=Services&subject=${encodeURIComponent(s.title)}`}>{cta}</Button></div>
+        <div className="mt-6"><Button href={`/request-a-quote?type=Services&subject=${encodeURIComponent(s.title)}`}>{cta}</Button></div>
       </PageHero>
 
       <section className="bg-white py-24 sm:py-28">

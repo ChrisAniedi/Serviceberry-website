@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 
 const ease = [0.65, 0, 0.35, 1] as const;
 const RUN = "M130 70 C130 300 320 420 500 420 C680 420 870 300 870 70";
@@ -11,7 +11,7 @@ const DUR = 7;
  * action. It draws itself in, then a glowing pig travels it on a loop, lighting the line
  * behind it. With reduced motion the pig rests at the bottom of the arc.
  */
-export function HeroArc() {
+export function HeroArc({ labels = ["Launcher", "Receiver"] }: { labels?: readonly [string, string] | string[] }) {
   const reduce = useReducedMotion();
   const spline = {
     calcMode: "spline",
@@ -152,15 +152,26 @@ export function HeroArc() {
           </motion.g>
         ))}
       </svg>
-      {["Launcher", "Receiver"].map((label, n) => (
+      {labels.map((label, n) => (
         <motion.span
-          key={label}
-          className={`absolute top-[16.7%] -translate-x-1/2 -translate-y-[calc(100%+14px)] text-[14px] text-white sm:text-[16px] ${n ? "left-[87%]" : "left-[13%]"}`}
+          key={n}
+          className={`absolute top-[16.7%] -translate-x-1/2 -translate-y-[calc(100%+14px)] overflow-hidden text-[14px] whitespace-nowrap text-white sm:text-[16px] ${n ? "left-[87%]" : "left-[13%]"}`}
           initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.6 + n * 0.2, duration: 0.6 }}
         >
-          {label}
+          <AnimatePresence mode="popLayout" initial={false}>
+            <motion.span
+              key={label}
+              className="inline-block"
+              initial={{ y: "100%", opacity: 0 }}
+              animate={{ y: "0%", opacity: 1 }}
+              exit={{ y: "-100%", opacity: 0 }}
+              transition={{ duration: 0.6, delay: n * 0.08, ease: [0.16, 1, 0.3, 1] }}
+            >
+              {label}
+            </motion.span>
+          </AnimatePresence>
         </motion.span>
       ))}
     </div>

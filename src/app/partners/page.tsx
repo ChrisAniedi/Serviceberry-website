@@ -40,7 +40,7 @@ export default function PartnersPage() {
                       </div>
                     ))}
                     <div className="sm:col-span-2">
-                      <Button href={`/contact?type=Services&subject=${encodeURIComponent(`Enquiry about ${p.name}`)}`} variant="line">Enquire about this technology</Button>
+                      <Button href={`/request-a-quote?type=Services&subject=${encodeURIComponent(`Enquiry about ${p.name}`)}`} variant="line">Enquire about this technology</Button>
                     </div>
                   </dl>
                 </article>

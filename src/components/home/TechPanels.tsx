@@ -50,7 +50,7 @@ const tech = [
     body: "With IRWIN Group we replace corroded carbon-steel seawater pipes with HDPE-lined pipe, prefabricated from 3D measurements taken while the system is still running.",
     points: ["Measured in service", "Made to fit first time", "Resists corrosion and fouling"],
     image: brochure.hdpePipes,
-    href: "/contact?type=Services&subject=HDPE-lined%20seawater%20pipe",
+    href: "/request-a-quote?type=Services&subject=HDPE-lined%20seawater%20pipe",
   },
 ];
 
