@@ -19,15 +19,16 @@ export function LogoMark({ light = false, className }: { light?: boolean; classN
   );
 }
 
-export function Logo({ light = false, className = "" }: { light?: boolean; className?: string }) {
+/** `compact` is the smaller version used in the top bar. */
+export function Logo({ light = false, compact = false, className = "" }: { light?: boolean; compact?: boolean; className?: string }) {
   return (
-    <Link href="/" aria-label="Serviceberry Global Limited, home" className={cn("flex items-center gap-2.5", className)}>
-      <LogoMark light={light} />
+    <Link href="/" aria-label="Serviceberry Global Limited, home" className={cn("flex items-center", compact ? "gap-2" : "gap-2.5", className)}>
+      <LogoMark light={light} className={compact ? "size-8" : undefined} />
       <span className="leading-none">
-        <span className={cn("block font-display text-[19px] font-bold tracking-[-0.01em] uppercase [font-stretch:112%]", light ? "text-white" : "text-brand")}>
+        <span className={cn("block font-display font-bold", compact ? "text-[15.5px]" : "text-[19px]", " tracking-[-0.01em] uppercase [font-stretch:112%]", light ? "text-white" : "text-brand")}>
           Serviceberry
         </span>
-        <span className={cn("mt-1 block text-[9.5px] font-semibold tracking-[0.42em] uppercase", light ? "text-white/70" : "text-brand/80")}>
+        <span className={cn("block font-semibold uppercase", compact ? "mt-0.5 text-[8px] tracking-[0.4em]" : "mt-1 text-[9.5px] tracking-[0.42em]", light ? "text-white/70" : "text-brand/80")}>
           Global Limited
         </span>
       </span>

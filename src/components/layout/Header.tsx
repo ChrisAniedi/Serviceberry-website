@@ -103,7 +103,7 @@ export function Header() {
             )}
           </motion.nav>
 
-          <Logo light={dark} className="lg:justify-self-center" />
+          <Logo light={dark} compact className="lg:justify-self-center" />
 
           <div className="flex items-center justify-self-end gap-2 sm:gap-3">
             <Button href="/request-a-quote" size="sm" className="hidden sm:inline-flex">

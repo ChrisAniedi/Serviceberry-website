@@ -18,7 +18,7 @@ export function SplitWords({ text, className, delay = 0, highlight = [], as = "h
   const words = text.split(" ");
   const trigger = animateOnMount
     ? { animate: "show" as const }
-    : { whileInView: "show" as const, viewport: { once: true, margin: "-80px" } };
+    : { whileInView: "show" as const, viewport: { once: true, margin: "0px 0px -80px 0px" } };
 
   return (
     <Tag className={className} initial="hide" {...trigger} aria-label={text}>

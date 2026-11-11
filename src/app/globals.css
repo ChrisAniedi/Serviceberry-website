@@ -144,6 +144,18 @@ html.lenis, html.lenis body { height: auto; }
 .anim-glint { animation: glint 5s linear infinite; }
 .anim-glint-rev { animation: glint-x 14s linear infinite reverse; }
 
+/* the gold pig on the pigging line: travels station to station, pausing at each
+   (stations sit at 25% steps of the card grid; 34px puts the pig's centre on the icon) */
+@keyframes pig-run {
+  0%, 8% { left: 34px; opacity: 0; }
+  10% { opacity: 1; }
+  24%, 32% { left: calc(25% + 38px); }
+  48%, 56% { left: calc(50% + 42px); }
+  72%, 88% { left: calc(75% + 46px); opacity: 1; }
+  96%, 100% { left: calc(75% + 46px); opacity: 0; }
+}
+.anim-pig-run { animation: pig-run 9s cubic-bezier(0.65, 0, 0.35, 1) infinite; }
+
 @keyframes caret {
   0%, 45% { opacity: 1; }
   50%, 95% { opacity: 0; }

@@ -6,7 +6,7 @@ import { img } from "@/content/images";
 
 export const metadata: Metadata = {
   title: "Equipment for Sale & Equipment Supply",
-  description: "Selected oil and gas equipment for sale, plus equipment sourcing and procurement for project and operational requirements.",
+  description: "Equipment sourcing, procurement and rental for oil and gas projects and operations, plus selected equipment for sale.",
 };
 
 export default function EquipmentPage() {
@@ -15,7 +15,7 @@ export default function EquipmentPage() {
       <PageHero
         kp="4+000"
         label="Equipment"
-        title={<>Equipment for sale<br /><span className="text-brand">& equipment supply</span></>}
+        title={<>Equipment supply<br /><span className="text-brand">& equipment for sale</span></>}
         intro="Serviceberry markets selected equipment and sources equipment for project and operational requirements. Browse available items or send an equipment enquiry."
         image={img.procurement}
       />

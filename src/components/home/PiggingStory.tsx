@@ -1,196 +1,129 @@
 "use client";
 
-import Image from "next/image";
-import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll, useSpring, useTransform, type MotionValue } from "motion/react";
-import { useEffect, useRef, useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
+import { ClipboardList, FileCheck2, ScanSearch, Send } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { brochure, img } from "@/content/images";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
 const steps = [
   {
+    icon: ClipboardList,
     title: "Survey & plan",
     body: "We review the line: diameter, length, bends, valves and product. Then we choose the pig, size it and plan the run around production.",
-    points: ["Line data and drawings review", "Pig selection and sizing", "Run plan and permits"],
-    image: img.blueprints,
+    points: ["Line data and drawings", "Pig selection and sizing", "Run plan and permits"],
+    status: "Run plan approved",
   },
   {
+    icon: Send,
     title: "Launch",
     body: "The pig is loaded into the launcher and released under controlled pressure, with tracking so the crew always knows where it is.",
     points: ["Launcher operation", "Pig tracking and signalling", "Pressure and flow control"],
-    image: brochure.crewIntelligentPig,
+    status: "Pig in the line",
   },
   {
+    icon: ScanSearch,
     title: "Clean & inspect",
     body: "Brushes and discs sweep wax, scale and water ahead of the pig. Gauge, caliper or intelligent tools record the inside of the pipe.",
-    points: ["Progressive cleaning runs", "Gauge plate and caliper runs", "Intelligent pigging with tool partners"],
-    image: brochure.descalerBeforeAfter,
+    points: ["Progressive cleaning runs", "Gauge and caliper runs", "Intelligent pigging with partners"],
+    status: "Line cleaned · data logged",
   },
   {
+    icon: FileCheck2,
     title: "Receive & report",
     body: "The pig is trapped in the receiver, debris is measured and photographed, and the results become a clear run report.",
     points: ["Receiver operation", "Debris measured and logged", "Run report to the operator"],
-    image: img.monitoring,
+    status: "Report delivered",
   },
 ];
 
-function StepBody({ i, compact = false }: { i: number; compact?: boolean }) {
-  const s = steps[i];
-  return (
-    <div>
-      <p className="font-display text-[13px] font-semibold tracking-[0.14em] text-brand uppercase">
-        Station {String(i + 1).padStart(2, "0")} / 04
-      </p>
-      <h3 className={`headline mt-3 text-ink ${compact ? "text-[30px]" : "text-[clamp(2rem,3.4vw,3rem)]"}`}>{s.title}</h3>
-      <p className="mt-3 max-w-md text-[16.5px] leading-relaxed text-steel">{s.body}</p>
-      <ul className="mt-5 space-y-2">
-        {s.points.map((p) => (
-          <li key={p} className="flex items-center gap-3 text-[15px] text-ink">
-            <span className="h-[2px] w-5 rounded-full bg-brand" /> {p}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-/** The pipe with four stations and a pig that runs along it with the scroll. */
-function Track({ progress, active }: { progress: MotionValue<number>; active: number }) {
-  const left = useTransform(progress, (p) => `${p * 100}%`);
-  const fill = useTransform(progress, (p) => p);
-  return (
-    <div className="relative mx-[18px] h-[64px]">
-      {/* pipe */}
-      <div className="absolute inset-x-0 top-1/2 h-[10px] -translate-y-1/2 rounded-full bg-[#d9dde3] shadow-[inset_0_1px_2px_rgba(10,22,48,0.18),inset_0_-1px_0_rgba(255,255,255,0.8)]" />
-      <motion.div className="absolute top-1/2 left-0 h-[10px] w-full origin-left -translate-y-1/2 rounded-full bg-[linear-gradient(90deg,rgba(11,79,191,0.35),#0b4fbf)]" style={{ scaleX: fill }} />
-      {/* stations */}
-      {steps.map((s, i) => (
-        <div key={s.title} className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2" style={{ left: `${(i / (steps.length - 1)) * 100}%` }}>
-          <span className={`block size-5 rounded-full border-2 transition-colors duration-500 ${i <= active ? "border-brand bg-white" : "border-[#c4cad3] bg-stone"}`} />
-          <span
-            className={`absolute top-8 text-[13px] whitespace-nowrap transition-colors duration-500 ${i === 0 ? "left-0" : i === steps.length - 1 ? "right-0" : "left-1/2 -translate-x-1/2"} ${i === active ? "font-medium text-ink" : "text-steel"}`}
-          >
-            {s.title}
-          </span>
-        </div>
-      ))}
-      {/* the pig */}
-      <motion.span className="absolute top-1/2 z-10 -translate-x-1/2 -translate-y-1/2" style={{ left }}>
-        <span className="absolute -inset-5 rounded-full bg-[radial-gradient(closest-side,rgba(255,198,92,0.55),transparent)]" />
-        <span className="relative block h-[16px] w-[40px] rounded-full bg-[linear-gradient(180deg,#ffd98f,#f2a93b)] shadow-[0_0_18px_rgba(255,198,92,0.6)]" />
-      </motion.span>
-    </div>
-  );
-}
-
 /**
- * A pigging run, told along a pipe. On large screens the section holds while you scroll:
- * the pig travels from station to station, the pipe fills behind it, and each station's
- * words and photo come in as it arrives. Phones get the four stations as a simple list.
+ * A pigging run in four stations, on black (after camuh's "request to delivery"): a line
+ * with an icon at each station that draws itself in as the section arrives, a gold pig that
+ * keeps travelling it, and a card per station with its number, work and a status tag.
  */
 export function PiggingStory() {
-  const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
-  const [pin, setPin] = useState(false);
-  const [active, setActive] = useState(0);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(min-width: 1024px) and (min-height: 700px) and (prefers-reduced-motion: no-preference)");
-    const set = () => setPin(mq.matches);
-    set();
-    mq.addEventListener("change", set);
-    return () => mq.removeEventListener("change", set);
-  }, []);
-
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
-  // hold briefly at each station: the pig moves in the middle of each quarter of the scroll
-  const stationed = useTransform(scrollYProgress, [0, 0.12, 0.3, 0.42, 0.6, 0.72, 0.9, 1], [0, 0, 1 / 3, 1 / 3, 2 / 3, 2 / 3, 1, 1]);
-  const progress = useSpring(stationed, { stiffness: 120, damping: 26, mass: 0.5 });
-  useMotionValueEvent(stationed, "change", (p) => setActive(Math.min(3, Math.round(p * 3))));
-
   return (
-    <section
-      ref={ref}
-      id="kp-2"
-      className="relative scroll-mt-20 overflow-x-clip bg-stone text-ink"
-      style={{ height: pin ? "320svh" : undefined }}
-    >
-      <div className={pin ? "sticky top-0 flex h-svh flex-col justify-center overflow-hidden pt-24 pb-12" : "py-24 sm:py-28"}>
-        <div aria-hidden className="pointer-events-none absolute -top-40 right-[-10%] size-[620px] rounded-full bg-[radial-gradient(closest-side,rgba(255,255,255,0.9),transparent)]" />
-        <div className="container-x relative">
-          <div className="flex flex-wrap items-end justify-between gap-6">
-            <div>
-              <p className="font-display text-[12px] font-semibold tracking-[0.16em] text-brand uppercase">Our core: pigging</p>
-              <h2 className="headline mt-4 max-w-[18ch] text-[clamp(2.2rem,4.2vw,3.6rem)]">
-                How a pigging run <span className="text-brand">keeps your line flowing.</span>
-              </h2>
-            </div>
-            <p className="max-w-md text-[16px] leading-relaxed text-steel">
-              Operational and maintenance pigging, caliper and geometry runs, and intelligent pigging with specialist tool providers.
-            </p>
+    <section id="kp-2" className="relative scroll-mt-20 overflow-hidden bg-[#070809] py-24 text-white sm:py-28">
+      <div className="container-x">
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <div>
+            <p className="font-display text-[12px] font-semibold tracking-[0.16em] text-brand-light uppercase">Our core: pigging</p>
+            <h2 className="headline mt-4 max-w-[20ch] text-[clamp(2.1rem,4vw,3.4rem)]">
+              How a pigging run keeps your line flowing, <span className="text-white/45">in four stations.</span>
+            </h2>
           </div>
+          <p className="max-w-md text-[16px] leading-relaxed text-white/60">
+            Operational and maintenance pigging, caliper and geometry runs, and intelligent pigging with specialist tool providers. One crew from plan to report.
+          </p>
+        </div>
 
-          {pin ? (
-            <>
-              <div className="mt-9">
-                <Track progress={progress} active={active} />
-              </div>
-              <div className="mt-12 grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">
-                <div className="relative">
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={active}
-                      initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
-                      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                      exit={{ opacity: 0, y: -16, filter: "blur(6px)" }}
-                      transition={{ duration: 0.5, ease }}
-                    >
-                      <StepBody i={active} />
-                    </motion.div>
-                  </AnimatePresence>
-                  <div className="mt-8">
-                    <Button href="/services/pipeline-integrity-pigging">Plan a pigging programme</Button>
-                  </div>
-                </div>
-                <div className="relative aspect-[16/10] max-h-[42svh] w-full overflow-hidden rounded-[28px] bg-ink shadow-[0_30px_60px_-30px_rgba(10,22,48,0.45)]">
-                  <AnimatePresence initial={false}>
-                    <motion.div
-                      key={active}
-                      className="absolute inset-0"
-                      initial={{ opacity: 0, scale: reduce ? 1 : 1.08 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.9, ease }}
-                    >
-                      <Image src={steps[active].image} alt="" fill sizes="50vw" className="object-cover" />
-                    </motion.div>
-                  </AnimatePresence>
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink/50 via-transparent to-transparent" />
-                  <span className="absolute bottom-4 left-4 rounded-full bg-white/90 px-4 py-2 text-[13px] font-medium text-ink shadow-sm backdrop-blur-md">
-                    {String(active + 1).padStart(2, "0")} · {steps[active].title}
-                  </span>
-                </div>
-              </div>
-            </>
-          ) : (
-            <ol className="mt-12 space-y-12">
-              {steps.map((s, i) => (
-                <li key={s.title} className="grid gap-6 border-t border-ink/10 pt-10 sm:grid-cols-2 sm:items-center">
-                  <div className="relative aspect-[16/10] overflow-hidden rounded-[24px] bg-ink">
-                    <Image src={s.image} alt="" fill sizes="(min-width:640px) 50vw, 100vw" className="object-cover" />
-                  </div>
-                  <StepBody i={i} compact />
-                </li>
-              ))}
-            </ol>
+        {/* the line, its stations and the pig (large screens) */}
+        <div aria-hidden className="relative mt-14 hidden h-12 lg:block">
+          <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-white/12" />
+          <motion.div
+            className="absolute top-1/2 left-0 h-px w-[calc(75%+60px)] origin-left -translate-y-1/2 bg-brand-light"
+            initial={{ scaleX: reduce ? 1 : 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true, margin: "0px 0px -120px 0px" }}
+            transition={{ duration: 1.6, ease }}
+          />
+          {!reduce && (
+            <span className="anim-pig-run absolute top-1/2 left-0 z-10 block h-[10px] w-[28px] -translate-y-1/2 rounded-full bg-[linear-gradient(180deg,#ffd98f,#f2a93b)] shadow-[0_0_16px_4px_rgba(255,198,92,0.45)]" />
           )}
+          {steps.map((s, i) => (
+            <motion.span
+              key={s.title}
+              className="absolute top-0 grid size-12 place-items-center rounded-full bg-brand-light text-brand-deep"
+              style={{ left: `calc(${i * 25}% + ${i * 4 + 24}px)` }}
+              initial={{ scale: reduce ? 1 : 0.6, opacity: reduce ? 1 : 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              viewport={{ once: true, margin: "0px 0px -120px 0px" }}
+              transition={{ duration: 0.5, delay: 0.2 + i * 0.35, ease }}
+            >
+              <s.icon className="size-5" strokeWidth={1.8} />
+            </motion.span>
+          ))}
+        </div>
 
-          {!pin && (
-            <div className="mt-12 border-t border-ink/10 pt-10">
-              <Button href="/services/pipeline-integrity-pigging">Plan a pigging programme</Button>
-            </div>
-          )}
+        <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:mt-6 lg:grid-cols-4">
+          {steps.map((s, i) => (
+            <motion.li
+              key={s.title}
+              initial={{ opacity: reduce ? 1 : 0, y: reduce ? 0 : 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "0px 0px -60px 0px" }}
+              transition={{ duration: 0.8, delay: 0.15 + i * 0.12, ease }}
+              className="group flex flex-col rounded-[20px] bg-white/[0.045] p-6 ring-1 ring-white/[0.08] transition-colors duration-500 hover:bg-white/[0.07]"
+            >
+              <div className="flex items-center justify-between">
+                <span className="font-display text-[44px] leading-none font-medium tracking-[-0.03em] text-white/20 tabular-nums transition-colors duration-500 group-hover:text-white/35">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="grid size-10 place-items-center rounded-full bg-brand-light/15 text-brand-light lg:hidden">
+                  <s.icon className="size-5" strokeWidth={1.8} />
+                </span>
+              </div>
+              <h3 className="mt-7 text-[19px] font-semibold tracking-[-0.01em]">{s.title}</h3>
+              <p className="mt-2.5 text-[14.5px] leading-relaxed text-white/60">{s.body}</p>
+              <ul className="mt-4 space-y-1.5 text-[14px] text-white/80">
+                {s.points.map((p) => (
+                  <li key={p} className="flex items-center gap-2.5">
+                    <span className="h-px w-3.5 bg-brand-light" /> {p}
+                  </li>
+                ))}
+              </ul>
+              <span className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-[#1f9d55]/15 px-3 py-1.5 text-[12.5px] font-medium text-[#5fd497]">
+                <span className="size-1.5 rounded-full bg-[#5fd497]" /> {s.status}
+              </span>
+            </motion.li>
+          ))}
+        </ol>
+
+        <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">
+          <Button href="/services/pipeline-integrity-pigging">Plan a pigging programme</Button>
+          <p className="text-[14px] text-white/55">One contact from the first survey to the final report.</p>
         </div>
       </div>
     </section>

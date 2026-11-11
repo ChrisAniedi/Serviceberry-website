@@ -53,7 +53,7 @@ export function WhyUs() {
               key={r.title}
               initial={{ opacity: 0, y: 30, filter: "blur(6px)" }}
               whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              viewport={{ once: true, margin: "-60px" }}
+              viewport={{ once: true, margin: "0px 0px -60px 0px" }}
               transition={{ duration: 0.9, delay: (i % 3) * 0.08 + Math.floor(i / 3) * 0.12, ease }}
               className="group rounded-[24px] bg-white/[0.07] p-7 ring-1 ring-white/15 backdrop-blur-xl transition-colors duration-500 hover:bg-white/[0.12]"
             >

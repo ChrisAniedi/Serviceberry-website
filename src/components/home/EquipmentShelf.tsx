@@ -7,9 +7,10 @@ import { Button } from "@/components/ui/Button";
 import { EquipmentCard } from "@/components/sections/EquipmentCard";
 import { equipmentForSale, sourcingCategories } from "@/content/equipment";
 
-/** Equipment for sale and equipment sourcing, kept clearly separate by a two-way switch. */
+/** Equipment sourcing (first, the default) and equipment for sale, kept separate by a two-way switch. */
 export function EquipmentShelf({ id = "kp-4", withTitle = true }: { id?: string; withTitle?: boolean }) {
-  const [tab, setTab] = useState<"sale" | "source">("sale");
+  // Sourcing comes first: Serviceberry supplies and rents far more equipment than it sells.
+  const [tab, setTab] = useState<"sale" | "source">("source");
   return (
     <section id={id} className="scroll-mt-20 bg-mist py-24 sm:py-32">
       <div className="container-x">
@@ -17,12 +18,12 @@ export function EquipmentShelf({ id = "kp-4", withTitle = true }: { id?: string;
           <Title
             kp="4+000"
             label="Equipment"
-            title={<>Equipment for sale<br /><span className="text-brand">& equipment sourcing</span></>}
-            intro="Selected equipment available through Serviceberry, and sourcing and procurement support for project and operational requirements."
+            title={<>Equipment sourcing<br /><span className="text-brand">& equipment for sale</span></>}
+            intro="Sourcing, procurement and rental support for project and operational requirements, plus selected equipment available through Serviceberry."
           />
         )}
         <div role="tablist" aria-label="Equipment" className={`inline-flex rounded-full bg-white p-1 ring-1 ring-line ${withTitle ? "mt-12" : ""}`}>
-          {([["sale", "A · For sale"], ["source", "B · We source"]] as const).map(([k, label]) => (
+          {([["source", "A · We source"], ["sale", "B · For sale"]] as const).map(([k, label]) => (
             <button
               key={k}
               role="tab"

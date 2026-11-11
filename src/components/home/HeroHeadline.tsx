@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, LayoutGroup, motion, useReducedMotion } from "motion/react";
 import { useEffect, useState } from "react";
 
 const ease = [0.16, 1, 0.3, 1] as const;
@@ -14,89 +14,81 @@ export const runs = [
   { from: "spool", to: "start-up", a: "Spool", b: "Start-up" },
 ] as const;
 
-const phrase = (i: number) => `${runs[i].from} to ${runs[i].to}.`;
+const EVERY = 3400;
 
-const TYPE = 60; // ms per letter typed
-const ERASE = 30; // ms per letter erased
-const HOLD = 2200; // ms the full phrase stays
-const START = 2000; // ms before the first erase (lets the intro finish)
-
-/**
- * Types the run out letter by letter, holds it, erases it, and types the next one.
- * Returns the run index (the arc labels follow it) and the text typed so far.
- * With reduced motion the first phrase simply stays.
- */
-export function useTypedRun() {
+/** Rotates through `runs`; calls back so the arc labels can follow. Static with reduced motion. */
+export function useRun() {
   const reduce = useReducedMotion();
-  const [index, setIndex] = useState(0);
-  const [typed, setTyped] = useState(phrase(0));
-  const [mode, setMode] = useState<"hold" | "erase" | "type">("hold");
-
+  const [i, setI] = useState(0);
   useEffect(() => {
     if (reduce) return;
-    const full = phrase(index);
-    let t: ReturnType<typeof setTimeout>;
-    if (mode === "hold") t = setTimeout(() => setMode("erase"), typed === phrase(0) && index === 0 ? START + HOLD : HOLD);
-    else if (mode === "erase") {
-      if (typed.length) t = setTimeout(() => setTyped(typed.slice(0, -1)), ERASE);
-      else
-        t = setTimeout(() => {
-          setIndex((index + 1) % runs.length);
-          setMode("type");
-        }, 280);
-    } else {
-      if (typed.length < full.length) t = setTimeout(() => setTyped(full.slice(0, typed.length + 1)), TYPE);
-      else setMode("hold");
-    }
+    const t = setTimeout(() => setI((v) => (v + 1) % runs.length), i === 0 ? EVERY + 1800 : EVERY);
     return () => clearTimeout(t);
-  }, [mode, typed, index, reduce]);
-
-  return { index, typed };
+  }, [i, reduce]);
+  return i;
 }
 
-/** Colours the typed text: the two ends in gold, "to" and the full stop in white. */
-function Typed({ text, index }: { text: string; index: number }) {
-  const from = runs[index].from;
-  const a = text.slice(0, from.length);
-  const mid = text.slice(from.length, from.length + 4); // " to "
-  const b = text.slice(from.length + 4).replace(/\.$/, "");
-  const dot = text.endsWith(".") ? "." : "";
+function Swap({ text, k, className = "" }: { text: string; k: string; className?: string }) {
   return (
-    <>
-      <span className="text-[#ffd79a]">{a}</span>
-      {mid}
-      <span className="text-[#ffd79a]">{b}</span>
-      {dot}
-    </>
+    <motion.span layout transition={{ layout: { duration: 0.7, ease } }} className={`relative inline-flex overflow-hidden pb-[0.08em] ${className}`}>
+      <AnimatePresence mode="popLayout" initial={false}>
+        <motion.span
+          key={k}
+          className="relative inline-block whitespace-nowrap"
+          initial={{ y: "100%", opacity: 0, filter: "blur(6px)" }}
+          animate={{ y: "0%", opacity: 1, filter: "blur(0px)" }}
+          exit={{ y: "-100%", opacity: 0, filter: "blur(6px)" }}
+          transition={{ duration: 0.7, ease }}
+        >
+          {text}
+          <motion.span
+            aria-hidden
+            className="absolute inset-x-0 bottom-[0.02em] h-[0.05em] origin-left rounded-full bg-[#ffc65c]"
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.8, delay: 0.35, ease }}
+          />
+        </motion.span>
+      </AnimatePresence>
+    </motion.span>
+  );
+}
+
+function Fixed({ children, delay }: { children: React.ReactNode; delay: number }) {
+  return (
+    <motion.span layout transition={{ layout: { duration: 0.7, ease } }} className="inline-flex overflow-hidden pb-[0.08em]">
+      <motion.span className="inline-block" initial={{ y: "110%", filter: "blur(8px)" }} animate={{ y: "0%", filter: "blur(0px)" }} transition={{ duration: 1.1, delay, ease }}>
+        {children}
+      </motion.span>
+    </motion.span>
   );
 }
 
 /**
- * "Pipeline integrity, from launch to receiver." The first line stays; the run after
- * "from" is typed out, held, erased and replaced by the next ("survey to sign-off",
- * "wellhead to export line"…). The second line sits in a box as wide as the longest run,
- * with the text set from its left edge, so typing never shifts the line about.
- * Decorative: the page's real h1 sits under it.
+ * "Pipeline integrity, from launch to receiver." The first line stays; the two ends of the
+ * run change together ("survey to sign-off", "wellhead to export line"…). Decorative: the
+ * page's real h1 sits under it.
  */
-export function HeroHeadline({ index, typed }: { index: number; typed: string }) {
-  const longest = runs.map((_, i) => phrase(i)).reduce((a, b) => (b.length > a.length ? b : a));
+export function HeroHeadline({ index }: { index: number }) {
+  const r = runs[index];
   return (
-    <motion.p
-      aria-hidden
-      initial={{ opacity: 0, y: 24, filter: "blur(8px)" }}
-      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-      transition={{ duration: 1.1, delay: 0.45, ease }}
-      className="headline mt-6 text-[clamp(2.6rem,4.8vw,5.2rem)] leading-[1.02] font-[350] tracking-[-0.045em]"
-    >
-      <span className="block">Pipeline integrity,</span>
-      <span className="relative inline-grid max-w-full text-left">
-        {/* reserves the width of the longest run */}
-        <span className="invisible col-start-1 row-start-1">from {longest}</span>
-        <span className="col-start-1 row-start-1">
-          from <Typed text={typed} index={index} />
-          <span className="anim-caret ml-[0.04em] inline-block h-[0.82em] w-[0.06em] translate-y-[0.08em] rounded-full bg-[#ffd79a] align-baseline" />
-        </span>
+    <p aria-hidden className="headline mt-6 text-[clamp(2.6rem,4.8vw,5.2rem)] leading-[0.98] font-[350] tracking-[-0.045em]">
+      <span className="flex flex-wrap justify-center gap-x-[0.24em]">
+        <Fixed delay={0.45}>Pipeline</Fixed>
+        <Fixed delay={0.52}>integrity,</Fixed>
       </span>
-    </motion.p>
+      <LayoutGroup>
+        <span className="flex min-h-[2em] flex-wrap content-start justify-center gap-x-[0.24em] lg:min-h-0 lg:flex-nowrap">
+          <Fixed delay={0.59}>from</Fixed>
+          <motion.span layout className="inline-flex" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.1, delay: 0.66, ease }}>
+            <Swap text={r.from} k={`f-${index}`} className="text-white" />
+          </motion.span>
+          <Fixed delay={0.73}>to</Fixed>
+          <motion.span layout className="inline-flex" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.1, delay: 0.8, ease }}>
+            <Swap text={`${r.to}.`} k={`t-${index}`} className="text-white" />
+          </motion.span>
+        </span>
+      </LayoutGroup>
+    </p>
   );
 }

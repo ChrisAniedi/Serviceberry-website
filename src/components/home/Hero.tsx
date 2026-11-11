@@ -11,7 +11,7 @@ import { partners } from "@/content/partners";
 import { site } from "@/content/site";
 import { HeroArc } from "./HeroArc";
 import { HeroGridFlow } from "./HeroGridFlow";
-import { HeroHeadline, runs, useTypedRun } from "./HeroHeadline";
+import { HeroHeadline, runs, useRun } from "./HeroHeadline";
 import { HeroScene } from "./HeroScene";
 import { HeroCrew } from "./HeroCrew";
 import { HeroTrace } from "./HeroTrace";
@@ -28,7 +28,7 @@ const cols = "lg:grid-cols-[minmax(0,1fr)_minmax(0,2.6fr)_minmax(0,1fr)]";
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
-  const { index: run, typed } = useTypedRun();
+  const run = useRun();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const photoY = useTransform(scrollYProgress, [0, 1], ["0%", reduce ? "0%" : "22%"]);
   const sideY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -120]);
@@ -68,7 +68,7 @@ export function Hero() {
           >
             KP 0+000 · Port Harcourt, Nigeria
           </motion.p>
-          <HeroHeadline index={run} typed={typed} />
+          <HeroHeadline index={run} />
           <motion.h1
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -140,7 +140,7 @@ export function Hero() {
           <motion.p
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
+            viewport={{ once: true, margin: "0px 0px -80px 0px" }}
             transition={{ duration: 1, ease }}
             className="relative mx-auto mt-6 max-w-[760px] font-display text-[clamp(1.7rem,3.2vw,2.9rem)] leading-[1.12] font-[350] tracking-[-0.03em] text-balance"
           >

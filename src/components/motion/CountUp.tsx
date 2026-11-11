@@ -6,7 +6,7 @@ import { useEffect, useRef } from "react";
 /** Counts from 0 to `to` the first time it is seen. Pads to two digits for the technical look. */
 export function CountUp({ to, pad = 1, className }: { to: number; pad?: number; className?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-40px" });
+  const inView = useInView(ref, { once: true, margin: "0px 0px -40px 0px" });
 
   useEffect(() => {
     if (!inView || !ref.current) return;
