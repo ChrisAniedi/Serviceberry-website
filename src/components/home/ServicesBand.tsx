@@ -1,100 +1,84 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from "motion/react";
 import { useRef } from "react";
+import { Button } from "@/components/ui/Button";
 import { brochure } from "@/content/images";
 
-const statement =
-  "We plan, run and report the work that keeps your lines *clean, inspectable and flowing:* pigging, commissioning, chemical cleaning, integrity surveys and remote monitoring, with our own crews and specialist partners.";
+const ease = [0.16, 1, 0.3, 1] as const;
 
-// The service list from the front of the Serviceberry brochure.
-const tags = [
-  { label: "Operational pigging", href: "/services/pipeline-integrity-pigging" },
-  { label: "Intelligent pigging", href: "/services/pipeline-integrity-pigging" },
-  { label: "Integrity assessment, piggable and unpiggable", href: "/services/asset-process-systems-integrity" },
-  { label: "Commissioning and pumping", href: "/services/pipeline-commissioning-maintenance" },
-  { label: "Descaling and dewaxing", href: "/services/production-specialty-chemicals" },
-  { label: "Flow assurance chemicals", href: "/services/production-specialty-chemicals" },
-  { label: "HDPE-lined seawater pipe", href: "/request-a-quote?type=Services&subject=HDPE-lined%20seawater%20pipe" },
-  { label: "CP remote monitoring", href: "/services/remote-monitoring-cathodic-protection" },
+// Small photos from the brochure, scattered up both sides. x/y are % of the section.
+const floaters = [
+  { src: brochure.crewPigging, x: "6%", y: "14%", w: 150, h: 180, r: -6, depth: 70, delay: "0s" },
+  { src: brochure.plantDusk, x: "13%", y: "62%", w: 120, h: 120, r: 4, depth: 40, delay: "1.4s" },
+  { src: brochure.descalerBeforeAfter, x: "2%", y: "46%", w: 96, h: 72, r: -3, depth: 100, delay: "2.6s" },
+  { src: brochure.pigOnDeck, x: "82%", y: "10%", w: 128, h: 150, r: 5, depth: 55, delay: "0.8s" },
+  { src: brochure.hdpePipes, x: "88%", y: "52%", w: 140, h: 104, r: -4, depth: 85, delay: "2s" },
+  { src: brochure.watchdogUnit, x: "79%", y: "72%", w: 92, h: 100, r: 3, depth: 30, delay: "3.2s" },
 ];
 
-function Word({ word, range, progress, accent }: { word: string; range: [number, number]; progress: MotionValue<number>; accent: boolean }) {
+function Floater({ f, progress }: { f: (typeof floaters)[number]; progress: MotionValue<number> }) {
   const reduce = useReducedMotion();
-  const opacity = useTransform(progress, range, reduce ? [1, 1] : [0.14, 1]);
+  const y = useTransform(progress, [0, 1], reduce ? [0, 0] : [f.depth, -f.depth]);
   return (
-    <motion.span style={{ opacity }} className={`inline-block ${accent ? "text-brand" : ""}`}>
-      {word}&nbsp;
-    </motion.span>
+    <motion.div style={{ y, left: f.x, top: f.y, width: f.w, height: f.h }} className="absolute">
+      <div
+        className="anim-float relative h-full w-full overflow-hidden rounded-[18px] shadow-[0_24px_40px_-24px_rgba(10,22,48,0.55)] ring-4 ring-white"
+        style={{ rotate: `${f.r}deg`, animationDelay: f.delay }}
+      >
+        <Image src={f.src} alt="" fill sizes="160px" className="object-cover" />
+      </div>
+    </motion.div>
   );
 }
 
 /**
- * The line under the hero: one statement whose words brighten from faint to solid as it
- * scrolls through the screen, then the brochure's service list fading in as tags.
+ * Under the hero: a short, centred introduction in the brochure's own words, with small
+ * photos from the field floating up both sides (large screens). The second headline line
+ * brightens as it scrolls into view.
  */
 export function ServicesBand() {
-  const ref = useRef<HTMLParagraphElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.85", "end 0.45"] });
-  const section = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
-  const { scrollYProgress: drift } = useScroll({ target: section, offset: ["start end", "end start"] });
-  const upA = useTransform(drift, [0, 1], reduce ? [0, 0] : [60, -60]);
-  const upB = useTransform(drift, [0, 1], reduce ? [0, 0] : [120, -100]);
-
-  let accent = false;
-  const words = statement.split(" ").map((raw) => {
-    const startsAccent = raw.startsWith("*");
-    const endsAccent = raw.endsWith("*") || raw.endsWith("*:");
-    if (startsAccent) accent = true;
-    const w = { text: raw.replace(/\*/g, ""), accent };
-    if (endsAccent) accent = false;
-    return w;
-  });
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const lift = useTransform(scrollYProgress, [0.15, 0.45], reduce ? [1, 1] : [0.25, 1]);
 
   return (
-    <section ref={section} aria-label="What we do" className="overflow-hidden bg-white py-24 sm:py-32">
-      <div className="container-x grid gap-14 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:items-center">
-        <div>
-        <p className="font-display text-[12px] font-semibold tracking-[0.16em] text-brand uppercase">What we do</p>
-        <p ref={ref} className="headline mt-6 max-w-[30ch] text-[clamp(1.9rem,3.6vw,3.3rem)] leading-[1.14] tracking-[-0.03em] text-ink">
-          <span className="sr-only">{statement.replace(/\*/g, "")}</span>
-          <span aria-hidden>
-            {words.map((w, i) => (
-              <Word key={i} word={w.text} accent={w.accent} progress={scrollYProgress} range={[i / words.length, Math.min(1, (i + 3) / words.length)]} />
-            ))}
-          </span>
-        </p>
+    <section ref={ref} aria-label="About Serviceberry" className="relative overflow-hidden bg-white py-24 sm:py-32">
+      <div aria-hidden className="pointer-events-none absolute inset-0 hidden xl:block">
+        {floaters.map((f) => (
+          <Floater key={f.src} f={f} progress={scrollYProgress} />
+        ))}
+      </div>
 
-        <ul className="mt-12 flex max-w-5xl flex-wrap gap-2">
-          {tags.map((t, i) => (
-            <motion.li
-              key={t.label}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.6, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <Link href={t.href} className="inline-flex min-h-11 items-center gap-2 rounded-full bg-mist px-4 text-[14.5px] text-ink ring-1 ring-line transition-colors hover:bg-brand hover:text-white hover:ring-brand">
-                <span className="size-1.5 rounded-full bg-berry" /> {t.label}
-              </Link>
-            </motion.li>
-          ))}
-        </ul>
-        </div>
-
-        {/* Serviceberry's own crews, from the brochure */}
-        <div aria-hidden className="relative hidden h-[520px] lg:block">
-          <motion.div style={{ y: upA }} className="absolute top-0 right-0 h-[340px] w-[300px] -rotate-2 overflow-hidden rounded-[28px] shadow-[0_30px_60px_-30px_rgba(10,22,48,0.5)]">
-            <Image src={brochure.crewPigging} alt="" fill sizes="300px" className="object-cover" />
-          </motion.div>
-          <motion.div style={{ y: upB }} className="absolute bottom-0 left-0 h-[250px] w-[330px] rotate-2 overflow-hidden rounded-[28px] ring-8 ring-white shadow-[0_30px_60px_-30px_rgba(10,22,48,0.5)]">
-            <Image src={brochure.crewIntelligentPig} alt="" fill sizes="330px" className="object-cover" />
-            <span className="absolute bottom-3 left-3 rounded-full bg-white/85 px-3 py-1.5 text-[12.5px] font-medium text-ink backdrop-blur-md">Our crew on an inspection run</span>
-          </motion.div>
-        </div>
+      <div className="container-x relative">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.9, ease }}
+          className="mx-auto max-w-[900px] text-center"
+        >
+          <h2 className="headline text-[clamp(2.2rem,4.6vw,4rem)] leading-[1.04]">
+            Experienced professionals.
+            <br />
+            <motion.span style={{ opacity: lift }} className="text-brand">
+              Required results.
+            </motion.span>
+          </h2>
+          <p className="mx-auto mt-7 max-w-[620px] text-[17px] leading-[1.75] text-steel">
+            Serviceberry Global is a Port Harcourt-based provider of process and pipeline services to the oil, gas, energy
+            and construction industries. We bring <b className="font-semibold text-ink">operational and intelligent pigging</b>,{" "}
+            <b className="font-semibold text-ink">commissioning</b>, <b className="font-semibold text-ink">chemical cleaning and supply</b> and{" "}
+            <b className="font-semibold text-ink">cathodic protection monitoring</b> under one team, with properly engineered work and a clear
+            report on every job.
+          </p>
+          <div className="mt-9 flex flex-wrap justify-center gap-3">
+            <Button href="/services" variant="brand">Explore our services</Button>
+            <Button href="/about" variant="line">About us</Button>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

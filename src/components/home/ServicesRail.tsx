@@ -160,17 +160,19 @@ export function ServicesRail() {
                 sizes="400px"
                 className="object-cover transition-transform duration-[1.4s] ease-out-expo group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/55 via-transparent to-transparent" />
-              <span className="absolute top-5 left-5 rounded-full bg-white/15 px-3 py-1.5 font-display text-[12px] font-semibold tracking-[0.1em] ring-1 ring-white/25 backdrop-blur-md">
+              {/* a soft shade only where text sits, so the photo stays clear */}
+              <div className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-ink/70 via-ink/25 to-transparent" />
+              <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-ink/35 to-transparent" />
+              <span className="glass-fade absolute top-5 left-5 rounded-full px-3 py-1.5 font-display text-[12px] font-semibold tracking-[0.1em]">
                 {String(i + 1).padStart(2, "0")} / {String(services.length).padStart(2, "0")}
               </span>
               <span className="absolute top-4 right-4 grid size-11 place-items-center rounded-full bg-white text-ink transition-transform duration-500 group-hover:rotate-45">
                 <ArrowUpRight className="size-5" />
               </span>
-              <div className="absolute inset-x-3 bottom-3 rounded-[22px] bg-[linear-gradient(160deg,rgba(255,255,255,0.22),rgba(255,255,255,0.06)_60%)] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_20px_40px_-20px_rgba(10,22,48,0.6)] ring-1 ring-white/30 backdrop-blur-[18px] backdrop-saturate-[1.6]">
-                <h3 className="headline text-[25px] leading-[1.05] [text-shadow:0_1px_12px_rgba(10,22,48,0.35)]">{s.title}</h3>
-                <p className="mt-2 line-clamp-2 text-[14.5px] leading-snug text-white/90 [text-shadow:0_1px_10px_rgba(10,22,48,0.4)]">{s.short}</p>
-                <ul className="mt-4 grid max-h-0 gap-1.5 overflow-hidden text-[13.5px] text-white/85 opacity-0 transition-all duration-700 ease-out-expo group-hover:max-h-40 group-hover:opacity-100 group-focus-visible:max-h-40 group-focus-visible:opacity-100">
+              <div className="glass-fade text-lift absolute inset-x-3 bottom-3 rounded-[22px] p-5">
+                <h3 className="headline text-[25px] leading-[1.05]">{s.title}</h3>
+                <p className="mt-2 line-clamp-2 text-[14.5px] leading-snug text-white/90">{s.short}</p>
+                <ul className="mt-4 grid max-h-0 gap-1.5 overflow-hidden text-[13.5px] text-white/90 opacity-0 transition-all duration-700 ease-out-expo group-hover:max-h-40 group-hover:opacity-100 group-focus-visible:max-h-40 group-focus-visible:opacity-100">
                   {scope.map((x) => (
                     <li key={x} className="flex gap-2">
                       <span className="mt-[7px] size-1.5 shrink-0 rounded-full bg-brand-light" /> {x}

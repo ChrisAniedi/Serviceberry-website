@@ -30,15 +30,16 @@ export function useRun() {
 
 function Swap({ text, k, className = "" }: { text: string; k: string; className?: string }) {
   return (
-    <motion.span layout transition={{ layout: { duration: 0.7, ease } }} className={`relative inline-flex overflow-hidden pb-[0.08em] ${className}`}>
-      <AnimatePresence mode="popLayout" initial={false}>
+    <motion.span layout transition={{ layout: { duration: 0.55, ease } }} className={`relative inline-flex overflow-hidden pb-[0.08em] ${className}`}>
+      {/* "wait": the old words leave first, the line then settles to the new width, then the
+          new words rise in, so two words never share the slot */}
+      <AnimatePresence mode="wait" initial={false}>
         <motion.span
           key={k}
           className="relative inline-block whitespace-nowrap"
           initial={{ y: "100%", opacity: 0, filter: "blur(6px)" }}
-          animate={{ y: "0%", opacity: 1, filter: "blur(0px)" }}
-          exit={{ y: "-100%", opacity: 0, filter: "blur(6px)" }}
-          transition={{ duration: 0.7, ease }}
+          animate={{ y: "0%", opacity: 1, filter: "blur(0px)", transition: { duration: 0.6, delay: 0.12, ease } }}
+          exit={{ y: "-90%", opacity: 0, filter: "blur(6px)", transition: { duration: 0.3, ease: [0.4, 0, 1, 1] } }}
         >
           {text}
           <motion.span
@@ -56,7 +57,7 @@ function Swap({ text, k, className = "" }: { text: string; k: string; className?
 
 function Fixed({ children, delay }: { children: React.ReactNode; delay: number }) {
   return (
-    <motion.span layout transition={{ layout: { duration: 0.7, ease } }} className="inline-flex overflow-hidden pb-[0.08em]">
+    <motion.span layout transition={{ layout: { duration: 0.55, ease } }} className="inline-flex overflow-hidden pb-[0.08em]">
       <motion.span className="inline-block" initial={{ y: "110%", filter: "blur(8px)" }} animate={{ y: "0%", filter: "blur(0px)" }} transition={{ duration: 1.1, delay, ease }}>
         {children}
       </motion.span>
@@ -80,11 +81,11 @@ export function HeroHeadline({ index }: { index: number }) {
       <LayoutGroup>
         <span className="flex min-h-[2em] flex-wrap content-start justify-center gap-x-[0.24em] lg:min-h-0 lg:flex-nowrap">
           <Fixed delay={0.59}>from</Fixed>
-          <motion.span layout className="inline-flex" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.1, delay: 0.66, ease }}>
+          <motion.span layout className="inline-flex" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.1, delay: 0.66, ease, layout: { duration: 0.55, ease } }}>
             <Swap text={r.from} k={`f-${index}`} className="text-white" />
           </motion.span>
           <Fixed delay={0.73}>to</Fixed>
-          <motion.span layout className="inline-flex" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.1, delay: 0.8, ease }}>
+          <motion.span layout className="inline-flex" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.1, delay: 0.8, ease, layout: { duration: 0.55, ease } }}>
             <Swap text={`${r.to}.`} k={`t-${index}`} className="text-white" />
           </motion.span>
         </span>
