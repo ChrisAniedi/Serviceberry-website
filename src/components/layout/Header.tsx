@@ -56,7 +56,7 @@ export function Header() {
   const dark = open || (pathname === "/" && !pastHero && !drop);
   const active = (href: string) => pathname === href || pathname.startsWith(href + "/");
   const linkCls = (on: boolean) =>
-    `relative flex h-[74px] items-center gap-1 px-3.5 font-display text-[15px] font-medium transition-colors ${on ? (dark ? "text-berry-light" : "text-brand") : dark ? "text-white/85 hover:text-white" : "text-ink hover:text-brand"}`;
+    `relative flex h-[74px] items-center gap-1 px-3.5 font-display text-[15px] font-medium transition-colors ${on ? (dark ? "text-brand-light" : "text-brand") : dark ? "text-white/85 hover:text-white" : "text-ink hover:text-brand"}`;
 
   return (
     <>
@@ -160,7 +160,7 @@ export function Header() {
                   <Image src={services[0].image} alt="" fill sizes="300px" className="object-cover opacity-70 transition-transform duration-700 group-hover:scale-105" />
                   <span className="absolute inset-x-5 bottom-5 text-white">
                     <span className="block font-display text-[24px] leading-none font-semibold">All services</span>
-                    <span className="mt-2 inline-flex items-center gap-1 text-[14px] text-berry-light">Overview <ArrowUpRight className="size-4" /></span>
+                    <span className="mt-2 inline-flex items-center gap-1 text-[14px] text-brand-light">Overview <ArrowUpRight className="size-4" /></span>
                   </span>
                 </Link>
               </div>

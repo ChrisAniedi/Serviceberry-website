@@ -10,7 +10,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
     <Link href={`/projects/${project.slug}`} className="group block bg-white ring-1 ring-line">
       <div className="relative aspect-[4/3] overflow-hidden">
         <Image src={project.image} alt="" fill sizes="(min-width:1024px) 33vw, 100vw" className="object-cover transition-transform duration-[1.2s] ease-out-expo group-hover:scale-105" />
-        <span className="absolute top-0 left-0 bg-berry px-3 py-1.5 font-display text-[13px] font-bold">{String(index + 1).padStart(2, "0")}</span>
+        <span className="absolute top-4 left-4 rounded-full bg-white/85 px-3 py-1.5 font-display text-[13px] font-semibold text-ink backdrop-blur-md">{String(index + 1).padStart(2, "0")}</span>
         {!project.verified && <Illustrative className="absolute top-2 right-2" />}
       </div>
       <div className="p-5">

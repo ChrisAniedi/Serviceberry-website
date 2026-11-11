@@ -46,7 +46,7 @@ export default function AcademyPage() {
 
       <div className="bg-ink py-5 text-white">
         <Marquee duration={40}>
-          {topics.map((t) => <span key={t} className="headline flex items-center px-7 text-[25px] whitespace-nowrap">{t}<span className="ml-14 inline-block h-2.5 w-6 rounded-full bg-berry" /></span>)}
+          {topics.map((t) => <span key={t} className="headline flex items-center px-7 text-[25px] whitespace-nowrap">{t}<span className="ml-14 inline-block h-2.5 w-6 rounded-full bg-brand-light" /></span>)}
         </Marquee>
       </div>
 
@@ -76,9 +76,9 @@ export default function AcademyPage() {
             {steps.map((s, i) => (
               <li key={s} className="bg-brand-deep p-7">
                 <Reveal delay={i * 0.08}>
-                  <span className="headline text-[54px] text-berry-light">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="headline text-[54px] text-brand-light">{String(i + 1).padStart(2, "0")}</span>
                   <p className="headline mt-4 text-[22px]">{s}</p>
-                  {i === 3 && <Award className="mt-4 size-6 text-berry-light" />}
+                  {i === 3 && <Award className="mt-4 size-6 text-brand-light" />}
                 </Reveal>
               </li>
             ))}
@@ -101,13 +101,13 @@ export default function AcademyPage() {
         </div>
       </section>
 
-      <section className="bg-berry py-20">
+      <section className="bg-brand py-20 text-white">
         <div className="container-x flex flex-wrap items-center justify-between gap-6">
           <div>
             <p className="headline text-[clamp(1.85rem,3.86vw,3.36rem)]">Your next skill is one click away.</p>
-            <p className="mt-2 text-[15px] text-ink/70">Opens academy.serviceberryglobal.com</p>
+            <p className="mt-2 text-[15px] text-white/80">Opens academy.serviceberryglobal.com</p>
           </div>
-          <Button href={site.academyUrl} external className="!bg-ink !text-white">Go to the Academy</Button>
+          <Button href={site.academyUrl} external variant="white">Go to the Academy</Button>
         </div>
       </section>
     </>

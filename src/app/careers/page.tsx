@@ -21,7 +21,7 @@ export default function CareersPage() {
           <div>
             <Title size="md" title="Current openings" />
             {vacancies.length === 0 ? (
-              <Reveal className="mt-8 border-l-[4px] border-berry bg-mist p-8">
+              <Reveal className="mt-8 border-l-[4px] border-brand bg-mist p-8">
                 <p className="headline text-[27px]">No current vacancies</p>
                 <p className="mt-3 max-w-lg text-[16px] text-steel">There are no open roles right now. Send your CV and we will keep it on file for future openings.</p>
               </Reveal>
@@ -38,7 +38,7 @@ export default function CareersPage() {
             )}
           </div>
           <Reveal className="h-fit bg-brand p-8 text-white">
-            <p className="font-display text-[13px] font-semibold tracking-[0.12em] text-berry-light uppercase">How to apply</p>
+            <p className="font-display text-[13px] font-semibold tracking-[0.12em] text-brand-light uppercase">How to apply</p>
             <ol className="mt-5 space-y-4 text-[16px] text-white/85">
               <li>1. Prepare your CV (PDF) and a short cover note.</li>
               <li>2. Put the role, or &quot;General application&quot;, in the subject line.</li>

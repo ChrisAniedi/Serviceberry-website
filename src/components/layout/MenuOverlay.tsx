@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { img } from "@/content/images";
 import { services } from "@/content/services";
 import { site } from "@/content/site";
+import { Socials } from "@/components/ui/Socials";
 
 const ease = [0.76, 0, 0.24, 1] as const;
 const out = [0.16, 1, 0.3, 1] as const;
@@ -87,13 +88,13 @@ export function MenuOverlay({ open, onClose, pathname }: { open: boolean; onClos
                           {i}+000
                         </span>
                         <span
-                          className={`headline text-[clamp(1.75rem,3.1vw,2.7rem)] transition-[color,transform] duration-500 group-hover:translate-x-3 ${i === current ? "text-berry-light" : shown === i ? "text-white" : "text-white/75"}`}
+                          className={`headline text-[clamp(1.75rem,3.1vw,2.7rem)] transition-[color,transform] duration-500 group-hover:translate-x-3 ${i === current ? "text-brand-light" : shown === i ? "text-white" : "text-white/75"}`}
                         >
                           {p.label}
                         </span>
                         {p.label === "Academy" && <span className="text-[13px] text-white/50">Training</span>}
                         {shown === i && (
-                          <motion.span layoutId="menu-pig" className="ml-auto h-[10px] w-7 self-center rounded-full bg-berry" transition={{ type: "spring", stiffness: 380, damping: 32 }} />
+                          <motion.span layoutId="menu-pig" className="ml-auto h-[10px] w-7 self-center rounded-full bg-brand-light" transition={{ type: "spring", stiffness: 380, damping: 32 }} />
                         )}
                       </Link>
                     </motion.div>
@@ -129,7 +130,7 @@ export function MenuOverlay({ open, onClose, pathname }: { open: boolean; onClos
               </div>
 
               <div>
-                <p className="font-display text-[12px] font-semibold tracking-[0.14em] text-berry-light uppercase">Services</p>
+                <p className="font-display text-[12px] font-semibold tracking-[0.14em] text-brand-light uppercase">Services</p>
                 <ul className="mt-3 grid gap-x-6 sm:grid-cols-2">
                   {services.map((s) => (
                     <li key={s.slug}>
@@ -143,23 +144,28 @@ export function MenuOverlay({ open, onClose, pathname }: { open: boolean; onClos
 
               <div className="grid gap-6 sm:grid-cols-2">
                 <div className="text-[15px] leading-relaxed text-white/75">
-                  <p className="font-display text-[12px] font-semibold tracking-[0.14em] text-berry-light uppercase">Talk to us</p>
+                  <p className="font-display text-[12px] font-semibold tracking-[0.14em] text-brand-light uppercase">Talk to us</p>
                   {site.phones.map((p) => (
                     <a key={p} href={`tel:${p.replace(/\s/g, "")}`} className="mt-2 block hover:text-white">{p}</a>
                   ))}
                   <a href={`mailto:${site.email}`} className="block hover:text-white">{site.email}</a>
                 </div>
                 <div className="text-[15px] leading-relaxed text-white/75">
-                  <p className="font-display text-[12px] font-semibold tracking-[0.14em] text-berry-light uppercase">Visit</p>
+                  <p className="font-display text-[12px] font-semibold tracking-[0.14em] text-brand-light uppercase">Visit</p>
                   <p className="mt-2">{site.address.lines.map((l) => <span key={l} className="block">{l}</span>)}</p>
                 </div>
+              </div>
+
+              <div className="flex items-center justify-between gap-4 border-t border-white/10 pt-6">
+                <p className="text-[14px] text-white/70">Follow Serviceberry</p>
+                <Socials />
               </div>
 
               <a
                 href={site.academyUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="chamfer group flex items-center justify-between gap-4 bg-berry px-5 py-4 text-white"
+                className="chamfer group flex items-center justify-between gap-4 bg-white px-5 py-4 text-ink"
               >
                 <span>
                   <span className="block font-display text-[18px] font-semibold">Serviceberry Academy</span>

@@ -114,7 +114,7 @@ html.lenis, html.lenis body { height: auto; }
 @keyframes smoke {
   0% { transform: translate(0, 0) scale(0.6); opacity: 0; }
   15% { opacity: 0.9; }
-  100% { transform: translate(120px, -120px) scale(2.8); opacity: 0; }
+  100% { transform: translate(90px, -95px) scale(3); opacity: 0; }
 }
 @keyframes blink {
   0%, 55%, 100% { opacity: 0.15; }

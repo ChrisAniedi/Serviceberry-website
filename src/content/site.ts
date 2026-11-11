@@ -31,6 +31,17 @@ export const site = {
   heroVideo: null as string | null,
 } as const;
 
+/**
+ * Social profiles, shown in the footer and the menu.
+ * TODO(verify): no public Serviceberry pages could be found (Nov 2026), so each link opens a
+ * search for the company on that network. Replace each `href` with the company page.
+ */
+export const socials = [
+  { name: "LinkedIn", href: "https://www.linkedin.com/search/results/companies/?keywords=Serviceberry%20Global%20Limited" },
+  { name: "Instagram", href: "https://www.instagram.com/explore/search/keyword/?q=serviceberry%20global" },
+  { name: "Facebook", href: "https://www.facebook.com/search/pages/?q=Serviceberry%20Global%20Limited" },
+] as const;
+
 export type NavItem = {
   label: string;
   href: string;

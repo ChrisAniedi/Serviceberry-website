@@ -23,8 +23,8 @@ function Drop() {
 /** Two bands of the service list, moving opposite ways and reacting to the scroll. */
 export function ServicesBand() {
   return (
-    <section aria-label="What we do" className="overflow-hidden border-b border-line bg-white py-10 sm:py-14">
-      <VelocityMarquee className="headline text-[clamp(2.4rem,6.4vw,5.6rem)] text-ink">
+    <section aria-label="What we do" className="overflow-hidden bg-white py-12 sm:py-16">
+      <VelocityMarquee className="headline text-[clamp(2.2rem,5.4vw,4.6rem)] text-ink/90">
         {lines.map((l) => (
           <span key={l} className="flex items-center">
             {l}
@@ -32,7 +32,7 @@ export function ServicesBand() {
           </span>
         ))}
       </VelocityMarquee>
-      <VelocityMarquee speed={-1.6} className="headline mt-2 text-[clamp(2.4rem,6.4vw,5.6rem)] text-transparent [-webkit-text-stroke:1.2px_#0b4fbf]">
+      <VelocityMarquee speed={-0.6} className="headline mt-1 text-[clamp(2.2rem,5.4vw,4.6rem)] text-transparent opacity-50 [-webkit-text-stroke:1px_#0b4fbf]">
         {[...lines].reverse().map((l) => (
           <span key={l} className="flex items-center">
             {l}

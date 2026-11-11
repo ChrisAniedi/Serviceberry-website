@@ -4,16 +4,14 @@ import Image from "next/image";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 import { Button } from "@/components/ui/Button";
-import { LogoMark } from "@/components/ui/Logo";
 import { brochure } from "@/content/images";
-import { site } from "@/content/site";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
 /**
  * Closing call to action, after the back page of the brochure: "Achieve more with Efficient
  * Engineering." in the crimson-to-blue gradient over a faded aerial of an industrial
- * waterfront, then the navy sweep (with its crimson edge) running into the footer.
+ * waterfront, then a navy sweep with a fine crimson line running into the footer.
  */
 export function Closing({ id = "kp-7" }: { id?: string }) {
   const ref = useRef<HTMLElement>(null);
@@ -35,7 +33,7 @@ export function Closing({ id = "kp-7" }: { id?: string }) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.9, ease }}
-          className="font-display text-[clamp(1.6rem,3vw,2.6rem)] font-light tracking-[-0.02em] text-berry"
+          className="font-display text-[clamp(1.6rem,3vw,2.6rem)] font-light tracking-[-0.02em] text-brand"
         >
           Achieve more with
         </motion.p>
@@ -44,7 +42,7 @@ export function Closing({ id = "kp-7" }: { id?: string }) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1.1, delay: 0.1, ease }}
-          className="headline mt-1 bg-[linear-gradient(100deg,#c4205a_0%,#8a2c8f_45%,#0b4fbf_85%)] bg-clip-text pb-2 text-[clamp(3.2rem,10vw,9rem)] leading-[0.95] font-semibold text-transparent"
+          className="headline mt-1 bg-[linear-gradient(100deg,#0a2a57_0%,#0b4fbf_55%,#6a3fa8_85%,#c4205a_110%)] bg-clip-text pb-2 text-[clamp(3rem,8vw,7.4rem)] leading-[0.95] font-medium text-transparent"
         >
           Efficient
           <br />
@@ -70,16 +68,9 @@ export function Closing({ id = "kp-7" }: { id?: string }) {
       {/* the navy sweep */}
       <motion.div style={{ y: sweep }} className="relative -mt-[min(22vw,280px)] -mb-px">
         <svg aria-hidden viewBox="0 0 1440 260" preserveAspectRatio="none" className="block h-[min(20vw,260px)] w-full">
-          <path d="M0 150 C 420 60, 900 40, 1440 0 L1440 40 C 900 80, 420 100, 0 190 Z" fill="#c4205a" />
+          <path d="M0 176 C 420 88, 900 66, 1440 26" fill="none" stroke="#c4205a" strokeWidth="3" vectorEffect="non-scaling-stroke" />
           <path d="M0 180 C 420 92, 900 70, 1440 30 L1440 260 L0 260 Z" fill="#0a2a57" />
         </svg>
-        <div className="flex items-center justify-between gap-6 bg-brand-deep px-[var(--gutter)] pt-4 pb-10 text-white">
-          <span className="flex items-center gap-3">
-            <LogoMark light className="size-11" />
-            <span className="text-[15px] text-white/80">Respect. Integrity. Passion.</span>
-          </span>
-          <a href={`mailto:${site.email}`} className="hidden text-[15px] text-white/80 hover:text-white sm:block">{site.email}</a>
-        </div>
       </motion.div>
     </section>
   );

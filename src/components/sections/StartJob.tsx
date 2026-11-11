@@ -11,7 +11,7 @@ export function StartJob({ id = "kp-7" }: { id?: string }) {
       <div className="container-x grid gap-14 lg:grid-cols-2 lg:items-start">
         <Reveal>
           <p className="flex items-center gap-3 font-display text-[12px] font-semibold tracking-[0.12em] text-white/70 uppercase">
-            <span className="inline-flex h-6 items-center gap-1.5 rounded-full bg-white/10 px-2.5 text-[12px] text-berry-light"><span className="size-1.5 rounded-full bg-berry" />KP 7+000</span>
+            <span className="inline-flex h-6 items-center gap-1.5 rounded-full bg-white/10 px-2.5 text-[12px] text-brand-light"><span className="size-1.5 rounded-full bg-berry" />KP 7+000</span>
             Receiver
           </p>
           <h2 className="headline mt-6 text-[clamp(2.52rem,5.88vw,5.04rem)]">Start a job</h2>
@@ -21,15 +21,15 @@ export function StartJob({ id = "kp-7" }: { id?: string }) {
           <ul className="mt-10 border-t border-white/20 text-[17px]">
             {site.phones.map((p) => (
               <li key={p} className="border-b border-white/20">
-                <a href={`tel:${p.replace(/\s/g, "")}`} className="flex items-center gap-4 py-4 hover:text-berry-light"><Phone className="size-5 text-berry-light" /> {p}</a>
+                <a href={`tel:${p.replace(/\s/g, "")}`} className="flex items-center gap-4 py-4 hover:text-brand-light"><Phone className="size-5 text-brand-light" /> {p}</a>
               </li>
             ))}
             <li className="border-b border-white/20">
-              <a href={`mailto:${site.email}`} className="flex items-center gap-4 py-4 break-all hover:text-berry-light"><Mail className="size-5 shrink-0 text-berry-light" /> {site.email}</a>
+              <a href={`mailto:${site.email}`} className="flex items-center gap-4 py-4 break-all hover:text-brand-light"><Mail className="size-5 shrink-0 text-brand-light" /> {site.email}</a>
             </li>
             <li className="border-b border-white/20">
-              <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.address.mapQuery)}`} target="_blank" rel="noopener noreferrer" className="flex items-start gap-4 py-4 hover:text-berry-light">
-                <MapPin className="mt-0.5 size-5 shrink-0 text-berry-light" /> {site.address.oneLine}
+              <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.address.mapQuery)}`} target="_blank" rel="noopener noreferrer" className="flex items-start gap-4 py-4 hover:text-brand-light">
+                <MapPin className="mt-0.5 size-5 shrink-0 text-brand-light" /> {site.address.oneLine}
               </a>
             </li>
           </ul>

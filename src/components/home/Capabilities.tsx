@@ -13,7 +13,7 @@ function PhotoTile({ href, image, kicker, title, className = "" }: { href: strin
       <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/20 to-transparent" />
       <div className="absolute inset-x-6 bottom-6 flex items-end justify-between gap-4 text-white">
         <span>
-          <span className="block font-display text-[11px] font-semibold tracking-[0.14em] text-berry-light uppercase">{kicker}</span>
+          <span className="block font-display text-[11px] font-semibold tracking-[0.14em] text-brand-light uppercase">{kicker}</span>
           <span className="headline mt-2 block text-[clamp(1.34rem,2.02vw,1.85rem)]">{title}</span>
         </span>
         <ArrowUpRight className="size-6 shrink-0 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
@@ -40,7 +40,7 @@ export function Capabilities() {
             <p className="headline text-[5.88rem] leading-none"><CountUp to={7} /></p>
             <p className="text-[15px] text-white/80">Pipeline, process, chemicals and equipment.</p>
           </div>
-          <Link href="/qhse" className="group flex flex-col justify-between bg-berry p-6 text-white">
+          <Link href="/qhse" className="group flex flex-col justify-between bg-brand p-6 text-white">
             <ShieldCheck className="size-9" strokeWidth={1.6} />
             <span>
               <span className="headline block text-[1.85rem]">Safety first</span>
@@ -57,7 +57,7 @@ export function Capabilities() {
             </span>
           </Link>
           <div className="flex flex-col justify-between bg-ink p-6 text-white md:col-span-2">
-            <p className="font-display text-[12px] font-semibold tracking-[0.12em] text-berry-light uppercase">Nigerian Content</p>
+            <p className="font-display text-[12px] font-semibold tracking-[0.12em] text-brand-light uppercase">Nigerian Content</p>
             <p className="max-w-lg font-display text-[clamp(1.5rem,2.2vw,2rem)] leading-tight font-[350] tracking-[-0.02em]">
               In-country crews, local participation and technology transfer through our partners and our Academy.
             </p>

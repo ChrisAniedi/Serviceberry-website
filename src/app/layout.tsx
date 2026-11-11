@@ -48,7 +48,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" className={`${display.variable} ${body.variable}`}>
       <body className="min-h-dvh overflow-x-clip">
-        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:bg-berry focus:px-4 focus:py-2 focus:text-ink">
+        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:bg-berry focus:px-4 focus:py-2 focus:text-white">
           Skip to content
         </a>
         <SmoothScroll />

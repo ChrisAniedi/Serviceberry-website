@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { brochure } from "@/content/images";
 
 const ease = [0.16, 1, 0.3, 1] as const;
@@ -56,16 +56,34 @@ const tech = [
 
 /**
  * Specialist technologies as expanding panels: the open one shows its photo and story,
- * the rest stand as slim labelled columns. Hover, focus or tap to open. Stacks on phones.
+ * the rest stand as slim labelled columns. On large screens the section holds while the
+ * panels open one by one with the scroll; hover, focus or click also opens one. Stacks on phones.
  */
 export function TechPanels() {
   const [open, setOpen] = useState(0);
+  const [pin, setPin] = useState(false);
+  const ref = useRef<HTMLElement>(null);
+
+  // large screens: the section holds while each panel opens in turn, then lets go
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px) and (min-height: 700px) and (prefers-reduced-motion: no-preference)");
+    const set = () => setPin(mq.matches);
+    set();
+    mq.addEventListener("change", set);
+    return () => mq.removeEventListener("change", set);
+  }, []);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
+  useMotionValueEvent(scrollYProgress, "change", (p) => {
+    if (pin) setOpen(Math.min(tech.length - 1, Math.floor(p * tech.length)));
+  });
+
   return (
-    <section className="bg-ink py-24 text-white sm:py-32">
-      <div className="container-x">
+    <section ref={ref} className="relative bg-ink text-white" style={{ height: pin ? `${100 + (tech.length - 1) * 55}svh` : undefined }}>
+      <div className={pin ? "sticky top-0 flex h-svh flex-col justify-center" : "py-24 sm:py-32"}>
+      <div className="container-x w-full">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <p className="font-display text-[12px] font-semibold tracking-[0.16em] text-berry-light uppercase">Technologies we bring</p>
+            <p className="font-display text-[12px] font-semibold tracking-[0.16em] text-brand-light uppercase">Technologies we bring</p>
             <h2 className="headline mt-4 max-w-[16ch] text-[clamp(2.2rem,4.4vw,3.8rem)]">
               Specialist tools for the <span className="text-brand-light">hard parts of the job.</span>
             </h2>
@@ -75,7 +93,7 @@ export function TechPanels() {
           </p>
         </div>
 
-        <div className="mt-12 flex flex-col gap-3 lg:h-[560px] lg:flex-row">
+        <div className="mt-10 flex flex-col gap-3 lg:h-[min(560px,calc(100svh-300px))] lg:flex-row">
           {tech.map((t, i) => {
             const on = open === i;
             return (
@@ -118,7 +136,7 @@ export function TechPanels() {
                       transition={{ duration: 0.7, delay: 0.2, ease }}
                       className="absolute inset-x-3 bottom-3 rounded-[22px] bg-white/10 p-6 ring-1 ring-white/20 backdrop-blur-xl lg:max-w-[560px] lg:p-7"
                     >
-                      <p className="font-display text-[12px] font-semibold tracking-[0.14em] text-berry-light uppercase">{t.key}</p>
+                      <p className="font-display text-[12px] font-semibold tracking-[0.14em] text-brand-light uppercase">{t.key}</p>
                       <h3 className="headline mt-2 text-[clamp(1.6rem,2.4vw,2.2rem)] leading-[1.05]">{t.name}</h3>
                       <p className="mt-3 text-[15px] leading-relaxed text-white/80">{t.body}</p>
                       <div className="mt-5 flex flex-wrap items-center justify-between gap-4">
@@ -127,7 +145,7 @@ export function TechPanels() {
                             <li key={p} className="rounded-full bg-white/10 px-3 py-1.5 text-[13px] ring-1 ring-white/15">{p}</li>
                           ))}
                         </ul>
-                        <Link href={t.href} className="inline-flex min-h-11 items-center gap-1.5 text-[14px] font-medium text-white hover:text-berry-light">
+                        <Link href={t.href} className="inline-flex min-h-11 items-center gap-1.5 text-[14px] font-medium text-white hover:text-brand-light">
                           Learn more <ArrowUpRight className="size-4" />
                         </Link>
                       </div>
@@ -137,7 +155,7 @@ export function TechPanels() {
                 {/* phones: always open */}
                 {!on && (
                   <div className="absolute inset-x-3 bottom-3 rounded-[22px] bg-white/10 p-6 ring-1 ring-white/20 backdrop-blur-xl lg:hidden">
-                    <p className="font-display text-[12px] font-semibold tracking-[0.14em] text-berry-light uppercase">{t.key}</p>
+                    <p className="font-display text-[12px] font-semibold tracking-[0.14em] text-brand-light uppercase">{t.key}</p>
                     <h3 className="headline mt-2 text-[1.6rem] leading-[1.05]">{t.name}</h3>
                     <p className="mt-3 text-[15px] leading-relaxed text-white/80">{t.body}</p>
                   </div>
@@ -146,6 +164,15 @@ export function TechPanels() {
             );
           })}
         </div>
+              {pin && (
+          <div aria-hidden className="mt-6 flex items-center gap-2">
+            {tech.map((t, i) => (
+              <span key={t.key} className={`h-1 rounded-full transition-all duration-500 ${i === open ? "w-10 bg-white" : "w-4 bg-white/25"}`} />
+            ))}
+            <span className="ml-3 text-[13px] text-white/50">Keep scrolling</span>
+          </div>
+        )}
+      </div>
       </div>
     </section>
   );

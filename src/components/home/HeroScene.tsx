@@ -27,28 +27,37 @@ export function HeroScene() {
           <div className="anim-drift absolute top-[8%] left-[-20%] h-[30%] w-[70%] rounded-[50%] bg-[radial-gradient(closest-side,rgba(255,236,200,0.35),transparent)] blur-2xl" />
           <div className="anim-drift-rev absolute top-[30%] right-[-25%] h-[24%] w-[60%] rounded-[50%] bg-[radial-gradient(closest-side,rgba(255,214,160,0.3),transparent)] blur-2xl" />
 
-          {/* flare boom, drawn in the silhouette colour */}
+          {/* flare boom, in the hazy silhouette colour and softened like the rest of the rig */}
           <svg viewBox="0 0 2000 1333" className="absolute inset-0 h-full w-full">
-            <path d="M672 790 L552 702" stroke="rgba(58,38,14,0.92)" strokeWidth="5" strokeLinecap="round" />
-            <path d="M672 806 L560 714" stroke="rgba(58,38,14,0.75)" strokeWidth="2.5" />
-            {[0.25, 0.5, 0.75].map((t) => (
-              <path key={t} d={`M${672 - 120 * t} ${790 - 88 * t} L${672 - 112 * t} ${806 - 92 * t}`} stroke="rgba(58,38,14,0.7)" strokeWidth="2" />
-            ))}
+            <defs>
+              <filter id="haze-soft" x="-5%" y="-5%" width="110%" height="110%">
+                <feGaussianBlur stdDeviation="1.1" />
+              </filter>
+            </defs>
+            <g filter="url(#haze-soft)" opacity="0.85">
+              <path d="M672 792 L566 712" stroke="rgb(84,56,24)" strokeWidth="4" strokeLinecap="round" />
+              <path d="M672 805 L572 722" stroke="rgb(84,56,24)" strokeWidth="2" opacity="0.7" />
+              {[0.3, 0.6].map((t) => (
+                <path key={t} d={`M${672 - 106 * t} ${792 - 80 * t} L${672 - 100 * t} ${805 - 83 * t}`} stroke="rgb(84,56,24)" strokeWidth="1.6" opacity="0.6" />
+              ))}
+            </g>
           </svg>
 
-          {/* the flare */}
-          <div className="absolute top-[52.6%] left-[27.6%] h-0 w-0">
-            <span className="anim-glow absolute -top-[110px] -left-[110px] size-[220px] rounded-full bg-[radial-gradient(closest-side,rgba(255,170,70,0.6),rgba(255,120,40,0.18)_55%,transparent)] mix-blend-screen" />
-            <span className="absolute bottom-0 left-0 block h-[58px] w-[30px] -translate-x-1/2 origin-bottom -rotate-[16deg]">
-              <span className="anim-flame-a absolute inset-x-0 bottom-0 h-full origin-bottom rounded-[50%_50%_45%_45%/65%_65%_35%_35%] bg-[linear-gradient(to_top,#ff5a14,#ff8a2a_45%,rgba(255,170,60,0.0))] blur-[1.5px]" />
-              <span className="anim-flame-b absolute inset-x-[18%] bottom-0 h-[72%] origin-bottom rounded-[50%_50%_45%_45%/65%_65%_35%_35%] bg-[linear-gradient(to_top,#ffb347,#ffd27a_55%,rgba(255,230,160,0))] blur-[1px]" />
-              <span className="anim-flame-c absolute inset-x-[34%] bottom-0 h-[42%] origin-bottom rounded-[50%_50%_45%_45%/65%_65%_35%_35%] bg-[#fff3d1] blur-[1px]" />
+          {/* the flare: small at this distance, glowing into the haze */}
+          <div className="absolute top-[53.4%] left-[28.3%] h-0 w-0">
+            <span className="anim-glow absolute -top-[150px] -left-[150px] size-[300px] rounded-full bg-[radial-gradient(closest-side,rgba(255,190,110,0.42),rgba(255,150,70,0.12)_50%,transparent)] mix-blend-screen" />
+            <span className="absolute bottom-0 left-0 block h-[34px] w-[17px] -translate-x-1/2 origin-bottom -rotate-[18deg] opacity-90 mix-blend-screen">
+              <span className="anim-flame-a absolute inset-x-0 bottom-0 h-full origin-bottom rounded-[50%_50%_45%_45%/65%_65%_35%_35%] bg-[linear-gradient(to_top,#ff7a2a,#ffa04a_45%,rgba(255,180,90,0))] blur-[3px]" />
+              <span className="anim-flame-b absolute inset-x-[16%] bottom-0 h-[70%] origin-bottom rounded-[50%_50%_45%_45%/65%_65%_35%_35%] bg-[linear-gradient(to_top,#ffc070,#ffe0a0_55%,rgba(255,236,190,0))] blur-[2px]" />
+              <span className="anim-flame-c absolute inset-x-[32%] bottom-0 h-[40%] origin-bottom rounded-[50%_50%_45%_45%/65%_65%_35%_35%] bg-[#fff1d6] blur-[1.5px]" />
             </span>
+            {/* a veil of the same haze over the flame, so it sits in the air like the rig does */}
+            <span className="absolute -top-[40px] -left-[30px] size-[60px] rounded-full bg-[rgba(236,170,88,0.22)] blur-[10px]" />
             {/* smoke carried downwind */}
             {[0, 1.6, 3.2, 4.8].map((d) => (
               <span
                 key={d}
-                className="anim-smoke absolute -top-[60px] -left-[10px] size-[34px] rounded-full bg-[rgba(80,58,34,0.2)] blur-[11px]"
+                className="anim-smoke absolute -top-[46px] -left-[8px] size-[26px] rounded-full bg-[rgba(130,96,58,0.16)] blur-[14px]"
                 style={{ animationDelay: `${d}s` }}
               />
             ))}

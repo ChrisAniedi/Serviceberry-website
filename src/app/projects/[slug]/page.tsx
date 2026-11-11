@@ -52,9 +52,9 @@ export default async function CaseStudy({ params }: Props) {
           <div className="mt-16 grid gap-12 lg:grid-cols-[1fr_1.7fr]">
             <div>
               <div className="sticky top-24 bg-brand-deep p-7 text-white">
-                <p className="font-display text-[12px] font-semibold tracking-[0.12em] text-berry-light uppercase">Scope at a glance</p>
-                <ul className="mt-5 space-y-3">{p.scope.map((s) => <li key={s} className="flex items-center gap-3 text-[16px]"><span className="h-[3px] w-4 bg-berry" /> {s}</li>)}</ul>
-                <p className="mt-7 font-display text-[12px] font-semibold tracking-[0.12em] text-berry-light uppercase">Outcome</p>
+                <p className="font-display text-[12px] font-semibold tracking-[0.12em] text-brand-light uppercase">Scope at a glance</p>
+                <ul className="mt-5 space-y-3">{p.scope.map((s) => <li key={s} className="flex items-center gap-3 text-[16px]"><span className="h-[3px] w-4 bg-brand" /> {s}</li>)}</ul>
+                <p className="mt-7 font-display text-[12px] font-semibold tracking-[0.12em] text-brand-light uppercase">Outcome</p>
                 <p className="mt-2 text-[16px] text-white/85">{p.outcome}</p>
               </div>
             </div>
@@ -72,10 +72,10 @@ export default async function CaseStudy({ params }: Props) {
           </div>
         </div>
       </section>
-      <section className="bg-berry py-20">
+      <section className="bg-brand py-20 text-white">
         <div className="container-x flex flex-wrap items-center justify-between gap-6">
           <p className="headline text-[clamp(1.68rem,3.36vw,2.86rem)]">Discuss a similar requirement with our team.</p>
-          <Button href={`/contact?type=Project%20Collaboration&subject=${encodeURIComponent(p.title)}`} className="!bg-ink !text-white">Start the conversation</Button>
+          <Button href={`/contact?type=Project%20Collaboration&subject=${encodeURIComponent(p.title)}`} variant="white">Start the conversation</Button>
         </div>
       </section>
     </>

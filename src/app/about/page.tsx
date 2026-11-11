@@ -49,7 +49,7 @@ export default function AboutPage() {
         <div className="container-x grid gap-px bg-white/15 lg:grid-cols-2">
           {[{ k: "Our vision", v: vision }, { k: "Our mission", v: mission }].map((x) => (
             <Reveal key={x.k} className="bg-brand-deep p-2 lg:p-10">
-              <p className="font-display text-[13px] font-semibold tracking-[0.12em] text-berry-light uppercase">{x.k}</p>
+              <p className="font-display text-[13px] font-semibold tracking-[0.12em] text-brand-light uppercase">{x.k}</p>
               <p className="headline mt-4 text-[clamp(1.6rem,2.52vw,2.35rem)] leading-[1.02]">{x.v}</p>
             </Reveal>
           ))}
@@ -61,7 +61,7 @@ export default function AboutPage() {
           <div className="mt-12 grid border-t border-l border-line sm:grid-cols-2 lg:grid-cols-3">
             {values.map((v, i) => (
               <Reveal key={v.title} delay={(i % 3) * 0.05} className="border-r border-b border-line p-7">
-                <p className="font-display text-[44px] leading-none font-bold text-berry-light">{String(i + 1).padStart(2, "0")}</p>
+                <p className="font-display text-[44px] leading-none font-bold text-brand-light">{String(i + 1).padStart(2, "0")}</p>
                 <h3 className="headline mt-5 text-[24px]">{v.title}</h3>
                 <p className="mt-2 text-[16px] text-steel">{v.body}</p>
               </Reveal>

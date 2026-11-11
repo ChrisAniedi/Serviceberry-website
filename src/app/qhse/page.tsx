@@ -27,7 +27,7 @@ export default function QhsePage() {
       <section className="bg-white py-24">
         <div className="container-x grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {pillars.map((p, i) => (
-            <Reveal key={p.title} delay={i * 0.06} className={`flex min-h-[300px] flex-col justify-between p-7 ${i === 1 ? "bg-berry" : "bg-mist"}`}>
+            <Reveal key={p.title} delay={i * 0.06} className={`flex min-h-[300px] flex-col justify-between p-7 ${i === 1 ? "bg-brand" : "bg-mist"}`}>
               <p.icon className="size-10 text-brand" strokeWidth={1.5} />
               <div>
                 <h2 className="headline text-[29px]">{p.title}</h2>

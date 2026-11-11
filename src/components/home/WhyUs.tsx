@@ -37,7 +37,7 @@ export function WhyUs() {
       <div className="container-x">
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
-            <p className="font-display text-[12px] font-semibold tracking-[0.16em] text-berry-light uppercase">Why clients work with us</p>
+            <p className="font-display text-[12px] font-semibold tracking-[0.16em] text-brand-light uppercase">Why clients work with us</p>
             <h2 className="headline mt-4 text-[clamp(2.4rem,5vw,4.4rem)]">
               We collaborate for <span className="text-brand-light">impact and success.</span>
             </h2>
@@ -57,7 +57,7 @@ export function WhyUs() {
               transition={{ duration: 0.9, delay: (i % 3) * 0.08 + Math.floor(i / 3) * 0.12, ease }}
               className="group rounded-[24px] bg-white/[0.07] p-7 ring-1 ring-white/15 backdrop-blur-xl transition-colors duration-500 hover:bg-white/[0.12]"
             >
-              <span className="grid size-12 place-items-center rounded-2xl bg-berry/90 transition-transform duration-500 group-hover:-rotate-6">
+              <span className="grid size-12 place-items-center rounded-2xl bg-white/10 text-brand-light ring-1 ring-white/20 transition-transform duration-500 group-hover:-rotate-6">
                 <r.icon className="size-6" strokeWidth={1.6} />
               </span>
               <h3 className="headline mt-8 text-[24px]">{r.title}</h3>

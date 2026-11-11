@@ -40,7 +40,7 @@ export function PipeFrame({ src, alt, priority, className = "", children, video 
         <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />
         {children}
         <div aria-hidden className="absolute inset-x-[8%] bottom-0 h-[3px] bg-white/25">
-          <motion.span className="absolute top-1/2 h-[9px] w-8 -translate-x-1/2 -translate-y-1/2 rounded-full bg-berry" style={{ left: pig }} />
+          <motion.span className="absolute top-1/2 h-[9px] w-8 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-light" style={{ left: pig }} />
         </div>
       </motion.div>
     </div>

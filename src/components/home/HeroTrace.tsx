@@ -17,8 +17,8 @@ export function HeroTrace() {
         <svg viewBox="0 0 240 120" className="h-auto w-full overflow-visible" aria-hidden>
           <defs>
             <linearGradient id="trace-fill" x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0" stopColor="#ff4f86" stopOpacity="0.55" />
-              <stop offset="1" stopColor="#ff4f86" stopOpacity="0" />
+              <stop offset="0" stopColor="#ffc65c" stopOpacity="0.55" />
+              <stop offset="1" stopColor="#ffc65c" stopOpacity="0" />
             </linearGradient>
           </defs>
           {[40, 80, 120, 160, 200].map((x) => (
@@ -28,7 +28,7 @@ export function HeroTrace() {
           <motion.path
             d={LINE}
             fill="none"
-            stroke="#ff4f86"
+            stroke="#ffc65c"
             strokeWidth="2"
             initial={{ pathLength: 0 }}
             animate={{ pathLength: 1 }}

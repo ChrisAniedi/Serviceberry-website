@@ -20,7 +20,7 @@ export function HeroCrew() {
           {!reduce && (
             <motion.span
               aria-hidden
-              className="absolute inset-x-0 h-12 bg-gradient-to-b from-transparent via-berry/35 to-transparent"
+              className="absolute inset-x-0 h-12 bg-gradient-to-b from-transparent via-white/25 to-transparent"
               animate={{ top: ["-15%", "100%"] }}
               transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", repeatDelay: 0.6 }}
             />
@@ -34,7 +34,7 @@ export function HeroCrew() {
       <Link
         href="/services/pipeline-integrity-pigging"
         aria-label="Pipeline Integrity & Pigging"
-        className="absolute -bottom-7 left-1/2 grid size-14 -translate-x-1/2 place-items-center rounded-full bg-berry text-white shadow-[0_10px_30px_-8px_rgba(255,79,134,0.6)] transition-transform hover:scale-105"
+        className="absolute -bottom-7 left-1/2 grid size-14 -translate-x-1/2 place-items-center rounded-full bg-white text-ink shadow-[0_10px_30px_-8px_rgba(255,198,92,0.6)] transition-transform hover:scale-105"
       >
         <ArrowUpRight className="size-6" />
       </Link>

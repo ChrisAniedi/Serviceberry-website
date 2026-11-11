@@ -26,9 +26,9 @@ export default async function ContactPage({ searchParams }: Props) {
           <Reveal delay={0.1} className="min-w-0 space-y-3">
             <div className="bg-brand p-7 text-white">
               <ul className="space-y-5 text-[16px]">
-                <li className="flex gap-4"><MapPin className="mt-0.5 size-5 shrink-0 text-berry-light" /><address className="not-italic">{site.address.lines.map((l) => <span key={l} className="block">{l}</span>)}</address></li>
-                {site.phones.map((p) => <li key={p}><a href={`tel:${p.replace(/\s/g, "")}`} className="flex gap-4 hover:text-berry-light"><Phone className="size-5 text-berry-light" /> {p}</a></li>)}
-                <li><a href={`mailto:${site.email}`} className="flex gap-4 break-all hover:text-berry-light"><Mail className="size-5 shrink-0 text-berry-light" /> {site.email}</a></li>
+                <li className="flex gap-4"><MapPin className="mt-0.5 size-5 shrink-0 text-brand-light" /><address className="not-italic">{site.address.lines.map((l) => <span key={l} className="block">{l}</span>)}</address></li>
+                {site.phones.map((p) => <li key={p}><a href={`tel:${p.replace(/\s/g, "")}`} className="flex gap-4 hover:text-brand-light"><Phone className="size-5 text-brand-light" /> {p}</a></li>)}
+                <li><a href={`mailto:${site.email}`} className="flex gap-4 break-all hover:text-brand-light"><Mail className="size-5 shrink-0 text-brand-light" /> {site.email}</a></li>
               </ul>
             </div>
             {/* TODO(verify): Serviceberry must confirm the map pin before launch. */}

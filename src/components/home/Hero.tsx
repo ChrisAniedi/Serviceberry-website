@@ -37,7 +37,8 @@ export function Hero() {
   return (
     <section ref={ref} id="kp-0" className="relative isolate overflow-hidden bg-ink text-white">
       {/* photo, graded into the navy below */}
-      <motion.div className="absolute inset-x-0 top-0 -z-10 h-[max(100svh,760px)]" style={{ y: photoY }}>
+      {/* photo, graded into the navy of the About row */}
+      <motion.div className="absolute inset-x-0 top-0 -z-10 h-[max(100svh,760px)] overflow-hidden" style={{ y: photoY }}>
         <motion.div
           className="absolute inset-0"
           initial={{ scale: reduce ? 1 : 1.15, opacity: 0 }}
@@ -46,7 +47,7 @@ export function Hero() {
         >
           <HeroScene />
         </motion.div>
-        <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,rgba(24,14,4,0.55)_0%,rgba(24,14,4,0.12)_28%,rgba(24,14,4,0.05)_50%,rgba(16,16,20,0.55)_78%,#0c1a2b_100%)]" />
+        <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,rgba(24,14,4,0.55)_0%,rgba(24,14,4,0.1)_24%,rgba(24,14,4,0.04)_42%,rgba(18,16,24,0.4)_62%,rgba(10,22,48,0.88)_82%,#0a1630_93%,#0a1630_100%)]" />
       </motion.div>
 
       {/* row 1 */}
@@ -116,6 +117,12 @@ export function Hero() {
         </div>
       </div>
 
+      {/* a still band of navy over the photo's moving bottom edge, so no seam can show while it drifts */}
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-[calc(max(100svh,760px)-260px)] -z-10 h-[620px] bg-[linear-gradient(180deg,rgba(10,22,48,0)_0%,rgba(10,22,48,0.6)_30%,#0a1630_46%,#0a1630_100%)]" />
+
+      {/* sunset haze spilling over the row line, so the photo and the About row read as one scene */}
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-[max(calc(100svh-64px),700px)] -z-10 h-[420px] -translate-y-1/2 bg-[radial-gradient(60%_50%_at_50%_50%,rgba(255,176,92,0.14),transparent_70%)]" />
+
       {/* row 2: about, on the same grid */}
       <div className={`grid border-t border-white/15 ${cols}`}>
         <div className="order-2 flex flex-col items-center justify-center gap-4 border-t border-white/15 px-8 py-12 text-center lg:order-none lg:border-t-0 lg:py-20">
@@ -127,7 +134,7 @@ export function Hero() {
             ))}
           </div>
           <p className="max-w-[220px] text-[15px] leading-snug text-white/80">Training the crews behind the work</p>
-          <a href={site.academyUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-1 text-[14px] font-medium text-berry-light hover:underline">
+          <a href={site.academyUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-1 text-[14px] font-medium text-brand-light hover:underline">
             Serviceberry Academy <ArrowUpRight className="size-4" />
             <span className="sr-only">(opens in a new tab)</span>
           </a>

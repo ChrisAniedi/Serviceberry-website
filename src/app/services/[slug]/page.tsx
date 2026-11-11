@@ -57,7 +57,7 @@ export default async function ServicePage({ params }: Props) {
                 <ul className="mt-6 border-t border-line">
                   {g.items.map((it) => (
                     <li key={it} className="flex items-center gap-3 border-b border-line py-3.5 text-[16px]">
-                      <span className="h-[3px] w-4 shrink-0 bg-berry" /> {it}
+                      <span className="h-[3px] w-4 shrink-0 bg-brand" /> {it}
                     </li>
                   ))}
                 </ul>

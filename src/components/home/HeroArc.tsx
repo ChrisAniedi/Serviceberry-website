@@ -30,8 +30,8 @@ export function HeroArc() {
       >
         <defs>
           <radialGradient id="pig-glow">
-            <stop offset="0" stopColor="#ff4f86" stopOpacity="0.9" />
-            <stop offset="1" stopColor="#ff4f86" stopOpacity="0" />
+            <stop offset="0" stopColor="#ffc65c" stopOpacity="0.9" />
+            <stop offset="1" stopColor="#ffc65c" stopOpacity="0" />
           </radialGradient>
         </defs>
 
@@ -53,7 +53,7 @@ export function HeroArc() {
               d={RUN}
               pathLength={1}
               fill="none"
-              stroke="#ff4f86"
+              stroke="#ffc65c"
               strokeWidth="2"
               strokeDasharray="1 1"
               strokeLinecap="round"
@@ -94,7 +94,7 @@ export function HeroArc() {
                 width="26"
                 height="11"
                 rx="5.5"
-                fill="#ff4f86"
+                fill="#ffc65c"
               />
             </g>
           </g>
@@ -108,7 +108,7 @@ export function HeroArc() {
               width="26"
               height="11"
               rx="5.5"
-              fill="#ff4f86"
+              fill="#ffc65c"
             />
           </g>
         )}

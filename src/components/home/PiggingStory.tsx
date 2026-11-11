@@ -46,13 +46,13 @@ function Step({ i, onActive }: { i: number; onActive: (i: number) => void }) {
       <div className="chamfer-lg relative mb-8 aspect-[4/3] overflow-hidden lg:hidden">
         <Image src={s.image} alt="" fill sizes="100vw" className="object-cover" />
       </div>
-      <p className="font-display text-[13px] font-semibold tracking-[0.12em] text-berry-light uppercase">Step {String(i + 1).padStart(2, "0")} / 04</p>
+      <p className="font-display text-[13px] font-semibold tracking-[0.12em] text-brand-light uppercase">Step {String(i + 1).padStart(2, "0")} / 04</p>
       <h3 className="headline mt-3 text-[clamp(2.02rem,3.7vw,3.19rem)] text-white">{s.title}</h3>
       <p className="mt-5 max-w-md text-[17px] leading-relaxed text-white/75">{s.body}</p>
       <ul className="mt-6 space-y-2.5">
         {s.points.map((p) => (
           <li key={p} className="flex items-center gap-3 text-[15.5px] text-white">
-            <span className="h-[3px] w-5 bg-berry" /> {p}
+            <span className="h-[3px] w-5 bg-brand-light" /> {p}
           </li>
         ))}
       </ul>
@@ -90,7 +90,7 @@ export function PiggingStory() {
                   </motion.div>
                 </AnimatePresence>
                 <div className="absolute top-6 right-6 bottom-6 w-[3px] bg-white/25">
-                  <motion.span className="absolute inset-x-0 top-0 bg-berry" animate={{ height: `${((active + 1) / steps.length) * 100}%` }} transition={{ duration: 0.6 }} />
+                  <motion.span className="absolute inset-x-0 top-0 bg-white" animate={{ height: `${((active + 1) / steps.length) * 100}%` }} transition={{ duration: 0.6 }} />
                 </div>
                 <p className="absolute bottom-6 left-6 bg-ink/80 px-3 py-2 font-display text-[13px] font-semibold tracking-[0.08em] uppercase">
                   {String(active + 1).padStart(2, "0")} · {steps[active].title}
