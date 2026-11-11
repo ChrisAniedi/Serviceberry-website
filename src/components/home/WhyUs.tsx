@@ -29,7 +29,7 @@ export function WhyUs() {
   const y = useTransform(scrollYProgress, [0, 1], reduce ? ["0%", "0%"] : ["-6%", "6%"]);
 
   return (
-    <section ref={ref} className="relative isolate overflow-hidden bg-brand-deep py-24 text-white sm:py-32">
+    <section data-nav="dark" ref={ref} className="relative isolate overflow-hidden bg-brand-deep py-24 text-white sm:py-32">
       <motion.div className="absolute inset-0 -z-10" style={{ scale, y }}>
         <Image src={img.nightPlant2} alt="" fill sizes="100vw" className="object-cover" />
       </motion.div>

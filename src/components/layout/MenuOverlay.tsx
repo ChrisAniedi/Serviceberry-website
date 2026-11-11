@@ -56,7 +56,7 @@ export function MenuOverlay({ open, onClose, pathname }: { open: boolean; onClos
           role="dialog"
           aria-modal="true"
           aria-label="Menu"
-          className="fixed inset-0 z-[45] overflow-y-auto bg-brand-deep text-white"
+          className="fixed inset-0 z-[45] overflow-y-auto bg-[#08245c] bg-[radial-gradient(90%_70%_at_85%_0%,rgba(11,79,191,0.55),transparent_60%),linear-gradient(165deg,#0a3485_0%,#082866_45%,#051a45_100%)] text-white"
           initial={{ clipPath: "inset(0 0 100% 0)" }}
           animate={{ clipPath: "inset(0 0 0% 0)" }}
           exit={{ clipPath: "inset(0 0 100% 0)" }}

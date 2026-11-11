@@ -42,11 +42,11 @@ function Card({ i, active, still, onPick }: { i: number; active: boolean; still:
   return (
     <article
       onClick={onPick}
-      className={`group relative flex w-[min(84vw,400px)] shrink-0 flex-col overflow-hidden rounded-[26px] bg-white/[0.06] shadow-[inset_0_1px_0_rgba(255,255,255,0.14),0_30px_60px_-30px_rgba(0,0,0,0.8)] ring-1 backdrop-blur-xl transition-[filter,opacity,transform,box-shadow] duration-700 ease-out-expo lg:w-[min(30vw,420px)] ${
+      className={`group relative flex w-[min(84vw,400px)] shrink-0 flex-col overflow-hidden rounded-[26px] bg-white/[0.06] shadow-[inset_0_1px_0_rgba(255,255,255,0.14),0_30px_60px_-30px_rgba(0,0,0,0.8)] ring-1 backdrop-blur-xl transition-[filter,opacity,transform,box-shadow] duration-700 ease-out-expo lg:w-[min(30vw,560px)] ${
         dim ? "cursor-pointer scale-[0.95] opacity-40 blur-[3px] ring-white/[0.08] hover:opacity-60 hover:blur-[1.5px]" : "opacity-100 blur-0 ring-white/[0.16]"
       } ${active && !still ? "shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_0_0_1px_rgba(143,180,255,0.35),0_40px_80px_-30px_rgba(11,79,191,0.55)]" : ""}`}
     >
-      <div className="relative m-2 h-[clamp(130px,23svh,230px)] overflow-hidden rounded-[20px] bg-ink">
+      <div className={`relative m-2 overflow-hidden rounded-[20px] bg-ink ${still ? "h-[clamp(160px,46vw,230px)]" : "min-h-[150px] flex-1"}`}>
         <Image src={s.image} alt="" fill sizes="420px" className={`object-cover transition-transform duration-[1.4s] ease-out-expo ${active ? "scale-100" : "scale-110"}`} />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
         <span className="glass-fade text-lift absolute top-3 left-3 rounded-full px-3 py-1 font-display text-[12px] font-semibold tracking-[0.1em]">
@@ -56,14 +56,14 @@ function Card({ i, active, still, onPick }: { i: number; active: boolean; still:
           <span className={`size-1.5 rounded-full bg-[#5fd497] ${active ? "animate-pulse" : ""}`} /> {s.status}
         </span>
       </div>
-      <div className="px-5 pt-3 pb-5">
+      <div className="px-6 pt-4 pb-6">
         <div className="flex items-center gap-3">
           <span className="grid size-9 shrink-0 place-items-center rounded-full bg-brand-light text-brand-deep">
             <s.icon className="size-[18px]" strokeWidth={1.8} />
           </span>
-          <h3 className="text-[19px] font-semibold tracking-[-0.01em]">{s.title}</h3>
+          <h3 className="text-[20px] font-semibold tracking-[-0.01em]">{s.title}</h3>
         </div>
-        <p className="mt-2.5 text-[15px] leading-relaxed text-white/65">{s.body}</p>
+        <p className="mt-3 text-[15.5px] leading-relaxed text-white/65">{s.body}</p>
       </div>
     </article>
   );
@@ -108,8 +108,8 @@ function Pipeline({
 }) {
   const box = useRef<HTMLDivElement>(null);
   const [drag, setDrag] = useState(false);
-  // station centres sit 22px in from each end of the pipe
-  const pct = useTransform(progress, (p) => `calc(22px + ${Math.max(0, Math.min(1, p))} * (100% - 44px))`);
+  // station centres sit 32px in from each end of the pipe
+  const pct = useTransform(progress, (p) => `calc(32px + ${Math.max(0, Math.min(1, p))} * (100% - 64px))`);
   const speed = useVelocity(progress);
   const tilt = useTransform(speed, [-1.2, 0, 1.2], [5, 0, -5]);
   const stretch = useTransform(speed, [-1.2, 0, 1.2], [1.15, 1, 1.15]);
@@ -123,14 +123,14 @@ function Pipeline({
 
   const at = (clientX: number) => {
     const r = box.current!.getBoundingClientRect();
-    return Math.max(0, Math.min(1, (clientX - r.left - 22) / (r.width - 44)));
+    return Math.max(0, Math.min(1, (clientX - r.left - 32) / (r.width - 64)));
   };
 
   return (
-    <div className="relative mt-[clamp(1.25rem,3svh,2.25rem)] select-none">
+    <div className="relative mt-[clamp(2.75rem,6svh,4rem)] select-none">
       <div
         ref={box}
-        className={`relative h-[46px] touch-none ${drag ? "cursor-grabbing" : "cursor-grab"}`}
+        className={`relative h-[64px] touch-none ${drag ? "cursor-grabbing" : "cursor-grab"}`}
         onPointerDown={(e) => {
           if ((e.target as HTMLElement).closest("[data-station]")) return;
           e.currentTarget.setPointerCapture(e.pointerId);
@@ -142,7 +142,7 @@ function Pipeline({
         onPointerCancel={() => setDrag(false)}
       >
         {/* the pipe: steel tube with wax and scale specks inside */}
-        <div className="absolute inset-x-0 top-1/2 h-[18px] -translate-y-1/2 overflow-hidden rounded-full bg-[linear-gradient(180deg,#2c3443,#141922_55%,#0b0e14)] shadow-[inset_0_1px_0_rgba(255,255,255,0.14),inset_0_-2px_4px_rgba(0,0,0,0.6)] ring-1 ring-white/10">
+        <div className="absolute inset-x-0 top-1/2 h-[20px] -translate-y-1/2 overflow-hidden rounded-full bg-[linear-gradient(180deg,#2c3443,#141922_55%,#0b0e14)] shadow-[inset_0_1px_0_rgba(255,255,255,0.14),inset_0_-2px_4px_rgba(0,0,0,0.6)] ring-1 ring-white/10">
           <div className="absolute inset-0 opacity-70 [background:radial-gradient(circle_at_30%_70%,rgba(176,122,52,0.75)_0_1.6px,transparent_2.2px)_0_0/23px_18px,radial-gradient(circle_at_60%_40%,rgba(120,86,40,0.8)_0_1.2px,transparent_1.8px)_9px_0/17px_18px]" />
           {/* behind the pig: clean, with product flowing */}
           <motion.div className="absolute inset-y-0 left-0 overflow-hidden rounded-full" style={{ width: pct }}>
@@ -163,19 +163,35 @@ function Pipeline({
               onClick={() => onStation(i)}
               aria-label={`Go to step ${i + 1}: ${s.title}`}
               className="group/st absolute top-1/2 z-10 -translate-1/2 cursor-pointer"
-              style={{ left: `calc(22px + ${i / 3} * (100% - 44px))` }}
+              style={{ left: `calc(32px + ${i / 3} * (100% - 64px))` }}
             >
-              {i === active && <span className="absolute inset-0 animate-ping rounded-full bg-brand-light/30" />}
+              {i === active && <span className="absolute inset-1 animate-ping rounded-full bg-brand-light/25 [animation-duration:2s]" />}
+              {/* a valve-like station: an outer ring around a solid hub */}
               <span
-                className={`relative grid size-11 place-items-center rounded-full transition-[background-color,color,transform] duration-500 group-hover/st:scale-110 ${
-                  on ? "bg-brand-light text-brand-deep shadow-[0_0_24px_rgba(143,180,255,0.45)]" : "bg-[#151a24] text-white/55 ring-1 ring-white/20 group-hover/st:text-white"
+                className={`relative grid size-16 place-items-center rounded-full backdrop-blur-md transition-[background-color,box-shadow,scale] duration-500 group-hover/st:scale-105 ${
+                  on
+                    ? "bg-brand-light/15 shadow-[0_0_0_1px_rgba(143,180,255,0.55),0_0_36px_rgba(143,180,255,0.35)]"
+                    : "bg-white/[0.04] shadow-[0_0_0_1px_rgba(255,255,255,0.16)] group-hover/st:shadow-[0_0_0_1px_rgba(255,255,255,0.4)]"
                 }`}
               >
-                <s.icon className="size-[18px]" strokeWidth={1.8} />
+                <span
+                  className={`grid size-11 place-items-center rounded-full transition-colors duration-500 ${
+                    on ? "bg-brand-light text-brand-deep" : "bg-[#151a24] text-white/55 ring-1 ring-white/15 group-hover/st:text-white"
+                  }`}
+                >
+                  <s.icon className="size-5" strokeWidth={1.8} />
+                </span>
+                <span
+                  className={`absolute -top-1 -right-1 grid size-6 place-items-center rounded-full font-display text-[11px] font-semibold tabular-nums transition-colors duration-500 ${
+                    on ? "bg-white text-ink" : "bg-[#1c2230] text-white/60 ring-1 ring-white/15"
+                  }`}
+                >
+                  {i + 1}
+                </span>
               </span>
               <span
-                className={`absolute top-full left-1/2 mt-2 -translate-x-1/2 text-[12.5px] font-medium whitespace-nowrap transition-colors ${
-                  i === active ? "text-white" : "text-white/40 group-hover/st:text-white/80"
+                className={`absolute top-full left-1/2 mt-2.5 -translate-x-1/2 text-[14px] font-medium whitespace-nowrap transition-colors ${
+                  i === active ? "text-white" : "text-white/45 group-hover/st:text-white/80"
                 }`}
               >
                 {s.title}
@@ -198,7 +214,7 @@ function Pipeline({
             <motion.div style={{ rotate: tilt, scaleX: stretch }}>
               <PigShape />
             </motion.div>
-            <span className="absolute bottom-full left-1/2 mb-3 inline-flex -translate-x-1/2 items-center gap-1.5 rounded-full bg-white px-2.5 py-1 font-display text-[11.5px] font-semibold whitespace-nowrap text-ink tabular-nums shadow-[0_8px_20px_-8px_rgba(0,0,0,0.6)]">
+            <span className="absolute bottom-full left-1/2 mb-7 inline-flex -translate-x-1/2 items-center gap-1.5 rounded-full bg-white px-2.5 py-1 font-display text-[11.5px] font-semibold whitespace-nowrap text-ink tabular-nums shadow-[0_8px_20px_-8px_rgba(0,0,0,0.6)]">
               <GripHorizontal className="size-3.5 text-steel-2" /> KP {km}
               <span className="absolute top-full left-1/2 -mt-px size-0 -translate-x-1/2 border-x-[5px] border-t-[5px] border-x-transparent border-t-white" />
             </span>
@@ -257,8 +273,8 @@ export function PiggingStory() {
   };
 
   return (
-    <section ref={ref} id="kp-2" className="relative scroll-mt-20 overflow-x-clip bg-[#070809] text-white" style={{ height: pin ? "330svh" : undefined }}>
-      <div className={pin ? "sticky top-0 flex h-svh flex-col justify-center overflow-hidden pt-[74px] pb-6" : "relative overflow-hidden py-24"}>
+    <section data-nav="dark" ref={ref} id="kp-2" className="relative scroll-mt-20 overflow-x-clip bg-[#070809] text-white" style={{ height: pin ? "330svh" : undefined }}>
+      <div className={pin ? "sticky top-0 flex h-svh flex-col overflow-hidden pt-[clamp(88px,12svh,120px)] pb-[clamp(1.5rem,4svh,3rem)]" : "relative overflow-hidden py-24"}>
         {/* faint photo behind */}
         <div aria-hidden className="pointer-events-none absolute inset-0">
           <Image src={img.pipeValley} alt="" fill sizes="100vw" className="object-cover opacity-[0.12] grayscale" />
@@ -292,9 +308,9 @@ export function PiggingStory() {
         </div>
 
         {/* the cards: slide left with the run on large screens; a grid on phones */}
-        <div className={pin ? "relative mt-[clamp(2.5rem,6svh,4rem)]" : "container-x relative mt-10"}>
+        <div className={pin ? "relative mt-[clamp(3rem,7svh,4.5rem)] flex min-h-0 flex-1 items-start" : "container-x relative mt-10"}>
           {pin ? (
-            <motion.div ref={track} style={{ x: reduce ? 0 : x }} className="flex w-max gap-5 px-[var(--gutter)]">
+            <motion.div ref={track} style={{ x: reduce ? 0 : x }} className="flex h-full max-h-[620px] w-max gap-5 px-[var(--gutter)]">
               {steps.map((_, i) => (
                 <Card key={i} i={i} active={i === active} still={false} onPick={() => goTo(STATION_AT[i], false)} />
               ))}

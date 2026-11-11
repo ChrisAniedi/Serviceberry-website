@@ -69,7 +69,7 @@ export default function AcademyPage() {
         </div>
       </section>
 
-      <section className="bg-brand-deep py-24 text-white">
+      <section data-nav="dark" className="bg-brand-deep py-24 text-white">
         <div className="container-x">
           <Title light kp="6+200" label="How it works" title={<>Sign-up to<br /><span className="text-brand-light">certificate</span></>} />
           <ol className="mt-12 grid gap-px bg-white/15 sm:grid-cols-2 lg:grid-cols-4">

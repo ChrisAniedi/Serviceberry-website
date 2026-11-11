@@ -62,7 +62,7 @@ export function TechPanels() {
   const [open, setOpen] = useState(0);
 
   return (
-    <section className="relative isolate overflow-hidden bg-ink text-white">
+    <section data-nav="dark" className="relative isolate overflow-hidden bg-ink text-white">
       {/* a faint photo behind, kept quiet so the panels stay the focus */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <Image src={img.rigOcean} alt="" fill sizes="100vw" className="object-cover opacity-[0.14] grayscale" />

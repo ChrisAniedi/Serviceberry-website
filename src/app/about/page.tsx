@@ -45,7 +45,7 @@ export default function AboutPage() {
           ))}
         </div>
       </section>
-      <section className="bg-brand-deep py-24 text-white sm:py-28">
+      <section data-nav="dark" className="bg-brand-deep py-24 text-white sm:py-28">
         <div className="container-x grid gap-px bg-white/15 lg:grid-cols-2">
           {[{ k: "Our vision", v: vision }, { k: "Our mission", v: mission }].map((x) => (
             <Reveal key={x.k} className="bg-brand-deep p-2 lg:p-10">

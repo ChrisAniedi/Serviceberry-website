@@ -34,6 +34,13 @@ export function Header() {
   const [drop, setDrop] = useState(false);
   const [open, setOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
+  const [overDark, setOverDark] = useState(false);
+
+  // Dark sections carry data-nav="dark"; over them the bar turns to dark glass so it stays legible.
+  const checkDark = useCallback(() => {
+    const hit = document.elementsFromPoint(window.innerWidth / 2, 37).find((el) => !el.closest("header"));
+    setOverDark(!!hit?.closest('[data-nav="dark"]'));
+  }, []);
 
   useMotionValueEvent(scrollY, "change", (y) => {
     const prev = scrollY.getPrevious() ?? 0;
@@ -41,19 +48,21 @@ export function Header() {
     setPastHero(y > window.innerHeight - 90);
     if (y > 600 && y > prev + 2 && !drop) setHidden(true);
     else if (y < prev - 2 || y <= 600) setHidden(false);
+    checkDark();
   });
   useEffect(() => {
     setPastHero(window.scrollY > window.innerHeight - 90);
+    checkDark();
     setOpen(false);
     setDrop(false);
-  }, [pathname]);
+  }, [pathname, checkDark]);
   useEffect(() => {
     document.documentElement.style.overflow = open ? "hidden" : "";
     if (open) setDrop(false);
   }, [open]);
   const close = useCallback(() => setOpen(false), []);
 
-  const dark = open || (pathname === "/" && !pastHero && !drop);
+  const dark = open || (!drop && ((pathname === "/" && !pastHero) || overDark));
   const active = (href: string) => pathname === href || pathname.startsWith(href + "/");
   const linkCls = (on: boolean) =>
     `relative flex h-[74px] items-center gap-0.5 px-2.5 font-display text-[14.5px] font-medium transition-colors ${on ? (dark ? "text-brand-light" : "text-brand") : dark ? "text-white/85 hover:text-white" : "text-ink hover:text-brand"}`;
@@ -66,11 +75,11 @@ export function Header() {
             ? "bg-transparent"
             : dark
               ? moved
-                ? "bg-[linear-gradient(180deg,rgba(10,22,48,0.55),rgba(10,22,48,0.3))] shadow-[inset_0_-1px_0_rgba(255,255,255,0.12),0_10px_30px_-18px_rgba(0,0,0,0.5)] backdrop-blur-2xl backdrop-saturate-150"
+                ? "bg-[linear-gradient(180deg,rgba(10,22,48,0.32),rgba(10,22,48,0.12))] shadow-[inset_0_-1px_0_rgba(255,255,255,0.12),0_10px_30px_-18px_rgba(0,0,0,0.5)] backdrop-blur-[28px] backdrop-saturate-[1.8]"
                 : "bg-transparent shadow-[0_1px_0_rgba(255,255,255,0.14)]"
               : moved
-                ? "bg-white/70 shadow-[inset_0_-1px_0_rgba(221,227,236,0.9),0_12px_32px_-20px_rgba(12,26,43,0.4)] backdrop-blur-2xl backdrop-saturate-[1.8]"
-                : "bg-white/85 shadow-[0_1px_0_#dde3ea] backdrop-blur-xl"
+                ? "bg-[linear-gradient(180deg,rgba(255,255,255,0.5),rgba(255,255,255,0.3))] shadow-[inset_0_-1px_0_rgba(255,255,255,0.55),inset_0_1px_0_rgba(255,255,255,0.7),0_12px_32px_-20px_rgba(12,26,43,0.35)] backdrop-blur-[28px] backdrop-saturate-[2]"
+                : "bg-white/55 shadow-[0_1px_0_rgba(221,227,236,0.8)] backdrop-blur-[24px] backdrop-saturate-[1.8]"
         }`}
         animate={{ y: hidden && !open ? -80 : 0 }}
         transition={{ duration: 0.45, ease }}
