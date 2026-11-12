@@ -107,6 +107,17 @@ export function QuoteForm({ type, subject, details: startDetails, location: star
     return { ...who, type: need?.type ?? "", subject: subj, message: `${facts.join("\n")}\n\n${details.trim()}` };
   }, [need, picks, location, when, reach, details, who]);
 
+  const waText = [
+    "Hello Serviceberry, I would like a quote.",
+    need && `Need: ${need.title}${picks.length ? ` (${picks.join(", ")})` : ""}`,
+    details.trim() && `Details: ${details.trim()}`,
+    location && `Location: ${location}`,
+    `Needed: ${when}`,
+    (who.name || who.company) && `From: ${[who.name, who.company].filter(Boolean).join(", ")}`,
+  ]
+    .filter(Boolean)
+    .join("\n");
+
   async function submit(ev: FormEvent<HTMLFormElement>) {
     ev.preventDefault();
     const e: Record<string, string> = {};
@@ -323,16 +334,26 @@ export function QuoteForm({ type, subject, details: startDetails, location: star
               <input id="q-website" name="website" tabIndex={-1} autoComplete="off" />
             </div>
 
-            <div className="flex flex-col gap-4 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between">
-              <p className="max-w-sm text-[14px] text-steel">We only use your details to reply to this request.</p>
-              <button
-                type="submit"
-                disabled={state === "sending"}
-                className="inline-flex min-h-14 items-center justify-center gap-2.5 rounded-full bg-berry px-8 font-display text-[16px] font-semibold text-white shadow-[0_14px_30px_-14px_rgba(196,32,90,0.85)] transition-colors hover:bg-berry-deep disabled:opacity-70"
-              >
-                {state === "sending" && <Loader2 className="size-5 animate-spin" />}
-                {state === "sending" ? "Sending…" : "Send quote request"}
-              </button>
+            <div className="border-t border-line pt-8">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                <button
+                  type="submit"
+                  disabled={state === "sending"}
+                  className="inline-flex min-h-14 items-center justify-center gap-2.5 rounded-full bg-berry px-8 font-display text-[16px] font-semibold text-white shadow-[0_14px_30px_-14px_rgba(196,32,90,0.85)] transition-colors hover:bg-berry-deep disabled:opacity-70"
+                >
+                  {state === "sending" && <Loader2 className="size-5 animate-spin" />}
+                  {state === "sending" ? "Sending…" : "Submit request"}
+                </button>
+                <a
+                  href={waLink(waText)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-14 items-center justify-center gap-2.5 rounded-full px-7 font-display text-[16px] font-medium text-ink ring-1 ring-ink/20 transition-colors ring-inset hover:bg-[#25d366]/10 hover:ring-[#25d366]"
+                >
+                  <WhatsAppIcon className="size-5 text-[#1faa55]" /> Send via WhatsApp instead
+                </a>
+              </div>
+              <p className="mt-4 text-[13.5px] text-steel">By submitting, you agree to be contacted about this request. We only use your details to reply.</p>
             </div>
             {failMsg && <p role="alert" className="rounded-2xl bg-[#fdecef] px-4 py-3 text-[14.5px] text-[#8a0f30]">{failMsg}</p>}
           </motion.form>

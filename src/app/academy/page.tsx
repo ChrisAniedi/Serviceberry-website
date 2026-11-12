@@ -37,9 +37,9 @@ export default function AcademyPage() {
         title={<>Learn on the line. <span className="text-brand">Grow in the field.</span></>}
         intro="Building technical competence. Developing industry professionals. Professional, business and technical learning, online."
         image={img.engHardhat}
-        after="bg-ink"
+        stat={{ value: "3", label: "Learning tracks: technical, professional and business." }}
       >
-        <div className="mt-6 flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-3">
           <Button href={site.academyUrl} external variant="hivis">Visit Serviceberry Academy</Button>
           <Button href="/request-a-quote?type=Academy" variant="glass">Enrol a team</Button>
         </div>

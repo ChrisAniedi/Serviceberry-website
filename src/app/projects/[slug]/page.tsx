@@ -36,7 +36,7 @@ export default async function CaseStudy({ params }: Props) {
 
   return (
     <>
-      <PageHero kp="5+100" label={p.title} crumbs={[{ label: "Projects", href: "/projects" }]} title={p.title} intro={cs.overview} image={p.image}>
+      <PageHero variant="split" kp="5+100" label={p.type} tags={p.scope} caption={`${p.location} · ${p.role}`} title={p.title} intro={cs.overview} image={p.image}>
         {!p.verified && <Illustrative className="mt-4" />}
       </PageHero>
       <section className="bg-white py-20 sm:py-24">

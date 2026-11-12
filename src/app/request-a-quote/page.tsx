@@ -17,7 +17,6 @@ export default async function QuotePage({ searchParams }: Props) {
     <>
       <PageHero
         compact
-        after="bg-stone"
         kp="7+000"
         label="Request a quote"
         title={<>Request <span className="text-brand">a quote</span></>}

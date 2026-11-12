@@ -1,4 +1,4 @@
-import { img } from "./images";
+import { brochure, img } from "./images";
 
 /**
  * Service lines from the redesign workbook (section 2 and 3), with the services listed on
@@ -221,3 +221,17 @@ export const services: Service[] = [
 ];
 
 export const getService = (slug: string) => services.find((s) => s.slug === slug);
+
+/**
+ * Extra photos for each service page, in order: one per scope chapter, then one for the
+ * technology band, then the rest for "where it is used". Brochure photos first.
+ */
+export const serviceGallery: Record<string, string[]> = {
+  "pipeline-integrity-pigging": [brochure.crewPigging, brochure.crewIntelligentPig, brochure.pigOnDeck, brochure.yellowPipeline, img.pipeGrass, brochure.coverPipes],
+  "pipeline-commissioning-maintenance": [brochure.pipework, img.weldSparks, brochure.coverPipes, brochure.plantDusk, img.pipeBlue, img.structureLadders],
+  "asset-process-systems-integrity": [brochure.plantTowers, brochure.valveWorkshop, brochure.rovSurvey, img.structureLadders, img.nightPlant3, brochure.manifoldBlue],
+  "production-specialty-chemicals": [brochure.descalerBeforeAfter, brochure.waxBeaker, img.drumsDark, brochure.scaledElbow, img.oilpump, brochure.plantDusk],
+  "remote-monitoring-cathodic-protection": [brochure.watchdogUnit, brochure.elecsysNetwork, img.monitoring, brochure.yellowPipeline, img.pipeGrass, img.rigOcean],
+  "equipment-technical-procurement": [brochure.hdpeShop, img.machineWhite, img.factoryMachinery, img.tanksSnow, brochure.hdpePipes, img.valveGauge],
+  "valve-maintenance-hot-tapping": [brochure.valveHand, brochure.manifoldBlue, img.valveActuator, img.valvesPipes, img.valveSky, brochure.valveWorkshop],
+};

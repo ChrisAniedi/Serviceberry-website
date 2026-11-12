@@ -39,7 +39,7 @@ export default async function EquipmentDetail({ params }: Props) {
 
   return (
     <>
-      <PageHero compact kp="4+100" label={e.title} crumbs={[{ label: "Equipment", href: "/equipment" }]} title={e.title} intro={e.summary} image={e.photos[0]}>
+      <PageHero variant="split" kp="4+100" label={e.category} tags={[e.status, e.location]} title={e.title} intro={e.summary} image={e.photos[0]}>
         {!e.verified && <Illustrative />}
       </PageHero>
       <section className="bg-white py-16 sm:py-20">

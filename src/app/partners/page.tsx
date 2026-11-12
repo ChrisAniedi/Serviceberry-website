@@ -19,7 +19,7 @@ export default function PartnersPage() {
         title={<>Technology partners <span className="text-brand">& strategic alliances.</span></>}
         intro="We collaborate with technology owners, specialist service providers and equipment suppliers to give clients access to the right products, expertise and technical solutions."
         image={img.blueprints}
-        after="bg-mist"
+        stat={{ value: "3", label: "Technology partners, supported locally by our team." }}
       />
       <section className="bg-mist py-24">
         <div className="container-x">
