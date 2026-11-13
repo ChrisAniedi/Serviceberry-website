@@ -9,7 +9,7 @@ import { ALLOWED_ATTACHMENT, validateContact, type ContactFields, type FieldErro
 type Props = { defaultType?: string; defaultSubject?: string; defaultMessage?: string };
 
 const input =
-  "w-full rounded-2xl bg-paper px-4 py-3.5 text-[16px] text-ink ring-1 ring-line placeholder:text-steel-2 transition-[box-shadow,background-color] outline-none hover:ring-ink/25 focus:bg-white focus:ring-2 focus:ring-brand aria-[invalid=true]:ring-[#b3123f]";
+  "w-full rounded-2xl bg-paper px-4 py-3.5 text-[16px] text-ink ring-1 ring-line placeholder:text-steel-2 transition-[box-shadow,background-color] outline-none hover:ring-ink/25 focus:bg-white focus:ring-2 focus:ring-brand aria-[invalid=true]:ring-[#94283b]";
 
 /** Contact form with the exact fields from the workbook (section 8). */
 export function ContactForm({ defaultType, defaultSubject, defaultMessage }: Props) {

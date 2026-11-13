@@ -3,10 +3,12 @@
 /*
   Official brand colours (Serviceberry brand colour sheet): Royal Blue #074CBD, Deep Blue
   #003198 and Red Berry #B6344B. ink is the near-black navy for dark sections; brand-light
-  and berry-light are the blue and red lifted for small text and lines on dark.
+  and berry-light are the blue and red lifted for small text and lines on dark. ink is
+  a deep navy from the same blue (text and dark sections) and night the darkest of it.
 */
 @theme {
-  --color-ink: #0a1630;
+  --color-ink: #0b1a3e;
+  --color-night: #061230;
   --color-brand: #074cbd;
   --color-brand-deep: #003198;
   --color-brand-soft: #e6eefb;
@@ -246,7 +248,7 @@ html.lenis, html.lenis body { height: auto; }
   background: linear-gradient(30deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0) 55%);
   mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
 }
-.text-lift { text-shadow: 0 1px 2px rgba(5, 10, 25, 0.45), 0 2px 18px rgba(5, 10, 25, 0.35); }
+.text-lift { text-shadow: 0 1px 2px rgba(4, 12, 34, 0.45), 0 2px 18px rgba(4, 12, 34, 0.35); }
 
 /* ---- Spotlight: a soft light and a lit edge that follow the pointer (set --mx/--my) ----
    Like glass-fade, the element supplies its own position class. */

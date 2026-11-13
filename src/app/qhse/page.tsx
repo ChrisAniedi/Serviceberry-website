@@ -36,10 +36,10 @@ export default function QhsePage() {
 
       <section className="bg-white pb-24">
         <div className="container-x">
-          <Reveal className="relative isolate grid overflow-hidden rounded-[36px] bg-[#070b16] text-white lg:grid-cols-2">
+          <Reveal className="relative isolate grid overflow-hidden rounded-[36px] bg-[#061230] text-white lg:grid-cols-2">
             <div className="relative min-h-[320px] lg:min-h-[520px]">
               <Image src={brochure.qhseEngineer} alt="A Serviceberry engineer in safety gear" fill sizes="(min-width:1024px) 50vw, 100vw" className="object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#070b16] via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-[#070b16]" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#061230] via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-[#061230]" />
             </div>
             <div className="flex flex-col justify-center p-8 sm:p-12 lg:p-16">
               <p className="font-display text-[12px] font-semibold tracking-[0.16em] text-brand-light uppercase">On every site</p>

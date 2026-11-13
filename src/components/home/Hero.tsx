@@ -46,7 +46,7 @@ export function Hero() {
         >
           <HeroScene />
         </motion.div>
-        <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,22,74,0.6)_0%,rgba(0,30,95,0.12)_24%,rgba(0,30,95,0.04)_42%,rgba(6,20,60,0.4)_62%,rgba(10,22,48,0.88)_82%,#0a1630_93%,#0a1630_100%)]" />
+        <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,22,74,0.6)_0%,rgba(0,30,95,0.12)_24%,rgba(0,30,95,0.04)_42%,rgba(6,20,60,0.4)_62%,rgba(11,26,62,0.88)_82%,#0b1a3e_93%,#0b1a3e_100%)]" />
       </motion.div>
 
       {/* deeper blue at the sides, so the side cards sit on calm colour */}
@@ -107,7 +107,7 @@ export function Hero() {
       </div>
 
       {/* a still band of navy over the photo's moving bottom edge, so no seam can show while it drifts */}
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-[calc(max(100svh,760px)-260px)] -z-10 h-[620px] bg-[linear-gradient(180deg,rgba(10,22,48,0)_0%,rgba(10,22,48,0.6)_30%,#0a1630_46%,#0a1630_100%)]" />
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-[calc(max(100svh,760px)-260px)] -z-10 h-[620px] bg-[linear-gradient(180deg,rgba(11,26,62,0)_0%,rgba(11,26,62,0.6)_30%,#0b1a3e_46%,#0b1a3e_100%)]" />
 
       {/* blue-hour glow spilling over the row line, so the photo and the About row read as one scene */}
       <div aria-hidden className="pointer-events-none absolute inset-x-0 top-[max(calc(100svh-64px),700px)] -z-10 h-[420px] -translate-y-1/2 bg-[radial-gradient(60%_50%_at_50%_50%,rgba(7,76,189,0.32),transparent_70%)]" />

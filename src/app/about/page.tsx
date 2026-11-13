@@ -39,7 +39,7 @@ export default function AboutPage() {
             {blocks.map((b, i) => (
               <Reveal key={b.title} delay={(i % 2) * 0.08} className="group relative isolate min-h-[440px] overflow-hidden rounded-[30px] bg-ink text-white">
                 <Image src={b.image} alt="" fill sizes="(min-width:768px) 50vw, 100vw" className="-z-10 object-cover transition-transform duration-[1.4s] ease-out-expo group-hover:scale-[1.06]" />
-                <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#070b16]/90 via-[#070b16]/30 to-transparent" />
+                <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#061230]/90 via-[#061230]/30 to-transparent" />
                 <div className="glass-fade text-lift absolute inset-x-3 bottom-3 rounded-[24px] p-6 sm:p-7">
                   <p className="font-display text-[12px] font-semibold tracking-[0.14em] text-brand-light uppercase">{String(i + 1).padStart(2, "0")}</p>
                   <h2 className="headline mt-2 text-[30px]">{b.title}</h2>

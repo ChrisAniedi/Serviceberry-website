@@ -11,7 +11,7 @@ export function HeroCrew() {
   const reduce = useReducedMotion();
   const corner = "absolute size-4 border-white";
   return (
-    <div className="relative w-full max-w-[290px] rounded-[22px] border border-white/12 bg-[#0a1630]/45 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_30px_60px_-30px_rgba(0,0,0,0.6)] pb-8 backdrop-blur-xl">
+    <div className="relative w-full max-w-[290px] rounded-[22px] border border-white/12 bg-[#0b1a3e]/45 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_30px_60px_-30px_rgba(0,0,0,0.6)] pb-8 backdrop-blur-xl">
       <p className="text-[19px] leading-snug font-normal text-white">Pigging and inspection, planned with your operators</p>
       <div className="relative mt-5 aspect-[4/3.4]">
         <div className="absolute inset-3 overflow-hidden rounded-[14px]">

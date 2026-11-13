@@ -75,7 +75,7 @@ export default async function ServicePage({ params }: Props) {
               <p className="font-display text-[12px] font-semibold tracking-[0.16em] text-brand uppercase">What we deliver</p>
               <p className="headline mt-4 text-[clamp(1.8rem,3.2vw,2.8rem)] leading-[1.1]">{s.short}</p>
             </Reveal>
-            <Reveal delay={0.1} className="rounded-[28px] bg-[#070b16] p-6 text-white sm:p-7">
+            <Reveal delay={0.1} className="rounded-[28px] bg-[#061230] p-6 text-white sm:p-7">
               <p className="font-display text-[12px] font-semibold tracking-[0.16em] text-brand-light uppercase">At a glance</p>
               <ul className="mt-4 divide-y divide-white/10">
                 {s.scope.map((g, k) => (
@@ -101,9 +101,9 @@ export default async function ServicePage({ params }: Props) {
       {/* technology on a dark photo band */}
       <section className="bg-white pb-20 sm:pb-24">
         <div className="container-x">
-          <div data-nav="dark" className="relative isolate overflow-hidden rounded-[36px] bg-[#070b16] text-white">
+          <div data-nav="dark" className="relative isolate overflow-hidden rounded-[36px] bg-[#061230] text-white">
             <Image src={pic(n)} alt="" fill sizes="100vw" className="-z-10 object-cover opacity-35" />
-            <div className="absolute inset-0 -z-10 bg-[linear-gradient(100deg,#070b16_10%,rgba(7,11,22,0.75)_55%,rgba(7,11,22,0.4))]" />
+            <div className="absolute inset-0 -z-10 bg-[linear-gradient(100deg,#061230_10%,rgba(6,18,48,0.75)_55%,rgba(6,18,48,0.4))]" />
             <div className="grid gap-10 p-8 sm:p-12 lg:grid-cols-[1fr_1.2fr] lg:items-end lg:p-16">
               <Reveal>
                 <p className="font-display text-[12px] font-semibold tracking-[0.16em] text-brand-light uppercase">Technology & equipment</p>
@@ -134,7 +134,7 @@ export default async function ServicePage({ params }: Props) {
             {s.applications.map((a, k) => (
               <Reveal key={a} delay={k * 0.08} className="group relative isolate flex aspect-[4/5] items-end overflow-hidden rounded-[28px] bg-ink p-6 text-white sm:aspect-[3/4]">
                 <Image src={pic(n + 1 + k)} alt="" fill sizes="(min-width:768px) 33vw, 100vw" className="-z-10 object-cover transition-transform duration-[1.4s] ease-out-expo group-hover:scale-[1.06]" />
-                <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#070b16]/85 via-[#070b16]/15 to-transparent" />
+                <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#061230]/85 via-[#061230]/15 to-transparent" />
                 <p>
                   <span className="font-display text-[13px] font-semibold text-brand-light tabular-nums">{String(k + 1).padStart(2, "0")}</span>
                   <span className="headline mt-2 block text-[clamp(1.5rem,2.2vw,2rem)] leading-[1.05]">{a}</span>

@@ -118,7 +118,7 @@ export function PageHero({ kp, label, title, intro, image, children, variant = "
             <motion.div className="absolute inset-[-8%_0]" style={{ y }}>
               <Image src={image} alt="" fill priority sizes="100vw" className="object-cover" />
             </motion.div>
-            <div className="absolute inset-0 bg-gradient-to-t from-[#070b16]/55 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#061230]/55 via-transparent to-transparent" />
             {caption && <span className="glass-fade text-lift absolute top-5 left-5 rounded-full px-4 py-2 text-[13.5px] font-medium text-white">{caption}</span>}
             {tags && tags.length > 0 && (
               <ul className="absolute right-4 bottom-4 left-4 flex flex-wrap items-center justify-end gap-2 sm:right-6 sm:bottom-6">

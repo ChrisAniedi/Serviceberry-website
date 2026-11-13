@@ -27,7 +27,7 @@ export default function PartnersPage() {
           <div className="mt-12 space-y-3">
             {partners.map((p, i) => (
               <Reveal key={p.slug}>
-                <article id={p.slug} className="grid scroll-mt-24 gap-8 rounded-[30px] bg-white p-7 ring-1 ring-line transition-shadow duration-500 hover:shadow-[0_30px_60px_-34px_rgba(12,26,43,0.4)] sm:p-10 lg:grid-cols-[0.8fr_1.4fr]">
+                <article id={p.slug} className="grid scroll-mt-24 gap-8 rounded-[30px] bg-white p-7 ring-1 ring-line transition-shadow duration-500 hover:shadow-[0_30px_60px_-34px_rgba(11,26,62,0.4)] sm:p-10 lg:grid-cols-[0.8fr_1.4fr]">
                   <div>
                     <p className="font-display text-[12px] font-semibold tracking-[0.12em] text-brand uppercase">Partner {String(i + 1).padStart(2, "0")}</p>
                     <h2 className="headline mt-2 text-[37px]">{p.name}</h2>

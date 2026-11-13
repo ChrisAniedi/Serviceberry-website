@@ -45,7 +45,7 @@ export default function EquipmentPage() {
             <Reveal key={r.k} delay={i * 0.08}>
               <Link href={r.href} className="group relative isolate flex min-h-[420px] flex-col justify-between overflow-hidden rounded-[32px] bg-ink p-7 text-white sm:p-9">
                 <Image src={r.image} alt="" fill sizes="(min-width:768px) 50vw, 100vw" className="-z-10 object-cover transition-transform duration-[1.4s] ease-out-expo group-hover:scale-[1.05]" />
-                <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#070b16]/90 via-[#070b16]/35 to-[#070b16]/10" />
+                <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#061230]/90 via-[#061230]/35 to-[#061230]/10" />
                 <span className="grid size-14 place-items-center rounded-full bg-white font-display text-[22px] font-semibold text-ink">{r.k}</span>
                 <div>
                   <h2 className="headline text-[clamp(2rem,3.4vw,3rem)] leading-[1.02]">{r.title}</h2>
@@ -82,7 +82,7 @@ export default function EquipmentPage() {
               <span aria-hidden className="absolute top-7 right-[12%] left-[12%] hidden h-px bg-[linear-gradient(90deg,transparent,#c9d4e5_15%,#c9d4e5_85%,transparent)] sm:block" />
               {steps.map((s, i) => (
                 <Reveal key={s.t} delay={i * 0.08} className="relative text-center">
-                  <span className="relative mx-auto grid size-14 place-items-center rounded-full bg-white font-display text-[17px] font-semibold text-brand shadow-[0_10px_30px_-14px_rgba(10,42,87,0.35)] ring-1 ring-line">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="relative mx-auto grid size-14 place-items-center rounded-full bg-white font-display text-[17px] font-semibold text-brand shadow-[0_10px_30px_-14px_rgba(0,49,152,0.35)] ring-1 ring-line">{String(i + 1).padStart(2, "0")}</span>
                   <p className="mt-4 text-[16.5px] font-semibold">{s.t}</p>
                   <p className="mt-1 text-[14.5px] leading-snug text-steel">{s.b}</p>
                 </Reveal>

@@ -34,7 +34,7 @@ export function SourcingTiles() {
               className="group relative isolate flex aspect-[4/5] flex-col justify-between overflow-hidden rounded-[26px] bg-ink p-5 text-white"
             >
               <Image src={a.image} alt="" fill sizes="(min-width:1024px) 25vw, 50vw" className="-z-10 object-cover transition-transform duration-[1.4s] ease-out-expo group-hover:scale-[1.07]" />
-              <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#070b16]/90 via-[#070b16]/25 to-transparent transition-colors duration-500 group-hover:from-brand-deep/95" />
+              <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#061230]/90 via-[#061230]/25 to-transparent transition-colors duration-500 group-hover:from-brand-deep/95" />
               <div className="flex items-start justify-between">
                 <span className="grid size-11 place-items-center rounded-2xl bg-white/15 ring-1 ring-white/25 backdrop-blur-md transition-[rotate,background-color] duration-500 group-hover:-rotate-6 group-hover:bg-white group-hover:text-brand">
                   <a.icon className="size-5" strokeWidth={1.7} />

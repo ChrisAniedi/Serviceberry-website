@@ -40,7 +40,7 @@ export function ServiceIndex() {
             {hover !== null && (
               <motion.div
                 aria-hidden
-                className="pointer-events-none absolute top-0 left-0 z-20 hidden h-[230px] w-[330px] overflow-hidden rounded-[22px] shadow-[0_30px_60px_-24px_rgba(10,22,48,0.55)] lg:block"
+                className="pointer-events-none absolute top-0 left-0 z-20 hidden h-[230px] w-[330px] overflow-hidden rounded-[22px] shadow-[0_30px_60px_-24px_rgba(11,26,62,0.55)] lg:block"
                 style={{ x, y, translateX: "-50%", translateY: "-50%" }}
                 initial={{ opacity: 0, scale: 0.85 }}
                 animate={{ opacity: 1, scale: 1 }}

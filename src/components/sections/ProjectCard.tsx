@@ -7,7 +7,7 @@ import { Illustrative } from "@/components/ui/Illustrative";
 /** Compact project card used on service pages and the projects grid. */
 export function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (
-    <Link href={`/projects/${project.slug}`} className="group block overflow-hidden rounded-[26px] bg-white ring-1 ring-line transition-[translate,box-shadow] duration-500 ease-out-expo hover:-translate-y-1.5 hover:shadow-[0_30px_60px_-30px_rgba(12,26,43,0.45)]">
+    <Link href={`/projects/${project.slug}`} className="group block overflow-hidden rounded-[26px] bg-white ring-1 ring-line transition-[translate,box-shadow] duration-500 ease-out-expo hover:-translate-y-1.5 hover:shadow-[0_30px_60px_-30px_rgba(11,26,62,0.45)]">
       <div className="relative m-2 aspect-[4/3] overflow-hidden rounded-[20px]">
         <Image src={project.image} alt="" fill sizes="(min-width:1024px) 33vw, 100vw" className="object-cover transition-transform duration-[1.2s] ease-out-expo group-hover:scale-105" />
         <span className="absolute top-4 left-4 rounded-full bg-white/85 px-3 py-1.5 font-display text-[13px] font-semibold text-ink backdrop-blur-md">{String(index + 1).padStart(2, "0")}</span>

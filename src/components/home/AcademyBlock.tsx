@@ -37,7 +37,7 @@ export function AcademyBlock({ id = "kp-6" }: { id?: string }) {
           <ul className="mt-10 grid gap-3 sm:grid-cols-3">
             {tracks.map((t, i) => (
               <Reveal key={t.t} delay={i * 0.07}>
-                <li className="group h-full rounded-[22px] bg-white p-5 ring-1 ring-line transition-shadow duration-500 hover:shadow-[0_20px_40px_-24px_rgba(10,42,87,0.35)]">
+                <li className="group h-full rounded-[22px] bg-white p-5 ring-1 ring-line transition-shadow duration-500 hover:shadow-[0_20px_40px_-24px_rgba(0,49,152,0.35)]">
                   <span className="grid size-10 place-items-center rounded-xl bg-brand-soft text-brand transition-transform duration-500 group-hover:-rotate-6">
                     <t.icon className="size-5" strokeWidth={1.7} />
                   </span>

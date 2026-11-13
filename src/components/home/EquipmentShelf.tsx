@@ -37,7 +37,7 @@ export function EquipmentShelf({ id = "kp-4", withTitle = true }: { id?: string;
               onClick={() => setTab(k)}
               className="relative min-h-11 rounded-full px-5 font-display text-[16px] font-semibold"
             >
-              {tab === k && <motion.span layoutId="eq-tab" className="absolute inset-0 rounded-full bg-ink" transition={{ duration: 0.35 }} />}
+              {tab === k && <motion.span layoutId="eq-tab" className="absolute inset-0 rounded-full bg-brand" transition={{ duration: 0.35 }} />}
               <span className={`relative ${tab === k ? "text-white" : "text-ink"}`}>{label}</span>
             </button>
           ))}

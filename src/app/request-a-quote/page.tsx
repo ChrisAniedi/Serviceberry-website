@@ -23,7 +23,7 @@ export default async function QuotePage({ searchParams }: Props) {
         intro="One page, one send. Tell us what you need and where; an engineer reads every request and replies with questions, a scope or a priced quote."
         image={img.pipeValley}
       />
-      <section className="bg-stone py-14 sm:py-20">
+      <section className="bg-mist py-14 sm:py-20">
         <div className="container-x grid gap-6 lg:grid-cols-[minmax(0,1.7fr)_minmax(320px,1fr)] lg:items-start">
           <QuoteForm type={type} subject={subject} details={details} location={location} />
           <QuoteAside />

@@ -43,7 +43,7 @@ export function ScopeChapter({ n, of, heading, items, image, flip }: { n: number
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "0px 0px -30px 0px" }}
               transition={{ duration: 0.7, delay: 0.15 + i * 0.07, ease }}
-              className="group flex flex-col justify-between gap-6 rounded-[20px] bg-white p-5 ring-1 ring-line transition-[translate,box-shadow] duration-500 ease-out-expo hover:-translate-y-1 hover:shadow-[0_20px_40px_-24px_rgba(10,42,87,0.4)]"
+              className="group flex flex-col justify-between gap-6 rounded-[20px] bg-white p-5 ring-1 ring-line transition-[translate,box-shadow] duration-500 ease-out-expo hover:-translate-y-1 hover:shadow-[0_20px_40px_-24px_rgba(0,49,152,0.4)]"
             >
               <span className="flex items-center justify-between">
                 <span className="grid size-8 place-items-center rounded-full bg-brand text-white transition-transform duration-500 group-hover:scale-110"><Check className="size-4" strokeWidth={2.6} /></span>

@@ -75,10 +75,10 @@ export function Header() {
             ? "bg-transparent"
             : dark
               ? moved
-                ? "bg-[linear-gradient(180deg,rgba(10,22,48,0.32),rgba(10,22,48,0.12))] shadow-[inset_0_-1px_0_rgba(255,255,255,0.12),0_10px_30px_-18px_rgba(0,0,0,0.5)] backdrop-blur-[28px] backdrop-saturate-[1.8]"
+                ? "bg-[linear-gradient(180deg,rgba(11,26,62,0.32),rgba(11,26,62,0.12))] shadow-[inset_0_-1px_0_rgba(255,255,255,0.12),0_10px_30px_-18px_rgba(0,0,0,0.5)] backdrop-blur-[28px] backdrop-saturate-[1.8]"
                 : "bg-transparent shadow-[0_1px_0_rgba(255,255,255,0.14)]"
               : moved
-                ? "bg-[linear-gradient(180deg,rgba(255,255,255,0.5),rgba(255,255,255,0.3))] shadow-[inset_0_-1px_0_rgba(255,255,255,0.55),inset_0_1px_0_rgba(255,255,255,0.7),0_12px_32px_-20px_rgba(12,26,43,0.35)] backdrop-blur-[28px] backdrop-saturate-[2]"
+                ? "bg-[linear-gradient(180deg,rgba(255,255,255,0.5),rgba(255,255,255,0.3))] shadow-[inset_0_-1px_0_rgba(255,255,255,0.55),inset_0_1px_0_rgba(255,255,255,0.7),0_12px_32px_-20px_rgba(11,26,62,0.35)] backdrop-blur-[28px] backdrop-saturate-[2]"
                 : "bg-white/55 shadow-[0_1px_0_rgba(221,227,236,0.8)] backdrop-blur-[24px] backdrop-saturate-[1.8]"
         }`}
         animate={{ y: hidden && !open ? -80 : 0 }}
@@ -127,7 +127,7 @@ export function Header() {
               aria-controls="site-menu"
               aria-label={open ? "Close menu" : "Open menu"}
               className={`flex min-h-11 items-center gap-3 rounded-full pr-4 pl-5 font-display text-[15px] font-semibold transition-colors ${
-                dark ? "bg-white/10 text-white ring-1 ring-white/20 ring-inset hover:bg-white/20" : "bg-ink text-white hover:bg-brand-deep"
+                dark ? "bg-white/10 text-white ring-1 ring-white/20 ring-inset hover:bg-white/20" : "bg-brand-deep text-white hover:bg-brand"
               }`}
             >
               <span aria-hidden className="relative block h-5 overflow-hidden">
@@ -151,7 +151,7 @@ export function Header() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -6 }}
               transition={{ duration: 0.25, ease }}
-              className="absolute inset-x-0 top-full hidden border-t border-line bg-white shadow-[0_30px_60px_-30px_rgba(12,26,43,0.35)] lg:block"
+              className="absolute inset-x-0 top-full hidden border-t border-line bg-white shadow-[0_30px_60px_-30px_rgba(11,26,62,0.35)] lg:block"
             >
               <div className="container-x grid grid-cols-[1fr_300px] gap-10 py-8">
                 <ul className="grid grid-cols-2 gap-x-8">

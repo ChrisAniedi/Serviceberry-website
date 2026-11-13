@@ -81,13 +81,13 @@ export function Footer() {
               href={site.academyUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group mt-8 flex items-center justify-between gap-4 rounded-[20px] bg-white p-5 ring-1 ring-line transition-shadow hover:shadow-[0_16px_30px_-20px_rgba(10,42,87,0.4)]"
+              className="group mt-8 flex items-center justify-between gap-4 rounded-[20px] bg-white p-5 ring-1 ring-line transition-shadow hover:shadow-[0_16px_30px_-20px_rgba(0,49,152,0.4)]"
             >
               <span>
                 <span className="block text-[15px] font-semibold">Serviceberry Academy</span>
                 <span className="mt-0.5 block text-[13.5px] text-steel">Online technical training</span>
               </span>
-              <span className="grid size-10 shrink-0 place-items-center rounded-full bg-ink text-white transition-transform duration-500 group-hover:rotate-45">
+              <span className="grid size-10 shrink-0 place-items-center rounded-full bg-brand-deep text-white transition-transform duration-500 group-hover:rotate-45">
                 <ArrowUpRight className="size-5" />
               </span>
               <span className="sr-only">(opens in a new tab)</span>

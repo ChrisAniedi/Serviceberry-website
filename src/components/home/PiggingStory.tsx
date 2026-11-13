@@ -69,19 +69,19 @@ function Card({ i, active, still, onPick }: { i: number; active: boolean; still:
   );
 }
 
-/** A side view of a cleaning pig: body, three sealing cups and a nose, drawn in gold. */
+/** A side view of a cleaning pig: body, three sealing cups in Red Berry and a nose, in steel white. */
 function PigShape() {
   return (
-    <svg viewBox="0 0 64 28" className="h-[28px] w-[64px] drop-shadow-[0_0_14px_rgba(255,198,92,0.6)]">
+    <svg viewBox="0 0 64 28" className="h-[28px] w-[64px] drop-shadow-[0_0_14px_rgba(143,180,255,0.65)]">
       <defs>
         <linearGradient id="pig-body" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#fff0c8" />
-          <stop offset="0.45" stopColor="#ffc865" />
-          <stop offset="1" stopColor="#c97f1e" />
+          <stop offset="0" stopColor="#ffffff" />
+          <stop offset="0.45" stopColor="#d4e2ff" />
+          <stop offset="1" stopColor="#7d9fe0" />
         </linearGradient>
         <linearGradient id="pig-cup" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#ffe3a6" />
-          <stop offset="1" stopColor="#a8650f" />
+          <stop offset="0" stopColor="#ff8d9f" />
+          <stop offset="1" stopColor="#94283b" />
         </linearGradient>
       </defs>
       <rect x="6" y="9" width="46" height="10" rx="3" fill="url(#pig-body)" />
@@ -204,7 +204,7 @@ function Pipeline({
         <motion.div className="pointer-events-none absolute top-1/2 z-20" style={{ left: pct }}>
           <div className="relative -translate-x-1/2 -translate-y-1/2">
             <motion.span
-              className="absolute top-1/2 right-[52px] h-[6px] w-[70px] -translate-y-1/2 rounded-full bg-[linear-gradient(90deg,transparent,rgba(255,214,150,0.7))] blur-[2px]"
+              className="absolute top-1/2 right-[52px] h-[6px] w-[70px] -translate-y-1/2 rounded-full bg-[linear-gradient(90deg,transparent,rgba(170,200,255,0.75))] blur-[2px]"
               style={{ opacity: trail }}
             />
             <motion.span
@@ -273,12 +273,12 @@ export function PiggingStory() {
   };
 
   return (
-    <section data-nav="dark" ref={ref} id="kp-2" className="relative scroll-mt-20 overflow-x-clip bg-[#070809] text-white" style={{ height: pin ? "330svh" : undefined }}>
+    <section data-nav="dark" ref={ref} id="kp-2" className="relative scroll-mt-20 overflow-x-clip bg-[#061230] text-white" style={{ height: pin ? "330svh" : undefined }}>
       <div className={pin ? "sticky top-0 flex h-svh flex-col overflow-hidden pt-[clamp(88px,12svh,120px)] pb-[clamp(1.5rem,4svh,3rem)]" : "relative overflow-hidden py-24"}>
         {/* faint photo behind */}
         <div aria-hidden className="pointer-events-none absolute inset-0">
           <Image src={img.pipeValley} alt="" fill sizes="100vw" className="object-cover opacity-[0.12] grayscale" />
-          <div className="absolute inset-0 bg-[radial-gradient(80%_70%_at_70%_30%,transparent,#070809_80%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(80%_70%_at_70%_30%,transparent,#061230_80%)]" />
         </div>
 
         <div className="container-x relative">

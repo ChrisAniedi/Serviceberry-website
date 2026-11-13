@@ -33,7 +33,7 @@ function Floater({ f, progress, mx, my }: { f: (typeof floaters)[number]; progre
     <motion.div style={{ x: px, y, left: f.x, top: f.y, width: f.w, height: f.h }} className="absolute">
       <motion.div style={{ rotate: rot, scale }} className="h-full w-full">
         <div
-          className="anim-bob relative h-full w-full overflow-hidden rounded-[18px] shadow-[0_30px_50px_-24px_rgba(10,22,48,0.6)] ring-4 ring-white"
+          className="anim-bob relative h-full w-full overflow-hidden rounded-[18px] shadow-[0_30px_50px_-24px_rgba(11,26,62,0.6)] ring-4 ring-white"
           style={{ animationDelay: f.delay }}
         >
           <Image src={f.src} alt="" fill sizes="180px" className="object-cover" />

@@ -92,7 +92,7 @@ export default function AcademyPage() {
           <Title size="md" title={<>Made for people who<br /><span className="text-brand">keep energy moving</span></>} />
           <div className="mt-12 grid gap-3 md:grid-cols-3">
             {audience.map((a, i) => (
-              <Reveal key={a.title} delay={i * 0.08} className="group rounded-[26px] bg-white p-7 ring-1 ring-line transition-[translate,box-shadow] duration-500 ease-out-expo hover:-translate-y-1.5 hover:shadow-[0_30px_60px_-30px_rgba(10,22,48,0.4)]">
+              <Reveal key={a.title} delay={i * 0.08} className="group rounded-[26px] bg-white p-7 ring-1 ring-line transition-[translate,box-shadow] duration-500 ease-out-expo hover:-translate-y-1.5 hover:shadow-[0_30px_60px_-30px_rgba(11,26,62,0.4)]">
                 <span className="grid size-14 place-items-center rounded-2xl bg-brand-soft text-brand transition-transform duration-500 group-hover:-rotate-6"><a.icon className="size-7" strokeWidth={1.5} /></span>
                 <p className="headline mt-8 text-[24px]">{a.title}</p>
                 <p className="mt-2 text-[16px] text-steel">{a.body}</p>

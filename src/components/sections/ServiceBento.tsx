@@ -34,7 +34,7 @@ export function ServiceBento() {
         >
           <Link href={`/services/${s.slug}`} className="group relative isolate flex h-full min-h-[280px] flex-col justify-between overflow-hidden rounded-[28px] bg-ink p-6 text-white sm:p-7">
             <Image src={s.image} alt="" fill sizes={i === 0 ? "(min-width:1024px) 50vw, 100vw" : "(min-width:1024px) 25vw, 100vw"} className="-z-10 object-cover transition-transform duration-[1.4s] ease-out-expo group-hover:scale-[1.06]" />
-            <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#070b16]/90 via-[#070b16]/30 to-[#070b16]/10" />
+            <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#061230]/90 via-[#061230]/30 to-[#061230]/10" />
             <div className="flex items-start justify-between">
               <span className="glass-fade text-lift rounded-full px-3 py-1 font-display text-[12.5px] font-semibold tabular-nums">{String(i + 1).padStart(2, "0")}</span>
               <span className="grid size-10 place-items-center rounded-full bg-white text-ink transition-transform duration-500 group-hover:rotate-45"><ArrowUpRight className="size-5" /></span>

@@ -66,7 +66,7 @@ export function TechPanels() {
       {/* a faint photo behind, kept quiet so the panels stay the focus */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <Image src={img.rigOcean} alt="" fill sizes="100vw" className="object-cover opacity-[0.14] grayscale" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,#0a1630_0%,rgba(10,22,48,0.55)_35%,rgba(10,22,48,0.7)_70%,#0a1630_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,#0b1a3e_0%,rgba(11,26,62,0.55)_35%,rgba(11,26,62,0.7)_70%,#0b1a3e_100%)]" />
       </div>
       <div className="py-24 sm:py-32">
       <div className="container-x w-full">

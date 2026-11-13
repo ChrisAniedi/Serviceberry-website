@@ -46,9 +46,9 @@ export default async function ContactPage({ searchParams }: Props) {
         <div className="container-x">
           <Reveal className="grid overflow-hidden rounded-[36px] bg-white ring-1 ring-line lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
             {/* direct lines, over a crew photo */}
-            <div data-nav="dark" className="relative isolate flex flex-col justify-between gap-10 overflow-hidden bg-[#070b16] p-7 text-white sm:p-10">
+            <div data-nav="dark" className="relative isolate flex flex-col justify-between gap-10 overflow-hidden bg-[#061230] p-7 text-white sm:p-10">
               <Image src={brochure.crewPigging} alt="" fill sizes="(min-width:1024px) 40vw, 100vw" className="-z-10 object-cover opacity-45" />
-              <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(7,11,22,0.55),rgba(7,11,22,0.92))]" />
+              <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(6,18,48,0.55),rgba(6,18,48,0.92))]" />
               <div>
                 <p className="font-display text-[12px] font-semibold tracking-[0.16em] text-brand-light uppercase">Reach us directly</p>
                 <p className="headline mt-4 text-[clamp(1.8rem,2.8vw,2.5rem)] leading-[1.05]">A person answers, not a menu.</p>
@@ -102,7 +102,7 @@ export default async function ContactPage({ searchParams }: Props) {
             {/* TODO(verify): Serviceberry must confirm the map pin before launch. */}
             <iframe title="Map showing the Serviceberry office in Elelenwo, Port Harcourt" src={mapSrc} className="h-[420px] w-full grayscale-[0.6] sm:h-[480px]" loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
             <div className="p-5 sm:absolute sm:top-6 sm:left-6 sm:max-w-sm sm:p-0">
-              <div className="rounded-[26px] bg-white p-6 shadow-[0_30px_60px_-30px_rgba(10,22,48,0.5)] ring-1 ring-line sm:p-7">
+              <div className="rounded-[26px] bg-white p-6 shadow-[0_30px_60px_-30px_rgba(11,26,62,0.5)] ring-1 ring-line sm:p-7">
                 <p className="font-display text-[12px] font-semibold tracking-[0.16em] text-brand uppercase">Visit our office</p>
                 <address className="mt-3 text-[17px] leading-relaxed not-italic">{site.address.lines.map((l) => <span key={l} className="block">{l}</span>)}</address>
                 <a href={directions} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full bg-ink px-5 font-display text-[14.5px] font-medium text-white transition-colors hover:bg-brand-deep">

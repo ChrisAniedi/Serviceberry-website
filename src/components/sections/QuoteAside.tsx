@@ -13,7 +13,7 @@ const next = [
 export function QuoteAside() {
   return (
     <div className="space-y-3 lg:sticky lg:top-24">
-      <div className="rounded-[30px] bg-[#070b16] p-7 text-white sm:p-8">
+      <div className="rounded-[30px] bg-[#061230] p-7 text-white sm:p-8">
         <p className="font-display text-[20px] font-semibold">What happens next</p>
         <ol className="mt-6 space-y-5">
           {next.map((s, i) => (

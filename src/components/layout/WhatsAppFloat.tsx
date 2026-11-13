@@ -44,7 +44,7 @@ export function WhatsAppFloat() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 6, scale: 0.97 }}
             transition={{ duration: 0.5, ease }}
-            className="relative mb-2 hidden max-w-[240px] rounded-2xl rounded-br-md bg-white p-4 pr-9 text-[14px] text-ink shadow-[0_20px_50px_-20px_rgba(10,22,48,0.5)] ring-1 ring-line sm:block"
+            className="relative mb-2 hidden max-w-[240px] rounded-2xl rounded-br-md bg-white p-4 pr-9 text-[14px] text-ink shadow-[0_20px_50px_-20px_rgba(11,26,62,0.5)] ring-1 ring-line sm:block"
           >
             <p className="font-semibold">Questions about a job?</p>
             <p className="mt-1 text-steel">Message our team on WhatsApp.</p>
@@ -63,7 +63,7 @@ export function WhatsAppFloat() {
         initial={{ opacity: 0, scale: 0.6, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 1.2, ease }}
-        className="group relative flex h-14 items-center rounded-full bg-ink pr-[18px] pl-[18px] text-white shadow-[0_18px_40px_-14px_rgba(10,22,48,0.7)] ring-1 ring-white/10 transition-[padding,background-color] duration-500 ease-out-expo hover:bg-[#0d1d3d] hover:pr-6"
+        className="group relative flex h-14 items-center rounded-full bg-ink pr-[18px] pl-[18px] text-white shadow-[0_18px_40px_-14px_rgba(11,26,62,0.7)] ring-1 ring-white/10 transition-[padding,background-color] duration-500 ease-out-expo hover:bg-brand-deep hover:pr-6"
       >
         <span aria-hidden className="absolute top-1/2 left-[28px] size-8 -translate-1/2 animate-ping rounded-full bg-[#25d366]/25 [animation-duration:2.6s]" />
         <span className="relative grid size-[22px] place-items-center text-[#25d366]">

@@ -16,7 +16,7 @@ export const buttonVariants = cva(
         primary: "bg-berry text-white shadow-[0_14px_30px_-14px_rgba(182,52,75,0.85)] before:bg-berry-deep",
         brand: "bg-brand text-white shadow-[0_14px_30px_-14px_rgba(7,76,189,0.8)] before:bg-brand-deep",
         white: "bg-white text-ink before:bg-mist",
-        line: "text-ink ring-1 ring-ink/20 ring-inset before:bg-ink hover:text-white",
+        line: "text-ink ring-1 ring-ink/20 ring-inset before:bg-brand-deep hover:text-white hover:ring-brand-deep",
         glass: "bg-white/10 text-white ring-1 ring-white/30 ring-inset backdrop-blur-md before:bg-white hover:text-ink",
       },
       size: {
@@ -33,8 +33,8 @@ const chipVariants = cva("relative grid shrink-0 place-items-center overflow-hid
     variant: {
       primary: "bg-white text-berry",
       brand: "bg-white text-brand",
-      white: "bg-ink text-white",
-      line: "bg-ink text-white group-hover:bg-white group-hover:text-ink",
+      white: "bg-brand-deep text-white",
+      line: "bg-brand-deep text-white group-hover:bg-white group-hover:text-brand-deep",
       glass: "bg-white text-ink group-hover:bg-ink group-hover:text-white",
     },
     size: { md: "size-9", sm: "size-8" },

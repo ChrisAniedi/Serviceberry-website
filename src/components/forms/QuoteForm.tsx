@@ -13,7 +13,7 @@ const ease = [0.16, 1, 0.3, 1] as const;
 const icons: Record<string, typeof Wrench> = { services: Wrench, source: PackageSearch, sale: Boxes, project: Handshake, academy: GraduationCap, other: MessageSquare };
 
 const input =
-  "w-full rounded-2xl bg-paper px-4 py-3.5 text-[16px] text-ink ring-1 ring-line outline-none transition-[box-shadow,background-color] placeholder:text-steel-2 hover:ring-ink/25 focus:bg-white focus:ring-2 focus:ring-brand aria-[invalid=true]:ring-[#b3123f]";
+  "w-full rounded-2xl bg-paper px-4 py-3.5 text-[16px] text-ink ring-1 ring-line outline-none transition-[box-shadow,background-color] placeholder:text-steel-2 hover:ring-ink/25 focus:bg-white focus:ring-2 focus:ring-brand aria-[invalid=true]:ring-[#94283b]";
 
 function Field({ label, optional, error, id, children, className }: { label: string; optional?: boolean; error?: string; id: string; children: ReactNode; className?: string }) {
   return (
@@ -22,7 +22,7 @@ function Field({ label, optional, error, id, children, className }: { label: str
         {label} {optional ? <span className="font-normal text-steel">(optional)</span> : <span className="text-berry">*</span>}
       </label>
       {children}
-      {error && <p id={`${id}-err`} className="mt-1.5 text-[13.5px] text-[#b3123f]">{error}</p>}
+      {error && <p id={`${id}-err`} className="mt-1.5 text-[13.5px] text-[#94283b]">{error}</p>}
     </div>
   );
 }
@@ -35,7 +35,7 @@ function Chip({ on, onClick, children }: { on: boolean; onClick: () => void; chi
       onClick={onClick}
       className={cn(
         "inline-flex min-h-11 items-center gap-2 rounded-full px-4 text-[14.5px] transition-[background-color,color,box-shadow] duration-300",
-        on ? "bg-ink text-white" : "bg-paper text-ink ring-1 ring-line hover:ring-ink/30",
+        on ? "bg-brand text-white" : "bg-paper text-ink ring-1 ring-line hover:ring-brand/40",
       )}
     >
       <span className={cn("grid size-4 place-items-center rounded-full transition-colors", on ? "bg-white text-ink" : "ring-1 ring-ink/25")}>{on && <Check className="size-3" strokeWidth={3} />}</span>
@@ -213,7 +213,7 @@ export function QuoteForm({ type, subject, details: startDetails, location: star
                       onClick={() => choose(n)}
                       className={cn(
                         "group relative flex items-start gap-3.5 rounded-2xl p-4 text-left transition-[background-color,box-shadow,color] duration-300",
-                        on ? "bg-brand-deep text-white shadow-[0_18px_40px_-22px_rgba(10,42,87,0.9)]" : "bg-paper ring-1 ring-line hover:ring-ink/30",
+                        on ? "bg-brand-deep text-white shadow-[0_18px_40px_-22px_rgba(0,49,152,0.9)]" : "bg-paper ring-1 ring-line hover:ring-ink/30",
                       )}
                     >
                       <span className={cn("grid size-10 shrink-0 place-items-center rounded-xl transition-colors", on ? "bg-brand-light text-brand-deep" : "bg-white text-brand ring-1 ring-line")}>
@@ -231,7 +231,7 @@ export function QuoteForm({ type, subject, details: startDetails, location: star
                   );
                 })}
               </div>
-              {errors.need && <p className="mt-2 text-[13.5px] text-[#b3123f]">{errors.need}</p>}
+              {errors.need && <p className="mt-2 text-[13.5px] text-[#94283b]">{errors.need}</p>}
 
               <AnimatePresence initial={false}>
                 {need && need.picks.length > 0 && (
@@ -286,7 +286,7 @@ export function QuoteForm({ type, subject, details: startDetails, location: star
                     </label>
                   )}
                   <input ref={fileInput} id="q-file" type="file" accept={ALLOWED_ATTACHMENT.join(",")} className="sr-only" onChange={(e) => setFile(e.target.files?.[0] ?? null)} />
-                  {errors.file && <p id="q-file-err" className="mt-1.5 text-[13.5px] text-[#b3123f]">{errors.file}</p>}
+                  {errors.file && <p id="q-file-err" className="mt-1.5 text-[13.5px] text-[#94283b]">{errors.file}</p>}
                 </div>
               </div>
             </Section>
@@ -318,7 +318,7 @@ export function QuoteForm({ type, subject, details: startDetails, location: star
                         role="radio"
                         aria-checked={reach === r}
                         onClick={() => setReach(r)}
-                        className={cn("min-h-11 rounded-full px-4 text-[14.5px] transition-colors", reach === r ? "bg-ink text-white" : "bg-paper ring-1 ring-line hover:ring-ink/30")}
+                        className={cn("min-h-11 rounded-full px-4 text-[14.5px] transition-colors", reach === r ? "bg-brand text-white" : "bg-paper ring-1 ring-line hover:ring-ink/30")}
                       >
                         {r}
                       </button>
@@ -355,7 +355,7 @@ export function QuoteForm({ type, subject, details: startDetails, location: star
               </div>
               <p className="mt-4 text-[13.5px] text-steel">By submitting, you agree to be contacted about this request. We only use your details to reply.</p>
             </div>
-            {failMsg && <p role="alert" className="rounded-2xl bg-[#fdecef] px-4 py-3 text-[14.5px] text-[#8a0f30]">{failMsg}</p>}
+            {failMsg && <p role="alert" className="rounded-2xl bg-[#fdecef] px-4 py-3 text-[14.5px] text-[#7a2031]">{failMsg}</p>}
           </motion.form>
         )}
       </AnimatePresence>
