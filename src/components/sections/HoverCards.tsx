@@ -28,7 +28,7 @@ export function HoverCards({ items, cols = 3, tone = "light" }: { items: Item[];
           className={`spot group relative overflow-hidden rounded-[24px] p-7 ring-1 transition-[translate,background-color,box-shadow] duration-500 ease-out-expo hover:-translate-y-1.5 ${
             dark
               ? "bg-white/[0.06] text-white ring-white/12 backdrop-blur-xl hover:bg-white/[0.1]"
-              : "bg-white text-ink ring-line hover:shadow-[0_30px_60px_-30px_rgba(10,22,48,0.4)] [--spot-edge:rgba(11,79,191,0.5)] [--spot:rgba(11,79,191,0.06)]"
+              : "bg-white text-ink ring-line hover:shadow-[0_30px_60px_-30px_rgba(10,22,48,0.4)] [--spot-edge:rgba(7,76,189,0.5)] [--spot:rgba(7,76,189,0.06)]"
           }`}
         >
           <span className={`font-display text-[40px] leading-none font-light tabular-nums transition-colors duration-500 ${dark ? "text-brand-light/70 group-hover:text-brand-light" : "text-brand-light group-hover:text-brand"}`}>

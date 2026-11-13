@@ -1,18 +1,19 @@
 @import "tailwindcss";
 
 /*
-  Brand colours from the Serviceberry brochure (Sept 2025): royal blue and navy from the
-  logo's S, crimson from its drop. berry-light is the crimson lifted for small text on dark.
+  Official brand colours (Serviceberry brand colour sheet): Royal Blue #074CBD, Deep Blue
+  #003198 and Red Berry #B6344B. ink is the near-black navy for dark sections; brand-light
+  and berry-light are the blue and red lifted for small text and lines on dark.
 */
 @theme {
   --color-ink: #0a1630;
-  --color-brand: #0b4fbf;
-  --color-brand-deep: #0a2a57;
-  --color-brand-soft: #e8effc;
+  --color-brand: #074cbd;
+  --color-brand-deep: #003198;
+  --color-brand-soft: #e6eefb;
   --color-brand-light: #8fb4ff;
-  --color-berry: #c4205a;
-  --color-berry-deep: #a3184a;
-  --color-berry-light: #ff7aa5;
+  --color-berry: #b6344b;
+  --color-berry-deep: #94283b;
+  --color-berry-light: #ff8d9f;
   --color-steel: #56667c;
   --color-steel-2: #8b98a8;
   --color-line: #dde3ec;
@@ -277,21 +278,21 @@ html.lenis, html.lenis body { height: auto; }
 
 /* ---- Hero grid: light running through the lines ---- */
 .grid-comet-y {
-  background: linear-gradient(to bottom, transparent, rgba(255, 220, 160, 0.85), transparent);
-  box-shadow: 0 0 10px 1px rgba(255, 200, 120, 0.35);
+  background: linear-gradient(to bottom, transparent, rgba(200, 222, 255, 0.9), transparent);
+  box-shadow: 0 0 10px 1px rgba(140, 185, 255, 0.4);
   animation: comet-y 7s cubic-bezier(0.45, 0, 0.55, 1) infinite;
   opacity: 0;
 }
 .grid-comet-x, .grid-comet-x-rev {
-  background: linear-gradient(to right, transparent, rgba(255, 220, 160, 0.85), transparent);
-  box-shadow: 0 0 10px 1px rgba(255, 200, 120, 0.3);
+  background: linear-gradient(to right, transparent, rgba(200, 222, 255, 0.9), transparent);
+  box-shadow: 0 0 10px 1px rgba(140, 185, 255, 0.35);
   animation: comet-x 9s cubic-bezier(0.45, 0, 0.55, 1) infinite;
   opacity: 0;
 }
 .grid-comet-x-rev { animation-name: comet-x-rev; }
 .grid-node {
-  background: rgba(255, 225, 175, 0.9);
-  box-shadow: 0 0 0 0 rgba(255, 214, 150, 0.5);
+  background: rgba(205, 225, 255, 0.95);
+  box-shadow: 0 0 0 0 rgba(150, 190, 255, 0.5);
   animation: node 3.2s ease-out infinite;
 }
 @keyframes comet-y {
@@ -313,8 +314,8 @@ html.lenis, html.lenis body { height: auto; }
   100% { transform: translateX(-220px); opacity: 0; }
 }
 @keyframes node {
-  0% { box-shadow: 0 0 0 0 rgba(255, 214, 150, 0.55); }
-  100% { box-shadow: 0 0 0 12px rgba(255, 214, 150, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(150, 190, 255, 0.55); }
+  100% { box-shadow: 0 0 0 12px rgba(150, 190, 255, 0); }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -20,8 +20,8 @@ const ease = [0.16, 1, 0.3, 1] as const;
 const cols = "lg:grid-cols-[minmax(0,1fr)_minmax(0,2.6fr)_minmax(0,1fr)]";
 
 /**
- * Edge-to-edge opener on a visible three-column grid. A dusk photo of an offshore platform
- * fills the top and fades to navy; the headline sits centred; side cards show what we
+ * Edge-to-edge opener on a visible three-column grid. A dusk photo of an offshore platform,
+ * graded into the brand blues, fills the top and fades to navy; the headline sits centred; side cards show what we
  * read and who runs the work; the pig-run arc carries the call to action. The grid runs on
  * into the About row underneath.
  */
@@ -46,8 +46,13 @@ export function Hero() {
         >
           <HeroScene />
         </motion.div>
-        <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,rgba(24,14,4,0.55)_0%,rgba(24,14,4,0.1)_24%,rgba(24,14,4,0.04)_42%,rgba(18,16,24,0.4)_62%,rgba(10,22,48,0.88)_82%,#0a1630_93%,#0a1630_100%)]" />
+        <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,22,74,0.6)_0%,rgba(0,30,95,0.12)_24%,rgba(0,30,95,0.04)_42%,rgba(6,20,60,0.4)_62%,rgba(10,22,48,0.88)_82%,#0a1630_93%,#0a1630_100%)]" />
       </motion.div>
+
+      {/* deeper blue at the sides, so the side cards sit on calm colour */}
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[max(100svh,760px)] bg-[linear-gradient(90deg,rgba(8,16,38,0.55)_0%,rgba(8,16,38,0.18)_24%,transparent_40%,transparent_60%,rgba(8,16,38,0.18)_76%,rgba(8,16,38,0.55)_100%)]" />
+      {/* a soft deep-blue shade behind the words, so the intro reads over the bright horizon */}
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[max(100svh,760px)] bg-[radial-gradient(46%_40%_at_50%_34%,rgba(8,18,44,0.45),transparent_75%)]" />
 
       <HeroGridFlow />
 
@@ -104,8 +109,8 @@ export function Hero() {
       {/* a still band of navy over the photo's moving bottom edge, so no seam can show while it drifts */}
       <div aria-hidden className="pointer-events-none absolute inset-x-0 top-[calc(max(100svh,760px)-260px)] -z-10 h-[620px] bg-[linear-gradient(180deg,rgba(10,22,48,0)_0%,rgba(10,22,48,0.6)_30%,#0a1630_46%,#0a1630_100%)]" />
 
-      {/* sunset haze spilling over the row line, so the photo and the About row read as one scene */}
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-[max(calc(100svh-64px),700px)] -z-10 h-[420px] -translate-y-1/2 bg-[radial-gradient(60%_50%_at_50%_50%,rgba(255,176,92,0.14),transparent_70%)]" />
+      {/* blue-hour glow spilling over the row line, so the photo and the About row read as one scene */}
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-[max(calc(100svh-64px),700px)] -z-10 h-[420px] -translate-y-1/2 bg-[radial-gradient(60%_50%_at_50%_50%,rgba(7,76,189,0.32),transparent_70%)]" />
 
       {/* row 2: about, on the same grid */}
       <div className={`grid border-t border-white/15 ${cols}`}>

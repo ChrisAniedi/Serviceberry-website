@@ -43,7 +43,7 @@ function Swap({ text, k, className = "" }: { text: string; k: string; className?
           {text}
           <motion.span
             aria-hidden
-            className="absolute inset-x-0 bottom-[0.02em] h-[0.05em] origin-left rounded-full bg-[#ffc65c]"
+            className="absolute inset-x-0 bottom-[0.02em] h-[0.05em] origin-left rounded-full bg-[#a9c8ff]"
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
             transition={{ duration: 0.8, delay: 0.35, ease }}

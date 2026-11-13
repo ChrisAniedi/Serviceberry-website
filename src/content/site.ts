@@ -14,12 +14,12 @@ export const site = {
     "Serviceberry Global Limited delivers engineering, asset integrity, pipeline, process and equipment solutions to the oil and gas and industrial sectors in Nigeria and beyond.",
   academyUrl: "https://academy.serviceberryglobal.com",
   address: {
-    lines: ["Plot 7B, Road 7B, Victory Estate", "Elelenwo, Port Harcourt", "Rivers State, Nigeria"],
-    oneLine: "Plot 7B, Road 7B, Victory Estate, Elelenwo, Port Harcourt, Rivers State",
+    lines: ["Plot 7B Road 7B, Victory Estate", "Elelenwo, Port Harcourt", "Rivers State, Nigeria"],
+    oneLine: "Plot 7B Road 7B, Victory Estate, Elelenwo, Port Harcourt, Rivers State, Nigeria",
     // TODO(verify): Serviceberry must confirm the map pin before launch.
     mapQuery: "Victory Estate, Elelenwo, Port Harcourt, Rivers State, Nigeria",
   },
-  phones: ["+234 702 500 2228", "+234 815 613 5559"],
+  phones: ["+234 702 500 2228", "+234 806 341 5145"],
   email: "info@serviceberryglobal.com",
   // TODO(verify): add the company LinkedIn URL when confirmed.
   linkedin: "" as string,

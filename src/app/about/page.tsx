@@ -29,6 +29,7 @@ export default function AboutPage() {
         title={<>Engineering <span className="text-brand">reliability.</span></>}
         intro="Serviceberry Global Limited is a Nigerian engineering and technical services company supporting the oil and gas, energy, process and industrial sectors. Our focus is asset integrity, operational reliability and project execution."
         image={img.chapterInspect}
+        grade
       />
 
       <section className="bg-white py-24 sm:py-28">
@@ -54,7 +55,7 @@ export default function AboutPage() {
         <div className="container-x">
           <div data-nav="dark" className="relative isolate overflow-hidden rounded-[36px] bg-brand-deep text-white">
             <Image src={brochure.aerialPlant} alt="" fill sizes="100vw" className="-z-10 object-cover opacity-25" />
-            <div className="absolute inset-0 -z-10 bg-[linear-gradient(120deg,rgba(10,42,87,0.96),rgba(10,42,87,0.75))]" />
+            <div className="absolute inset-0 -z-10 bg-[linear-gradient(120deg,rgba(0,36,118,0.95),rgba(0,49,152,0.72))]" />
             <div className="grid gap-px lg:grid-cols-2">
               {[{ k: "Our vision", v: vision }, { k: "Our mission", v: mission }].map((x, i) => (
                 <Reveal key={x.k} delay={i * 0.1} className={`p-8 sm:p-12 lg:p-16 ${i === 1 ? "border-t border-white/12 lg:border-t-0 lg:border-l" : ""}`}>

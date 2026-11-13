@@ -30,6 +30,8 @@ type Props = {
   caption?: string;
   /** A shorter opener with no photo (forms). */
   compact?: boolean;
+  /** Re-tone a warm photo into the brand blues (as on the home hero). */
+  grade?: boolean;
 };
 
 const ease = [0.16, 1, 0.3, 1] as const;
@@ -60,7 +62,7 @@ function Title({ title, size, light }: { title: ReactNode; size: string; light?:
  * over a brand wash, a glass card bottom-right); detail pages keep the title and buttons on
  * white with the photo underneath and its tags on it. Forms get a compact title only.
  */
-export function PageHero({ kp, label, title, intro, image, children, variant = "overlay", stat, tags, caption, compact }: Props) {
+export function PageHero({ kp, label, title, intro, image, children, variant = "overlay", stat, tags, caption, compact, grade }: Props) {
   const box = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: box, offset: ["start start", "end start"] });
@@ -152,11 +154,17 @@ export function PageHero({ kp, label, title, intro, image, children, variant = "
         >
           <motion.div aria-hidden className="absolute inset-[-8%_0] -z-10" style={{ y }}>
             <motion.div className="absolute inset-0" initial={{ scale: reduce ? 1 : 1.1 }} animate={{ scale: 1 }} transition={{ duration: 2, ease }}>
-              <Image src={image} alt="" fill priority sizes="100vw" className="object-cover" />
+              <Image src={image} alt="" fill priority sizes="100vw" className={`object-cover ${grade ? "[filter:contrast(1.15)_brightness(0.92)]" : ""}`} />
+              {grade && (
+                <>
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,#003198_0%,#074cbd_50%,#003198_100%)] mix-blend-color" />
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,40,130,0.6)_0%,rgba(7,76,189,0.05)_50%,rgba(0,30,90,0.35)_100%)] mix-blend-multiply" />
+                </>
+              )}
             </motion.div>
           </motion.div>
           {/* brand wash rising from the bottom-left, where the words sit */}
-          <div aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(35deg,rgba(11,79,191,0.95)_0%,rgba(11,64,160,0.78)_28%,rgba(10,42,87,0.35)_55%,transparent_75%)]" />
+          <div aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(35deg,rgba(0,49,152,0.95)_0%,rgba(7,76,189,0.78)_30%,rgba(0,49,152,0.3)_58%,transparent_78%)]" />
           <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-[#06142e]/70 via-transparent to-transparent" />
 
           <div className="grid gap-8 p-6 sm:p-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:p-14">

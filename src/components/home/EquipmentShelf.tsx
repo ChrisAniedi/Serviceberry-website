@@ -64,7 +64,7 @@ export function EquipmentShelf({ id = "kp-4", withTitle = true }: { id?: string;
                       <Link
                         href={`/request-a-quote?type=Equipment%20Sourcing&subject=${encodeURIComponent(c.title)}`}
                         onPointerMove={spot}
-                        className="spot group relative flex h-full flex-col overflow-hidden p-6 transition-colors duration-500 [--spot-edge:rgba(11,79,191,0.55)] [--spot:rgba(11,79,191,0.07)] hover:bg-paper"
+                        className="spot group relative flex h-full flex-col overflow-hidden p-6 transition-colors duration-500 [--spot-edge:rgba(7,76,189,0.55)] [--spot:rgba(7,76,189,0.07)] hover:bg-paper"
                       >
                         <div className="flex items-start justify-between">
                           <span className="grid size-11 place-items-center rounded-xl bg-mist text-brand ring-1 ring-line transition-[background-color,color,rotate,scale] duration-500 ease-out-expo group-hover:-rotate-6 group-hover:scale-110 group-hover:bg-brand group-hover:text-white group-hover:ring-brand">

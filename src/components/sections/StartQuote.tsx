@@ -40,7 +40,7 @@ export function StartQuote({ id = "quote", title = "Start your quote", intro, ty
     <section id={id} data-nav="dark" className="relative isolate scroll-mt-20 overflow-hidden bg-[#060a14] text-white">
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <Image src={img.nightPlant3} alt="" fill sizes="100vw" className="object-cover opacity-[0.16] grayscale" />
-        <div className="absolute inset-0 bg-[radial-gradient(60%_80%_at_75%_30%,rgba(11,79,191,0.38),transparent_70%),linear-gradient(180deg,#060a14_0%,rgba(6,10,20,0.7)_40%,#060a14_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(60%_80%_at_75%_30%,rgba(7,76,189,0.38),transparent_70%),linear-gradient(180deg,#060a14_0%,rgba(6,10,20,0.7)_40%,#060a14_100%)]" />
       </div>
 
       <div className="container-x grid gap-12 pt-24 pb-10 sm:pt-28 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-16">

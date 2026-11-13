@@ -30,8 +30,8 @@ export function HeroArc({ labels = ["Launcher", "Receiver"] }: { labels?: readon
       >
         <defs>
           <radialGradient id="pig-glow">
-            <stop offset="0" stopColor="#ffc65c" stopOpacity="0.9" />
-            <stop offset="1" stopColor="#ffc65c" stopOpacity="0" />
+            <stop offset="0" stopColor="#a9c8ff" stopOpacity="0.9" />
+            <stop offset="1" stopColor="#a9c8ff" stopOpacity="0" />
           </radialGradient>
         </defs>
 
@@ -53,7 +53,7 @@ export function HeroArc({ labels = ["Launcher", "Receiver"] }: { labels?: readon
               d={RUN}
               pathLength={1}
               fill="none"
-              stroke="#ffc65c"
+              stroke="#a9c8ff"
               strokeWidth="2"
               strokeDasharray="1 1"
               strokeLinecap="round"
@@ -94,7 +94,7 @@ export function HeroArc({ labels = ["Launcher", "Receiver"] }: { labels?: readon
                 width="26"
                 height="11"
                 rx="5.5"
-                fill="#ffc65c"
+                fill="#a9c8ff"
               />
             </g>
           </g>
@@ -108,7 +108,7 @@ export function HeroArc({ labels = ["Launcher", "Receiver"] }: { labels?: readon
               width="26"
               height="11"
               rx="5.5"
-              fill="#ffc65c"
+              fill="#a9c8ff"
             />
           </g>
         )}

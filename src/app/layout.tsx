@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image" },
 };
 
-export const viewport: Viewport = { themeColor: "#0e2e55" };
+export const viewport: Viewport = { themeColor: "#003198" };
 
 const orgJsonLd = {
   "@context": "https://schema.org",
@@ -38,7 +38,7 @@ const orgJsonLd = {
   telephone: site.phones[0],
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Plot 7B, Road 7B, Victory Estate, Elelenwo",
+    streetAddress: "Plot 7B Road 7B, Victory Estate, Elelenwo",
     addressLocality: "Port Harcourt",
     addressRegion: "Rivers State",
     addressCountry: "NG",

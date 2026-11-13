@@ -31,7 +31,7 @@ export function Footer() {
     <footer className="overflow-hidden border-t border-line bg-paper text-ink">
       <div className="container-x">
         <div className="flex flex-wrap items-center justify-between gap-6 border-b border-line py-10">
-          <Logo />
+          <Logo full />
           <p className="text-[15px] text-steel">{site.tagline}, from Port Harcourt.</p>
         </div>
 

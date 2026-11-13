@@ -33,7 +33,7 @@ export function WhyUs() {
       <motion.div className="absolute inset-0 -z-10" style={{ scale, y }}>
         <Image src={img.nightPlant2} alt="" fill sizes="100vw" className="object-cover" />
       </motion.div>
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(10,42,87,0.88),rgba(10,42,87,0.7)_45%,rgba(10,22,48,0.92))]" />
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(0,36,118,0.9),rgba(0,49,152,0.72)_45%,rgba(10,22,48,0.94))]" />
 
       <div className="container-x">
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end">

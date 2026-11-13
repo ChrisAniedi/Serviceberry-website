@@ -11,14 +11,14 @@ const AREA = `${LINE} L240 120 L0 120 Z`;
 export function HeroTrace() {
   const reduce = useReducedMotion();
   return (
-    <div className="w-full max-w-[290px] border border-white/25 bg-white/[0.06] p-5 backdrop-blur-md">
+    <div className="w-full max-w-[290px] rounded-[22px] border border-white/12 bg-[#0a1630]/45 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_30px_60px_-30px_rgba(0,0,0,0.6)] backdrop-blur-xl">
       <p className="text-[19px] leading-snug font-normal text-white">Read the whole line, metre by metre</p>
       <div className="relative mt-12">
         <svg viewBox="0 0 240 120" className="h-auto w-full overflow-visible" aria-hidden>
           <defs>
             <linearGradient id="trace-fill" x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0" stopColor="#ffc65c" stopOpacity="0.55" />
-              <stop offset="1" stopColor="#ffc65c" stopOpacity="0" />
+              <stop offset="0" stopColor="#a9c8ff" stopOpacity="0.55" />
+              <stop offset="1" stopColor="#a9c8ff" stopOpacity="0" />
             </linearGradient>
           </defs>
           {[40, 80, 120, 160, 200].map((x) => (
@@ -28,7 +28,7 @@ export function HeroTrace() {
           <motion.path
             d={LINE}
             fill="none"
-            stroke="#ffc65c"
+            stroke="#a9c8ff"
             strokeWidth="2"
             initial={{ pathLength: 0 }}
             animate={{ pathLength: 1 }}

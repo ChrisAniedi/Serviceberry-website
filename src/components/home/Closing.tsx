@@ -34,8 +34,8 @@ export function Closing({ id = "kp-7" }: { id?: string }) {
         <motion.div className="absolute inset-0 -z-10" style={{ scale, y }}>
           <Image src={brochure.aerialPlant} alt="" fill sizes="100vw" className="object-cover" />
         </motion.div>
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(100deg,rgba(10,42,87,0.95)_0%,rgba(10,42,87,0.82)_45%,rgba(10,42,87,0.45)_100%)]" />
-        <div aria-hidden className="absolute -bottom-40 -left-24 -z-10 size-[520px] rounded-full bg-[radial-gradient(closest-side,rgba(196,32,90,0.28),transparent)]" />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(100deg,rgba(0,36,118,0.95)_0%,rgba(0,49,152,0.82)_45%,rgba(7,76,189,0.4)_100%)]" />
+        <div aria-hidden className="absolute -bottom-40 -left-24 -z-10 size-[520px] rounded-full bg-[radial-gradient(closest-side,rgba(182,52,75,0.28),transparent)]" />
 
         <div className="grid gap-12 p-8 sm:p-12 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:items-end lg:p-16">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "0px 0px -80px 0px" }} transition={{ duration: 1, ease }}>

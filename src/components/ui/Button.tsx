@@ -13,8 +13,8 @@ export const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: "bg-berry text-white shadow-[0_14px_30px_-14px_rgba(196,32,90,0.85)] before:bg-berry-deep",
-        brand: "bg-brand text-white shadow-[0_14px_30px_-14px_rgba(11,79,191,0.8)] before:bg-brand-deep",
+        primary: "bg-berry text-white shadow-[0_14px_30px_-14px_rgba(182,52,75,0.85)] before:bg-berry-deep",
+        brand: "bg-brand text-white shadow-[0_14px_30px_-14px_rgba(7,76,189,0.8)] before:bg-brand-deep",
         white: "bg-white text-ink before:bg-mist",
         line: "text-ink ring-1 ring-ink/20 ring-inset before:bg-ink hover:text-white",
         glass: "bg-white/10 text-white ring-1 ring-white/30 ring-inset backdrop-blur-md before:bg-white hover:text-ink",

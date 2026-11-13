@@ -44,7 +44,7 @@ function Card({ i, active, still, onPick }: { i: number; active: boolean; still:
       onClick={onPick}
       className={`group relative flex w-[min(84vw,400px)] shrink-0 flex-col overflow-hidden rounded-[26px] bg-white/[0.06] shadow-[inset_0_1px_0_rgba(255,255,255,0.14),0_30px_60px_-30px_rgba(0,0,0,0.8)] ring-1 backdrop-blur-xl transition-[filter,opacity,transform,box-shadow] duration-700 ease-out-expo lg:w-[min(30vw,560px)] ${
         dim ? "cursor-pointer scale-[0.95] opacity-40 blur-[3px] ring-white/[0.08] hover:opacity-60 hover:blur-[1.5px]" : "opacity-100 blur-0 ring-white/[0.16]"
-      } ${active && !still ? "shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_0_0_1px_rgba(143,180,255,0.35),0_40px_80px_-30px_rgba(11,79,191,0.55)]" : ""}`}
+      } ${active && !still ? "shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_0_0_1px_rgba(143,180,255,0.35),0_40px_80px_-30px_rgba(7,76,189,0.55)]" : ""}`}
     >
       <div className={`relative m-2 overflow-hidden rounded-[20px] bg-ink ${still ? "h-[clamp(160px,46vw,230px)]" : "min-h-[150px] flex-1"}`}>
         <Image src={s.image} alt="" fill sizes="420px" className={`object-cover transition-transform duration-[1.4s] ease-out-expo ${active ? "scale-100" : "scale-110"}`} />

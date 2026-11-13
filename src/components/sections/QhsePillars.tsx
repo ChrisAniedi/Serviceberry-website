@@ -31,7 +31,7 @@ export function QhsePillars() {
             transition={{ duration: 0.8, delay: i * 0.07, ease }}
             onPointerMove={spot}
             className={`spot group relative flex min-h-[380px] flex-col overflow-hidden rounded-[26px] p-7 ring-1 transition-[translate,box-shadow] duration-500 ease-out-expo hover:-translate-y-1.5 hover:shadow-[0_30px_60px_-30px_rgba(10,22,48,0.5)] ${
-              lead ? "bg-brand-deep text-white ring-white/10" : "bg-white text-ink ring-line [--spot-edge:rgba(11,79,191,0.5)] [--spot:rgba(11,79,191,0.06)]"
+              lead ? "bg-brand-deep text-white ring-white/10" : "bg-white text-ink ring-line [--spot-edge:rgba(7,76,189,0.5)] [--spot:rgba(7,76,189,0.06)]"
             }`}
           >
             <div className="flex items-start justify-between">

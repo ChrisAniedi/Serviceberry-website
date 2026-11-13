@@ -339,7 +339,7 @@ export function QuoteForm({ type, subject, details: startDetails, location: star
                 <button
                   type="submit"
                   disabled={state === "sending"}
-                  className="inline-flex min-h-14 items-center justify-center gap-2.5 rounded-full bg-berry px-8 font-display text-[16px] font-semibold text-white shadow-[0_14px_30px_-14px_rgba(196,32,90,0.85)] transition-colors hover:bg-berry-deep disabled:opacity-70"
+                  className="inline-flex min-h-14 items-center justify-center gap-2.5 rounded-full bg-berry px-8 font-display text-[16px] font-semibold text-white shadow-[0_14px_30px_-14px_rgba(182,52,75,0.85)] transition-colors hover:bg-berry-deep disabled:opacity-70"
                 >
                   {state === "sending" && <Loader2 className="size-5 animate-spin" />}
                   {state === "sending" ? "Sending…" : "Submit request"}
