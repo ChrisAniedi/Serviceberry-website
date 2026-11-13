@@ -11,7 +11,7 @@ const AREA = `${LINE} L240 120 L0 120 Z`;
 export function HeroTrace() {
   const reduce = useReducedMotion();
   return (
-    <div className="w-full max-w-[290px] rounded-[22px] border border-white/12 bg-[#0b1a3e]/45 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_30px_60px_-30px_rgba(0,0,0,0.6)] backdrop-blur-xl">
+    <div className="hero-glass relative w-full max-w-[290px] p-5">
       <p className="text-[19px] leading-snug font-normal text-white">Read the whole line, metre by metre</p>
       <div className="relative mt-12">
         <svg viewBox="0 0 240 120" className="h-auto w-full overflow-visible" aria-hidden>
